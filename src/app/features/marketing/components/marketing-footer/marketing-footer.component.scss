@@ -42,10 +42,40 @@
 }
 
 .site-footer__tagline {
-  margin: 0;
+  margin: 0 0 var(--space-5);
   font-size: var(--text-xs);
   color: var(--ink-4);
   letter-spacing: 0.02em;
+}
+
+.site-footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-footer__social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  color: var(--ink-3);
+  transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+  @include m.focus-ring;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    color: var(--ink);
+    border-color: var(--ink-4);
+    background: var(--surface-alt);
+  }
 }
 
 .site-footer__heading {
