@@ -10,7 +10,7 @@
       <div class="ai-showcase__capabilities">
         @for (row of capabilityRows; track row.icon) {
           <div class="ai-showcase__capability">
-            <span class="ai-showcase__capability-icon"><app-icon [name]="row.icon" size="17" /></span>
+            <span class="ai-showcase__capability-icon" [style.color]="row.color"><app-icon [name]="row.icon" size="26" /></span>
             <span class="ai-showcase__capability-text">{{ row.text }}</span>
           </div>
         }
