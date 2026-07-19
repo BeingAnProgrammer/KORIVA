@@ -24,6 +24,7 @@ import { StatsBandComponent } from '../components/stats-band/stats-band.componen
     MarketingFooterComponent
   ],
   templateUrl: './landing-page.component.html',
+  styleUrl: './landing-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LandingPageComponent {

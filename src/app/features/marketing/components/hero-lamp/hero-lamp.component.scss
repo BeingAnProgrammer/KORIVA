@@ -3,7 +3,7 @@
 .hero-lamp {
   position: relative;
   overflow: hidden;
-  background: #020617;
+  background: #000000;
 }
 
 .hero-lamp__stage {
@@ -40,7 +40,7 @@
 .hero-lamp__beam-mask {
   position: absolute;
   z-index: 20;
-  background: #020617;
+  background: #000000;
 
   &--left-bottom {
     width: 100%;
@@ -85,7 +85,7 @@
   height: 12rem;
   width: 100%;
   transform: translateY(3rem) scaleX(1.5);
-  background: #020617;
+  background: #000000;
   filter: blur(40px);
 }
 
@@ -144,7 +144,7 @@
   height: 11rem;
   width: 100%;
   transform: translateY(-12.5rem);
-  background: #020617;
+  background: #000000;
 }
 
 .hero-lamp__content {

@@ -1,0 +1,9 @@
+// The landing page uses a pure black background rather than the app's
+// standard dark-theme canvas shades (#08090B / #0D0F13) — overriding the
+// tokens here (rather than in the global dark theme) keeps the authenticated
+// app shell's palette untouched.
+:host {
+  display: block;
+  --canvas: #000000;
+  --canvas-sub: #000000;
+}
