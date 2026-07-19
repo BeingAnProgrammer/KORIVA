@@ -1,0 +1,30 @@
+.toggle {
+  display: inline-block;
+  width: 40px;
+  height: 23px;
+  border-radius: 99px;
+  background: var(--ink-5);
+  position: relative;
+  flex-shrink: 0;
+  transition: background var(--dur-base);
+}
+
+.toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--surface);
+}
+
+.toggle--on {
+  background: var(--accent);
+
+  .toggle__thumb {
+    left: auto;
+    right: 2px;
+    background: var(--accent-fg);
+  }
+}

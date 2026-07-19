@@ -1,0 +1,77 @@
+@use 'mixins' as m;
+
+.ai-table {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.ai-table__row {
+  display: grid;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--hairline);
+  min-height: 44px;
+  transition: background var(--dur-fast);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:not(&--head):hover {
+    background: var(--surface-alt);
+  }
+
+  &--head {
+    padding: var(--space-3) var(--space-5);
+    background: var(--canvas-sub);
+  }
+}
+
+.ai-table__task {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ai-table__checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-xs);
+  border: 1.75px solid var(--ink-5);
+  flex-shrink: 0;
+}
+
+.ai-table__task-text {
+  font-size: var(--text-sm);
+  color: var(--ink);
+  font-weight: 500;
+  @include m.truncate;
+}
+
+.ai-table__owner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ai-table__owner-name {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+  @include m.truncate;
+}
+
+.ai-table__due {
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}
+
+.ai-table__meeting {
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+  @include m.truncate;
+}

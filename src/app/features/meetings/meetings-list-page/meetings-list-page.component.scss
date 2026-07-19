@@ -1,0 +1,61 @@
+@use 'mixins' as m;
+
+.meetings-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-8);
+}
+
+.meetings-toolbar__search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 40px;
+  padding: 0 14px;
+  flex: 1;
+  min-width: 220px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-inset);
+  color: var(--ink-4);
+  font-size: var(--text-sm);
+}
+
+.meetings-section-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-4);
+}
+
+.meetings-section-title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.meetings-section-count {
+  font-size: 11px;
+  color: var(--ink-4);
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--canvas-sub);
+}
+
+.meetings-upcoming {
+  margin-bottom: var(--space-10);
+}
+
+.meetings-completed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--space-4);
+
+  @include m.respond-down(sm) {
+    grid-template-columns: 1fr;
+  }
+}

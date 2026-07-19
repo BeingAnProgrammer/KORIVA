@@ -1,0 +1,39 @@
+.kpi-card {
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+}
+
+.kpi-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+
+  &--no-icon {
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+.kpi-card__icon {
+  font-size: 17px;
+  color: var(--ink-4);
+}
+
+.kpi-card__value {
+  font-size: var(--text-4xl);
+  line-height: 1;
+  color: var(--ink);
+
+  &--3xl {
+    font-size: var(--text-3xl);
+  }
+}
+
+.kpi-card__delta {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  margin-top: 6px;
+}

@@ -1,0 +1,16 @@
+<div
+  class="chat-bubble"
+  [class.chat-bubble--user]="!isAi()"
+  [class.chat-bubble--ai]="isAi()"
+  [style.max-width]="resolvedMaxWidth()"
+>
+  @if (isAi()) {
+    <div class="chat-bubble__ai-header">
+      <app-icon name="sparkles" size="15" />
+      KORIVA
+    </div>
+  }
+  <div class="chat-bubble__content">
+    <ng-content />
+  </div>
+</div>

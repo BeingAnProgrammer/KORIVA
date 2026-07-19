@@ -1,0 +1,17 @@
+<div class="reveal">
+  <p class="templates-intro">
+    Build the formats your organization runs on — meeting agendas, MOM structures, and AI prompts, per department.
+  </p>
+  <div class="templates-grid">
+    <button type="button" class="templates-create">
+      <span class="templates-create__icon"><app-icon name="plus" size="20" /></span>
+      <div>
+        <div class="templates-create__title">Create template</div>
+        <div class="templates-create__subtitle">Start from scratch or a preset</div>
+      </div>
+    </button>
+    @for (template of templates(); track template.name) {
+      <app-template-card [template]="template" />
+    }
+  </div>
+</div>

@@ -1,0 +1,135 @@
+@use 'mixins' as m;
+
+.ai-page {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.ai-page__hero {
+  text-align: center;
+  padding: var(--space-8) 0 var(--space-10);
+}
+
+.ai-page__hero-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-5);
+}
+
+.ai-page__hero-title {
+  margin: 0 0 8px;
+  font-size: var(--text-4xl);
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.ai-page__hero-subtitle {
+  margin: 0;
+  font-size: var(--text-md);
+  color: var(--ink-3);
+}
+
+.ai-page__suggestions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+
+  @include m.respond-down(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ai-page__suggestion {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  cursor: pointer;
+  text-align: left;
+  transition: transform var(--dur-base) var(--ease-spring), box-shadow var(--dur-base);
+  color: var(--ink-4);
+  @include m.focus-ring;
+
+  span {
+    font-size: var(--text-sm);
+    color: var(--ink-2);
+    font-weight: 500;
+    line-height: var(--leading-snug);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.ai-page__exchange {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.ai-page__answer-text {
+  margin: 0 0 var(--space-4);
+}
+
+.ai-page__citations {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.ai-page__citation {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  color: var(--ink-3);
+}
+
+.ai-page__input-bar {
+  position: sticky;
+  bottom: var(--space-8);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 8px 8px 18px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  color: var(--ink-4);
+}
+
+.ai-page__input-placeholder {
+  flex: 1;
+  font-size: var(--text-md);
+  color: var(--ink-4);
+}
+
+.ai-page__input-send {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--accent);
+  color: var(--accent-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  @include m.focus-ring;
+}

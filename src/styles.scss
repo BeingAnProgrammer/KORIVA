@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+// Global stylesheet — forwards the design-token architecture. Component
+// styles should @use 'mixins' as m; and 'tokens' are consumed as CSS custom
+// properties (var(--...)), never re-declared locally.
+@use 'styles/tokens';
+@use 'styles/theme-dark';
+@use 'styles/keyframes';
+@use 'styles/base';
+@use 'styles/utilities';
+@use 'styles/buttons';
+@use 'styles/pills';

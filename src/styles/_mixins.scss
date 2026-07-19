@@ -1,0 +1,93 @@
+// Shared SCSS mixins — responsive breakpoints, focus rings, truncation,
+// and small layout helpers used across the shared UI kit and feature pages.
+
+@use 'sass:map';
+
+// Breakpoint scale (min-width, mobile-first). The design was authored at a
+// fixed desktop width (1200px max-width containers); these breakpoints let
+// each grid degrade deliberately rather than being naively scaled down.
+$breakpoints: (
+  sm: 480px,
+  // large phones
+  md: 768px,
+  // tablets
+  lg: 1024px,
+  // laptops
+  xl: 1280px,
+  // desktops
+  xxl: 1536px // large / wide screens
+);
+
+@mixin respond-up($name) {
+  $value: map.get($breakpoints, $name);
+
+  @if $value == null {
+    @error "Unknown breakpoint `#{$name}`.";
+  }
+
+  @media (min-width: $value) {
+    @content;
+  }
+}
+
+@mixin respond-down($name) {
+  $value: map.get($breakpoints, $name);
+
+  @if $value == null {
+    @error "Unknown breakpoint `#{$name}`.";
+  }
+
+  @media (max-width: ($value - 1px)) {
+    @content;
+  }
+}
+
+@mixin focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin flex-center($gap: 0) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+@mixin card-surface {
+  background: var(--canvas-sub);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-xl);
+}

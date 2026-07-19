@@ -1,0 +1,20 @@
+<div class="upcoming-card">
+  <div class="upcoming-card__head">
+    <h3 class="upcoming-card__title">Upcoming</h3>
+    <span class="upcoming-card__head-icon"><app-icon name="calendar-clock" size="15" /></span>
+  </div>
+  @for (meeting of meetings(); track meeting.title) {
+    <div class="upcoming-card__row">
+      <div class="upcoming-card__when">
+        <div class="mono upcoming-card__date">{{ meeting.date }}</div>
+        <div class="num upcoming-card__time">{{ meeting.time }}</div>
+      </div>
+      <div class="upcoming-card__divider"></div>
+      <div class="upcoming-card__body">
+        <div class="upcoming-card__row-title">{{ meeting.title }}</div>
+        <div class="upcoming-card__row-meta">{{ meeting.type }} · {{ meeting.people }} people</div>
+      </div>
+      <app-status-pill [variant]="meeting.statusVariant">{{ meeting.status }}</app-status-pill>
+    </div>
+  }
+</div>

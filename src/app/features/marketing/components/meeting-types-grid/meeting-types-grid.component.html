@@ -1,0 +1,35 @@
+<section id="types" class="meeting-types">
+  <div class="meeting-types__inner">
+    <div class="meeting-types__intro">
+      <app-section-eyebrow color="#8B5CF6">Templates</app-section-eyebrow>
+      <h2 class="serif meeting-types__title">
+        Every meeting type gets its own <span class="text-gradient-mom">MOM</span>
+      </h2>
+      <p class="meeting-types__subtitle">
+        A sales call and an architecture review shouldn't produce the same document. KORIVA structures each around what
+        matters.
+      </p>
+    </div>
+
+    <div class="meeting-types__grid">
+      @for (type of meetingTypes(); track type.name) {
+        <div class="glow-wrap meeting-type-card">
+          <div appGlowBorder></div>
+          <div class="meeting-type-card__inner">
+            <div class="meeting-type-card__head">
+              <span class="meeting-type-card__icon" [style.color]="type.tint"><app-icon [name]="type.icon" size="18" /></span>
+              <span class="meeting-type-card__name">{{ type.name }}</span>
+            </div>
+            <div class="meeting-type-card__fields">
+              @for (field of type.fields; track field) {
+                <div class="meeting-type-card__field">
+                  <span class="meeting-type-card__dot" [style.background]="type.tint"></span>{{ field }}
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

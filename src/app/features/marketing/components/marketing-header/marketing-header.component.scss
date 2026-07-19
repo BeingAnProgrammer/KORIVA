@@ -1,0 +1,103 @@
+@use 'mixins' as m;
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  background: color-mix(in srgb, var(--canvas) 82%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.site-header__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 66px;
+  padding: 0 var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+
+  @include m.respond-down(sm) {
+    padding: 0 var(--space-4);
+  }
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+}
+
+.site-header__brand-name {
+  font-size: 22px;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  border: 1px solid var(--hairline);
+  background: color-mix(in srgb, var(--surface) 40%, transparent);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+
+  @include m.respond-down(lg) {
+    display: none;
+  }
+}
+
+.nav-pill {
+  position: relative;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  transition: color var(--dur-fast);
+  color: var(--ink-3);
+  background: transparent;
+  @include m.focus-ring;
+
+  &--active {
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+}
+
+.nav-pill__notch {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 0 0 999px 999px;
+  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+.nav-pill__notch-glow {
+  position: absolute;
+  top: -3px;
+  left: -8px;
+  width: 48px;
+  height: 16px;
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 999px;
+  filter: blur(8px);
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}

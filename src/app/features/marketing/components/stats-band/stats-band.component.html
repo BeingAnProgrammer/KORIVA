@@ -1,0 +1,10 @@
+<section class="stats-band">
+  <div class="stats-band__grid">
+    @for (stat of stats(); track stat.label) {
+      <div class="stats-band__item" [style.border-left-color]="stat.color">
+        <div class="serif num stats-band__value">{{ stat.value }}</div>
+        <div class="stats-band__label">{{ stat.label }}</div>
+      </div>
+    }
+  </div>
+</section>

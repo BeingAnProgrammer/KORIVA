@@ -1,0 +1,79 @@
+<div class="mom-tab">
+  <div class="mom-tab__toolbar">
+    <div class="eyebrow">Minutes of meeting · Sales template</div>
+    <div class="mom-tab__export-buttons">
+      <button type="button" class="mom-tab__export-btn"><app-icon name="file-text" size="14" />PDF</button>
+      <button type="button" class="mom-tab__export-btn"><app-icon name="file-type" size="14" />DOCX</button>
+    </div>
+  </div>
+
+  <div class="mom-doc">
+    <div class="mom-doc__head">
+      <h2 class="serif mom-doc__title">Q3 sales review</h2>
+      <div class="mono mom-doc__meta">October 14, 2025 · 52 minutes · 3 participants</div>
+    </div>
+
+    <div class="mom-doc__sections">
+      <div>
+        <div class="eyebrow mom-doc__section-label">Executive summary</div>
+        <p class="mom-doc__paragraph">
+          Q3 revenue closed at $14.2M, up 8.1% YoY, driven by enterprise. Mid-market renewals underperformed due to a
+          missing SSO capability. The team prioritized SSO scoping and agreed to revisit mid-market pricing.
+        </p>
+      </div>
+
+      <div>
+        <div class="eyebrow mom-doc__section-label">Discussion</div>
+        <ul class="mom-doc__list">
+          <li>Enterprise pipeline ahead of plan; two large logos expected to close in Q4.</li>
+          <li>Mid-market renewal risk concentrated in accounts requesting SSO and audit logs.</li>
+          <li>Azure OpenAI rate limits flagged as a dependency for the knowledge feature.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="eyebrow mom-doc__section-label">Decisions taken</div>
+        <ul class="mom-doc__list">
+          <li>SSO moved up the roadmap for immediate scoping.</li>
+          <li>Mid-market pricing under review before the board update.</li>
+          <li>Enterprise Q4 target raised by 5%.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="eyebrow mom-doc__section-label">Action items</div>
+        <div class="mom-actions-table">
+          <div class="mom-actions-table__row mom-actions-table__row--head">
+            <span class="eyebrow">Task</span>
+            <span class="eyebrow">Owner</span>
+            <span class="eyebrow">Deadline</span>
+          </div>
+          @for (item of actionItems; track item.task) {
+            <div class="mom-actions-table__row">
+              <span class="mom-actions-table__task">{{ item.task }}</span>
+              <span class="mom-actions-table__owner">{{ item.owner }}</span>
+              <span class="num mom-actions-table__deadline">{{ item.deadline }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="mom-doc__two-col">
+        <div>
+          <div class="eyebrow mom-doc__section-label mom-doc__section-label--rust">Risks</div>
+          <ul class="mom-doc__list mom-doc__list--sm">
+            <li>Mid-market churn if SSO slips past Q4.</li>
+            <li>Azure rate limits could delay knowledge search.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="eyebrow mom-doc__section-label">Next steps</div>
+          <ul class="mom-doc__list mom-doc__list--sm">
+            <li>Follow-up with Northwind next week.</li>
+            <li>Board pricing review in the leadership sync.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<section id="ai" class="ai-showcase">
+  <div class="ai-showcase__grid">
+    <div class="ai-showcase__copy">
+      <app-section-eyebrow color="#34D399">Intelligence</app-section-eyebrow>
+      <h2 class="serif ai-showcase__title">Ask a year of meetings anything</h2>
+      <p class="ai-showcase__subtitle">
+        KORIVA reads every transcript, MOM, and decision, then answers in plain language — with citations back to the
+        exact meeting and moment.
+      </p>
+      <div class="ai-showcase__capabilities">
+        @for (row of capabilityRows; track row.icon) {
+          <div class="ai-showcase__capability">
+            <span class="ai-showcase__capability-icon"><app-icon [name]="row.icon" size="17" /></span>
+            <span class="ai-showcase__capability-text">{{ row.text }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="ai-chat-card">
+      @for (query of aiQueries(); track query) {
+        <div class="ai-chat-card__bubble ai-chat-card__bubble--user">{{ query }}</div>
+      }
+      <div class="ai-chat-card__bubble ai-chat-card__bubble--ai">
+        <div class="ai-chat-card__ai-header"><app-icon name="sparkles" size="15" />KORIVA</div>
+        <div class="ai-chat-card__ai-text">
+          Azure OpenAI came up in 6 meetings this quarter. The API integration is owned by
+          <strong>Priya Nair</strong>, due Friday — flagged in the Oct 14 development review.
+        </div>
+        <div class="ai-chat-card__citations">
+          <span class="mono ai-chat-card__citation">Dev review · Oct 14</span>
+          <span class="mono ai-chat-card__citation">Sales sync · Oct 9</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

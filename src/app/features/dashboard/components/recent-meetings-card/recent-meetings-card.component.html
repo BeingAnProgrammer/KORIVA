@@ -1,0 +1,19 @@
+<div class="recent-card">
+  <div class="recent-card__head">
+    <h3 class="recent-card__title">Recent meetings</h3>
+    <a routerLink="/app/meetings" class="recent-card__view-all">View all</a>
+  </div>
+  @for (meeting of meetings(); track meeting.title) {
+    <a [routerLink]="['/app/meetings', slugify(meeting.title)]" class="recent-card__row">
+      <span class="recent-card__icon"><app-icon name="file-text" size="17" /></span>
+      <div class="recent-card__body">
+        <div class="recent-card__meta-row">
+          <span class="recent-card__title-text">{{ meeting.title }}</span>
+          <span class="mono recent-card__meta">{{ meeting.type }} · {{ meeting.date }} · {{ meeting.duration }}</span>
+        </div>
+        <div class="recent-card__summary">{{ meeting.summary }}</div>
+      </div>
+      <span class="recent-card__actions-pill">{{ meeting.actionsCount }} actions</span>
+    </a>
+  }
+</div>

@@ -1,0 +1,10 @@
+<a [routerLink]="['/app/meetings', slugify(recording().title), 'recording']" class="recording-card">
+  <div class="recording-card__thumb">
+    <span class="recording-card__play"><app-icon name="play" size="20" /></span>
+    <span class="mono recording-card__duration">{{ recording().duration }}</span>
+  </div>
+  <div class="recording-card__body">
+    <div class="recording-card__title">{{ recording().title }}</div>
+    <div class="recording-card__meta">{{ recording().type }} · {{ recording().date }}</div>
+  </div>
+</a>

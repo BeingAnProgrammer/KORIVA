@@ -1,0 +1,14 @@
+<div class="insights-card">
+  <div class="insights-card__head">
+    <span class="insights-card__head-icon"><app-icon name="sparkles" size="17" /></span>
+    <h3 class="insights-card__title">{{ title() }}</h3>
+  </div>
+  <div class="insights-card__list">
+    @for (insight of insights(); track insight.text) {
+      <div class="insights-card__row">
+        <span class="insights-card__row-icon"><app-icon [name]="insight.icon" [size]="itemIconSize()" /></span>
+        <span class="insights-card__row-text">{{ insight.text }}</span>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,52 @@
+@if (sidebar.mobileOpen()) {
+  <div class="sidebar-backdrop" (click)="sidebar.closeMobile()"></div>
+}
+
+<aside class="sidebar" [class.sidebar--mobile-open]="sidebar.mobileOpen()" [style.width]="sidebar.sidebarWidth()">
+  <div class="sidebar__header">
+    <a routerLink="/" title="Home" class="sidebar__brand" (click)="sidebar.closeMobile()">
+      <span class="sidebar__brand-mark"><app-logo-mark [size]="34" /></span>
+      @if (sidebar.showLabels()) {
+        <span class="serif sidebar__brand-name">KORIVA</span>
+      }
+    </a>
+  </div>
+
+  <nav class="sidebar__nav">
+    @if (sidebar.showLabels()) {
+      <div class="eyebrow sidebar__nav-heading">Workspace</div>
+    }
+    @for (item of navItems; track item.key) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="sidebar-nav-item--active"
+        class="sidebar-nav-item"
+        [title]="item.label"
+        (click)="sidebar.closeMobile()"
+      >
+        <span class="sidebar-nav-item__icon"><app-icon [name]="item.icon" size="19" /></span>
+        @if (sidebar.showLabels()) {
+          <span class="sidebar-nav-item__label">{{ item.label }}</span>
+        }
+      </a>
+    }
+  </nav>
+
+  <div class="sidebar__footer">
+    <button type="button" class="sidebar__collapse-btn" title="Collapse" (click)="sidebar.toggle()">
+      <span class="sidebar__collapse-icon"><app-icon name="panel-left-close" size="18" /></span>
+      @if (sidebar.showLabels()) {
+        <span>Collapse</span>
+      }
+    </button>
+    <div class="sidebar__user">
+      <app-avatar initials="AR" [size]="32" />
+      @if (sidebar.showLabels()) {
+        <div class="sidebar__user-info">
+          <div class="sidebar__user-name">Ava Reyes</div>
+          <div class="sidebar__user-role">Chief of staff</div>
+        </div>
+      }
+    </div>
+  </div>
+</aside>

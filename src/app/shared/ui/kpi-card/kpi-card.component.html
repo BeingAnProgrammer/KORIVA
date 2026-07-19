@@ -1,0 +1,10 @@
+<div class="kpi-card">
+  <div class="kpi-card__head" [class.kpi-card__head--no-icon]="!showIcon()">
+    <span class="eyebrow">{{ kpi().label }}</span>
+    @if (showIcon()) {
+      <span class="kpi-card__icon"><app-icon [name]="kpi().icon" /></span>
+    }
+  </div>
+  <div class="serif num kpi-card__value" [class.kpi-card__value--3xl]="valueSize() === '3xl'">{{ kpi().value }}</div>
+  <div class="kpi-card__delta" [style.color]="deltaColor()">{{ kpi().delta }}</div>
+</div>

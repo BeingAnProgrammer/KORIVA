@@ -1,0 +1,36 @@
+<div class="reveal">
+  <div class="analytics-kpis">
+    @for (kpi of kpis(); track kpi.label) {
+      <app-kpi-card [kpi]="kpi" [showIcon]="false" valueSize="3xl" />
+    }
+  </div>
+
+  <div class="analytics-columns">
+    <div class="analytics-card">
+      <div class="analytics-card__head">
+        <h3 class="analytics-card__title">Meeting productivity</h3>
+        <span class="eyebrow">Meetings per week</span>
+      </div>
+      <app-bar-chart [bars]="meetingProductivity" [height]="200" />
+    </div>
+    <div class="analytics-card">
+      <h3 class="analytics-card__title analytics-card__title--spaced">Meeting categories</h3>
+      <app-percentage-bar-list [items]="categoryBars()" />
+    </div>
+  </div>
+
+  <div class="analytics-teams">
+    <h3 class="analytics-card__title analytics-card__title--spaced">Team contributions</h3>
+    <div class="analytics-teams__grid">
+      @for (team of teamContributions(); track team.name) {
+        <div class="analytics-team-tile">
+          <span class="analytics-team-tile__icon"><app-icon name="users" size="18" /></span>
+          <div>
+            <div class="serif num analytics-team-tile__value">{{ team.meetings }}</div>
+            <div class="analytics-team-tile__label">{{ team.name }} meetings</div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

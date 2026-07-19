@@ -1,0 +1,96 @@
+// Button visual variants — ported verbatim from the handoff's btnPrimary /
+// btnPrimaryLg / btnSecondary / btnSecondaryLg / btnGhost style strings.
+// Applied via the `appButton` directive (shared/ui/button).
+@use 'mixins' as m;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border: none;
+  white-space: nowrap;
+  @include m.focus-ring;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.btn--primary,
+.btn--primary-lg {
+  background: var(--accent);
+  color: var(--accent-fg);
+  transition: background var(--dur-fast) var(--ease-standard), transform var(--dur-fast), box-shadow var(--dur-base);
+
+  &:not(:disabled):hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+}
+
+.btn--primary {
+  height: 44px;
+  padding: 0 22px;
+  font-size: var(--text-sm);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, #fff 22%, transparent) inset,
+    0 8px 24px -10px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+.btn--primary-lg {
+  height: 52px;
+  padding: 0 30px;
+  gap: 9px;
+  font-size: var(--text-md);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, #fff 22%, transparent) inset,
+    0 10px 30px -8px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+.btn--secondary,
+.btn--secondary-lg {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+  transition: border-color var(--dur-fast), background var(--dur-fast), transform var(--dur-fast);
+
+  &:not(:disabled):hover {
+    border-color: var(--ink-5);
+    background: var(--surface-alt);
+  }
+}
+
+.btn--secondary {
+  height: 44px;
+  padding: 0 20px;
+  font-size: var(--text-sm);
+}
+
+.btn--secondary-lg {
+  height: 52px;
+  padding: 0 26px;
+  gap: 9px;
+  font-size: var(--text-md);
+}
+
+.btn--ghost {
+  height: 40px;
+  padding: 0 16px;
+  gap: 6px;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  transition: background var(--dur-fast), color var(--dur-fast);
+
+  &:not(:disabled):hover {
+    background: var(--surface-alt);
+    color: var(--ink);
+  }
+}

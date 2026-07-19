@@ -1,0 +1,147 @@
+@use 'mixins' as m;
+
+.mom-tab {
+  max-width: 820px;
+}
+
+.mom-tab__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.mom-tab__export-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.mom-tab__export-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  color: var(--ink-2);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  @include m.focus-ring;
+}
+
+.mom-doc {
+  padding: var(--space-10) var(--space-12);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+
+  @include m.respond-down(sm) {
+    padding: var(--space-6) var(--space-5);
+  }
+}
+
+.mom-doc__head {
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.mom-doc__title {
+  margin: 0 0 6px;
+  font-size: var(--text-3xl);
+  color: var(--ink);
+}
+
+.mom-doc__meta {
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}
+
+.mom-doc__sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.mom-doc__section-label {
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+
+  &--rust {
+    color: var(--rust);
+  }
+}
+
+.mom-doc__paragraph {
+  margin: 0;
+  font-size: var(--text-md);
+  color: var(--ink-2);
+  line-height: var(--leading-loose);
+}
+
+.mom-doc__list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--ink-2);
+  font-size: var(--text-md);
+  line-height: var(--leading-loose);
+
+  &--sm {
+    font-size: var(--text-sm);
+  }
+}
+
+.mom-doc__two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+
+  @include m.respond-down(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mom-actions-table {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.mom-actions-table__row {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr;
+  gap: var(--space-3);
+  padding: 11px var(--space-4);
+  border-bottom: 1px solid var(--hairline);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &--head {
+    padding: 10px var(--space-4);
+    background: var(--canvas-sub);
+  }
+}
+
+.mom-actions-table__task {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.mom-actions-table__owner {
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+
+.mom-actions-table__deadline {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}

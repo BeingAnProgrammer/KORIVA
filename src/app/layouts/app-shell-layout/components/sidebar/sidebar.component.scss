@@ -1,0 +1,189 @@
+@use 'mixins' as m;
+
+.sidebar {
+  flex-shrink: 0;
+  background: var(--canvas-sub);
+  border-right: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  transition: width var(--dur-slow) var(--ease-gentle);
+
+  // Below tablet, the persistent sidebar becomes an off-canvas drawer
+  // instead of permanently occupying screen width — the source design was
+  // authored at a fixed desktop width and never addressed this.
+  @include m.respond-down(md) {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: var(--z-modal);
+    width: var(--sidebar-w) !important;
+    transform: translateX(-100%);
+    transition: transform var(--dur-slow) var(--ease-gentle);
+    box-shadow: var(--shadow-xl);
+  }
+
+  &--mobile-open {
+    @include m.respond-down(md) {
+      transform: translateX(0);
+    }
+  }
+}
+
+.sidebar-backdrop {
+  display: none;
+
+  @include m.respond-down(md) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-popover);
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  height: 69px;
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  min-width: 0;
+  @include m.focus-ring;
+}
+
+.sidebar__brand-mark {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+}
+
+.sidebar__brand-name {
+  font-size: 26px;
+  color: var(--ink);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.sidebar__nav {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-2) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar__nav-heading {
+  padding: var(--space-3) var(--space-3) var(--space-2);
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: 9px var(--space-3);
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 450;
+  text-align: left;
+  transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast);
+  background: transparent;
+  color: var(--ink-3);
+  @include m.focus-ring;
+
+  &--active {
+    font-weight: 600;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+
+    .sidebar-nav-item__icon {
+      color: var(--accent);
+    }
+  }
+}
+
+.sidebar-nav-item__icon {
+  font-size: 19px;
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--ink-3);
+}
+
+.sidebar-nav-item__label {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar__footer {
+  padding: var(--space-3);
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sidebar__collapse-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 9px var(--space-3);
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  @include m.focus-ring;
+}
+
+.sidebar__collapse-icon {
+  font-size: 18px;
+  display: inline-flex;
+}
+
+.sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+}
+
+.sidebar__user-info {
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.sidebar__user-name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar__user-role {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  white-space: nowrap;
+}

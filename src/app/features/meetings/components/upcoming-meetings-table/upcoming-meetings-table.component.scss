@@ -1,0 +1,65 @@
+@use 'mixins' as m;
+
+.um-table {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.um-table__row {
+  display: grid;
+  grid-template-columns: 2.4fr 1.1fr 1.2fr 1fr 0.9fr 1fr;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--hairline);
+  min-height: 44px;
+  transition: background var(--dur-fast);
+  color: inherit;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:not(&--head):hover {
+    background: var(--surface-alt);
+  }
+
+  &--head {
+    padding: var(--space-3) var(--space-5);
+    background: var(--canvas-sub);
+  }
+
+  @include m.respond-down(xl) {
+    grid-template-columns: 2fr 1fr 1.2fr 1fr;
+
+    span:nth-child(5),
+    span:nth-child(4) {
+      display: none;
+    }
+  }
+}
+
+.um-table__title {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: var(--text-sm);
+  @include m.truncate;
+}
+
+.um-table__type,
+.um-table__platform {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.um-table__datetime {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.um-table__people {
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}

@@ -1,0 +1,61 @@
+<section id="features" class="features">
+  <div class="features__head">
+    <div class="features__intro">
+      <app-section-eyebrow color="var(--accent)">Platform</app-section-eyebrow>
+      <h2 class="serif features__title">Everything from calendar<br />to knowledge base</h2>
+      <p class="features__subtitle">The full lifecycle of a meeting — captured, understood, and made useful long after the call ends.</p>
+    </div>
+    <div class="mono features__count">10 modules</div>
+  </div>
+
+  <div class="features__grid">
+    @if (featureLead(); as lead) {
+      <div class="glow-wrap feature-lead">
+        <div appGlowBorder></div>
+        <div class="feature-lead__inner">
+          <div class="feature-lead__dots"></div>
+          <div class="feature-lead__glow"></div>
+          <div class="feature-lead__left">
+            <span class="feature-lead__icon"><app-icon [name]="lead.icon" size="20" /></span>
+            <h3 class="serif feature-lead__title">
+              <span>AI-generated </span><span class="text-gradient-mom">MOM</span>
+            </h3>
+          </div>
+          <div class="feature-lead__right">
+            <p class="feature-lead__desc">{{ lead.desc }}</p>
+            <div class="feature-lead__chips">
+              <app-chip variant="lead">Decisions</app-chip>
+              <app-chip variant="lead">Owners</app-chip>
+              <app-chip variant="lead">Deadlines</app-chip>
+              <app-chip variant="lead">Risks</app-chip>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    @for (card of featureCards(); track card.title) {
+      <div class="glow-wrap feature-card">
+        <div appGlowBorder></div>
+        <div class="feature-card__inner">
+          <div class="feature-card__head">
+            <span class="feature-card__icon" [style.color]="card.color"><app-icon [name]="card.icon" size="19" /></span>
+            <span class="mono feature-card__badge">{{ card.badge }}</span>
+          </div>
+          <div class="feature-card__foot">
+            <div class="feature-card__title-row">
+              <h3 class="feature-card__title">{{ card.title }}</h3>
+              <span class="mono feature-card__meta">{{ card.meta }}</span>
+            </div>
+            <p class="feature-card__desc">{{ card.desc }}</p>
+            <div class="feature-card__tags">
+              @for (tag of card.tags; track tag) {
+                <app-chip>{{ tag }}</app-chip>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

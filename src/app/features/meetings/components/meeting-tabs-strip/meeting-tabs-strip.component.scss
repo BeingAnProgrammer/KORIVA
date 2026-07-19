@@ -1,0 +1,33 @@
+@use 'mixins' as m;
+
+.tabs-strip {
+  display: flex;
+  gap: var(--space-6);
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: var(--space-6);
+  overflow-x: auto;
+}
+
+.tabs-strip__tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 4px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 450;
+  white-space: nowrap;
+  transition: color var(--dur-fast);
+  @include m.focus-ring;
+
+  &--active {
+    border-bottom-color: var(--accent);
+    color: var(--ink);
+    font-weight: 600;
+  }
+}

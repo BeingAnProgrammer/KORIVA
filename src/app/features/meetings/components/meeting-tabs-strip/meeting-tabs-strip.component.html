@@ -1,0 +1,12 @@
+<div class="tabs-strip">
+  @for (tab of tabs; track tab.key) {
+    <a
+      [routerLink]="['/app/meetings', meetingId(), tab.key]"
+      class="tabs-strip__tab"
+      [class.tabs-strip__tab--active]="tab.key === activeTab()"
+    >
+      <app-icon [name]="tab.icon" size="15" />
+      {{ tab.label }}
+    </a>
+  }
+</div>

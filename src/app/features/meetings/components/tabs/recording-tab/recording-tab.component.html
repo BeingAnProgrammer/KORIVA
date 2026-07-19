@@ -1,0 +1,27 @@
+<div class="recording-tab">
+  <div class="recording-tab__player">
+    <div class="recording-tab__stage">
+      <button type="button" class="recording-tab__play" aria-label="Play recording">
+        <app-icon name="play" size="26" />
+      </button>
+      <div class="recording-tab__scrubber">
+        <span class="mono recording-tab__time">12:04</span>
+        <div class="recording-tab__track">
+          <div class="recording-tab__progress"></div>
+        </div>
+        <span class="mono recording-tab__time recording-tab__time--muted">52:14</span>
+      </div>
+    </div>
+  </div>
+  <div class="recording-tab__chapters">
+    <h3 class="recording-tab__chapters-title">Chapters</h3>
+    <div class="recording-tab__chapters-list">
+      @for (chapter of chapters; track chapter.timestamp; let first = $first) {
+        <div class="chapter-row" [class.chapter-row--active]="first">
+          <span class="mono chapter-row__time">{{ chapter.timestamp }}</span>
+          <span class="chapter-row__title">{{ chapter.title }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</div>

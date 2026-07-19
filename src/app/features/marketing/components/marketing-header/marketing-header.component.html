@@ -1,0 +1,32 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="site-header__brand">
+      <app-logo-mark [size]="28" />
+      <span class="serif site-header__brand-name">KORIVA</span>
+    </div>
+
+    <nav class="site-header__nav">
+      @for (pill of navPills(); track pill.name) {
+        <a
+          [href]="pill.href"
+          class="nav-pill"
+          [class.nav-pill--active]="pill.name === activeNav()"
+          (click)="setActive(pill.name)"
+        >
+          @if (pill.name === activeNav()) {
+            <span class="nav-pill__notch"><span class="nav-pill__notch-glow"></span></span>
+          }
+          {{ pill.name }}
+        </a>
+      }
+    </nav>
+
+    <div class="site-header__actions">
+      <a routerLink="/app/dashboard" appButton variant="ghost">Sign in</a>
+      <a routerLink="/app/dashboard" appButton variant="primary">
+        Get started
+        <app-icon name="arrow-right" size="16" />
+      </a>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,5 @@
+<div class="reveal teams-grid">
+  @for (team of teams(); track team.name) {
+    <app-team-card [team]="team" />
+  }
+</div>

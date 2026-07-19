@@ -1,0 +1,40 @@
+.kpi-compact {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+}
+
+.kpi-compact__icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--canvas-sub);
+  color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+}
+
+.kpi-compact__body {
+  min-width: 0;
+}
+
+.kpi-compact__value {
+  font-size: var(--text-2xl);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.kpi-compact__label {
+  font-size: 11px;
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

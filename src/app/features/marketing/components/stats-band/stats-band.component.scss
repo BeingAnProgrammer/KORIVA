@@ -1,0 +1,31 @@
+.stats-band {
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--canvas-sub);
+}
+
+.stats-band__grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-6);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-8);
+}
+
+.stats-band__item {
+  border-left: 2px solid var(--hairline);
+  padding-left: var(--space-5);
+}
+
+.stats-band__value {
+  font-size: var(--text-4xl);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.stats-band__label {
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+  margin-top: 8px;
+}

@@ -1,0 +1,8 @@
+<div class="automation-card">
+  <span class="automation-card__icon"><app-icon [name]="automation().icon" size="19" /></span>
+  <div class="automation-card__body">
+    <div class="automation-card__title">{{ automation().title }}</div>
+    <p class="automation-card__desc">{{ automation().description }}</p>
+  </div>
+  <app-toggle-switch [on]="automation().enabled" />
+</div>

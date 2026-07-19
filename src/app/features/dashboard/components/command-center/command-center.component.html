@@ -1,0 +1,24 @@
+<div class="command-center__kpis">
+  @for (kpi of kpis(); track kpi.label) {
+    <app-kpi-card [kpi]="kpi" />
+  }
+</div>
+
+<div class="command-center__columns">
+  <div class="command-center__col">
+    <app-recent-meetings-card [meetings]="recentMeetings()" />
+    <div class="command-center__chart-card">
+      <div class="command-center__chart-head">
+        <h3 class="command-center__chart-title">Meeting hours</h3>
+        <span class="eyebrow">Last 7 weeks</span>
+      </div>
+      <app-bar-chart [bars]="meetingHours" />
+    </div>
+  </div>
+
+  <div class="command-center__col">
+    <app-upcoming-list-card [meetings]="upcomingMeetings()" />
+    <app-ai-insights-card [insights]="insights()" />
+    <app-team-activity-card [activity]="teamActivity()" />
+  </div>
+</div>

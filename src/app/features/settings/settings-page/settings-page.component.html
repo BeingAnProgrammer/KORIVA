@@ -1,0 +1,64 @@
+<div class="reveal settings-layout">
+  <nav class="settings-nav">
+    @for (item of navItems(); track item.label) {
+      <button
+        type="button"
+        class="settings-nav__item"
+        [class.settings-nav__item--active]="item.active"
+        [attr.aria-current]="item.active ? 'page' : null"
+      >
+        <app-icon [name]="item.icon" size="16" />
+        {{ item.label }}
+      </button>
+    }
+  </nav>
+
+  <div class="settings-content">
+    <div class="settings-card">
+      <h3 class="settings-card__title">Profile</h3>
+      <div class="settings-profile">
+        <app-avatar initials="AR" [size]="56" />
+        <button type="button" class="settings-profile__change-btn">Change photo</button>
+      </div>
+      <div class="settings-fields">
+        <div>
+          <div class="eyebrow settings-field__label">Name</div>
+          <div class="settings-field__value">Ava Reyes</div>
+        </div>
+        <div>
+          <div class="eyebrow settings-field__label">Role</div>
+          <div class="settings-field__value">Chief of staff</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-card">
+      <h3 class="settings-card__title settings-card__title--tight">Theme</h3>
+      <p class="settings-card__desc">
+        Match your system, or lock light or dark. Also available in the switcher at the bottom of the screen.
+      </p>
+      <app-segmented-control [options]="themeOptions" [value]="themeService.theme()" (valueChange)="themeService.setTheme($event)" />
+    </div>
+
+    <div class="settings-card">
+      <h3 class="settings-card__title">Integrations</h3>
+      <div class="settings-integrations">
+        <div class="settings-integration-row">
+          <app-icon name="video" size="18" />
+          <span class="settings-integration-row__name">Zoom</span>
+          <app-status-pill variant="accent">Connected</app-status-pill>
+        </div>
+        <div class="settings-integration-row">
+          <app-icon name="calendar" size="18" />
+          <span class="settings-integration-row__name">Google Calendar</span>
+          <app-status-pill variant="accent">Connected</app-status-pill>
+        </div>
+        <div class="settings-integration-row">
+          <app-icon name="message-square" size="18" />
+          <span class="settings-integration-row__name">Slack</span>
+          <button type="button" class="settings-integration-row__connect">Connect</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

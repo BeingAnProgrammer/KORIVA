@@ -1,0 +1,29 @@
+<div class="reveal">
+  <div class="meetings-toolbar">
+    <div class="meetings-toolbar__search">
+      <app-icon name="search" size="16" />
+      <span>Search meetings, participants, topics</span>
+    </div>
+    <app-filter-button icon="filter" label="All types" />
+    <app-filter-button icon="calendar" label="Last 30 days" />
+    <app-filter-button icon="arrow-up-down" label="Sort" />
+  </div>
+
+  <div class="meetings-section-head">
+    <h3 class="meetings-section-title">Upcoming</h3>
+    <span class="mono meetings-section-count">{{ upcomingMeetings().length }}</span>
+  </div>
+  <div class="meetings-upcoming">
+    <app-upcoming-meetings-table [meetings]="upcomingMeetings()" />
+  </div>
+
+  <div class="meetings-section-head">
+    <h3 class="meetings-section-title">Completed</h3>
+    <span class="mono meetings-section-count">46</span>
+  </div>
+  <div class="meetings-completed-grid">
+    @for (meeting of completedMeetings(); track meeting.title) {
+      <app-completed-meeting-card [meeting]="meeting" />
+    }
+  </div>
+</div>

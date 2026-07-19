@@ -1,0 +1,12 @@
+<div class="reveal">
+  <div class="action-items-summary">
+    @for (tile of summaryTiles; track tile.label) {
+      <div class="action-items-tile">
+        <div class="serif num action-items-tile__value" [style.color]="tile.color">{{ tile.value }}</div>
+        <div class="eyebrow action-items-tile__label">{{ tile.label }}</div>
+      </div>
+    }
+  </div>
+
+  <app-action-items-table [items]="actionItems()" [showCheckbox]="true" [showDue]="true" [showMeeting]="true" />
+</div>
