@@ -4,12 +4,13 @@
   background: var(--canvas-sub);
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
+  padding-bottom: var(--space-16);
 }
 
 .meeting-types__inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--space-16) var(--space-6);
+  padding: var(--space-16) var(--space-6) 0;
 }
 
 .meeting-types__intro {
@@ -35,28 +36,17 @@
   color: var(--ink-3);
 }
 
-.meeting-types__grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-4);
-
-  @include m.respond-down(xl) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @include m.respond-down(md) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include m.respond-down(sm) {
-    grid-template-columns: 1fr;
-  }
-}
-
 .meeting-type-card.glow-wrap {
+  width: 260px;
+  flex-shrink: 0;
+  margin-right: var(--space-4);
   padding: 8px;
   border: 1px solid var(--hairline-2);
   border-radius: var(--radius-2xl);
+
+  @include m.respond-down(sm) {
+    width: 230px;
+  }
 }
 
 .meeting-type-card__inner {

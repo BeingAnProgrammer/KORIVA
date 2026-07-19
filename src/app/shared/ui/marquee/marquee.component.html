@@ -1,0 +1,13 @@
+<div class="marquee" [class.marquee--pause-on-hover]="pauseOnHover()">
+  <div class="marquee__track" [class.marquee__track--reverse]="direction() === 'right'" [style.--marquee-duration.s]="speed()">
+    @for (rep of repeats; track rep) {
+      <div class="marquee__group" [attr.aria-hidden]="rep === 1 ? 'true' : null">
+        @for (item of items(); track $index; let i = $index) {
+          <div class="marquee__item">
+            <ng-container *ngTemplateOutlet="itemTemplate(); context: { $implicit: item, index: i }" />
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

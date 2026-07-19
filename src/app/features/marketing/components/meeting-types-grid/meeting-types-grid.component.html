@@ -10,26 +10,26 @@
         matters.
       </p>
     </div>
+  </div>
 
-    <div class="meeting-types__grid">
-      @for (type of meetingTypes(); track type.name) {
-        <div class="glow-wrap meeting-type-card">
-          <div appGlowBorder></div>
-          <div class="meeting-type-card__inner">
-            <div class="meeting-type-card__head">
-              <span class="meeting-type-card__icon" [style.color]="type.tint"><app-icon [name]="type.icon" size="18" /></span>
-              <span class="meeting-type-card__name">{{ type.name }}</span>
-            </div>
-            <div class="meeting-type-card__fields">
-              @for (field of type.fields; track field) {
-                <div class="meeting-type-card__field">
-                  <span class="meeting-type-card__dot" [style.background]="type.tint"></span>{{ field }}
-                </div>
-              }
-            </div>
+  <app-marquee [items]="meetingTypes()" [speed]="55" [pauseOnHover]="true">
+    <ng-template let-type>
+      <div class="glow-wrap meeting-type-card">
+        <div appGlowBorder></div>
+        <div class="meeting-type-card__inner">
+          <div class="meeting-type-card__head">
+            <span class="meeting-type-card__icon" [style.color]="type.tint"><app-icon [name]="type.icon" size="18" /></span>
+            <span class="meeting-type-card__name">{{ type.name }}</span>
+          </div>
+          <div class="meeting-type-card__fields">
+            @for (field of type.fields; track field) {
+              <div class="meeting-type-card__field">
+                <span class="meeting-type-card__dot" [style.background]="type.tint"></span>{{ field }}
+              </div>
+            }
           </div>
         </div>
-      }
-    </div>
-  </div>
+      </div>
+    </ng-template>
+  </app-marquee>
 </section>

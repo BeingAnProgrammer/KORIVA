@@ -4,12 +4,13 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { MarketingContentService } from '../../../../data/services/marketing-content.service';
 import { GlowBorderDirective } from '../../../../shared/directives/glow-border.directive';
 import { IconComponent } from '../../../../shared/ui/icon/icon.component';
+import { MarqueeComponent } from '../../../../shared/ui/marquee/marquee.component';
 import { SectionEyebrowComponent } from '../../../../shared/ui/section-eyebrow/section-eyebrow.component';
 
-/** Landing page meeting-types grid — ported verbatim. */
+/** Landing page meeting-types row — a horizontally scrolling marquee (per user request). */
 @Component({
   selector: 'app-meeting-types-grid',
-  imports: [GlowBorderDirective, IconComponent, SectionEyebrowComponent],
+  imports: [GlowBorderDirective, IconComponent, SectionEyebrowComponent, MarqueeComponent],
   templateUrl: './meeting-types-grid.component.html',
   styleUrl: './meeting-types-grid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

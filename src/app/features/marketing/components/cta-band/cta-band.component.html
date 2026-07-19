@@ -5,16 +5,14 @@
     <div class="cta-cinematic__giant-text" aria-hidden="true">KORIVA</div>
 
     <div class="cta-cinematic__marquee" aria-hidden="true">
-      <div class="cta-cinematic__marquee-track">
-        @for (row of marqueeRows; track row) {
-          <div class="cta-cinematic__marquee-group">
-            @for (item of marqueeItems; track item) {
-              <span>{{ item }}</span>
-              <span class="cta-cinematic__marquee-dot">✦</span>
-            }
+      <app-marquee [items]="marqueeItems" [speed]="32">
+        <ng-template let-item>
+          <div class="cta-cinematic__marquee-item">
+            <span>{{ item }}</span>
+            <span class="cta-cinematic__marquee-dot">✦</span>
           </div>
-        }
-      </div>
+        </ng-template>
+      </app-marquee>
     </div>
 
     <div class="cta-cinematic__content" appScrollReveal>

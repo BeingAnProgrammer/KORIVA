@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { MagneticHoverDirective } from '../../../../shared/directives/magnetic-hover.directive';
 import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
 import { IconComponent } from '../../../../shared/ui/icon/icon.component';
+import { MarqueeComponent } from '../../../../shared/ui/marquee/marquee.component';
 
 const MARQUEE_ITEMS: readonly string[] = [
   'Meeting Intelligence',
@@ -22,7 +23,7 @@ const MARQUEE_ITEMS: readonly string[] = [
  */
 @Component({
   selector: 'app-cta-band',
-  imports: [RouterLink, MagneticHoverDirective, ScrollRevealDirective, IconComponent],
+  imports: [RouterLink, MagneticHoverDirective, ScrollRevealDirective, IconComponent, MarqueeComponent],
   templateUrl: './cta-band.component.html',
   styleUrl: './cta-band.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -31,7 +32,6 @@ export class CtaBandComponent {
   private readonly document = inject(DOCUMENT);
 
   protected readonly marqueeItems = MARQUEE_ITEMS;
-  protected readonly marqueeRows = [0, 1];
 
   protected scrollToTop(): void {
     this.document.defaultView?.scrollTo({ top: 0, behavior: 'smooth' });

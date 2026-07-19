@@ -1,0 +1,40 @@
+@use 'mixins' as m;
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll var(--marquee-duration, 30s) linear infinite;
+
+  &--reverse {
+    animation-direction: reverse;
+  }
+}
+
+.marquee--pause-on-hover:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee__group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@include m.reduced-motion {
+  .marquee__track {
+    animation: none;
+  }
+}
