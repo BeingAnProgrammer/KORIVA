@@ -39,11 +39,13 @@ import {
   LucideLink,
   LucideMegaphone,
   LucideMessageSquare,
+  LucideMic,
   LucideMonitor,
   LucideMoon,
   LucidePalette,
   LucidePanelLeftClose,
   LucidePanelLeftOpen,
+  LucidePaperclip,
   LucidePlay,
   LucidePlayCircle,
   LucidePlug,
@@ -66,7 +68,8 @@ import {
   LucideUserRound,
   LucideUsers,
   LucideVideo,
-  LucideWorkflow
+  LucideWorkflow,
+  LucideX
 } from '@lucide/angular';
 
 /**
@@ -120,11 +123,13 @@ export const APP_ICONS = [
   LucideLink,
   LucideMegaphone,
   LucideMessageSquare,
+  LucideMic,
   LucideMonitor,
   LucideMoon,
   LucidePalette,
   LucidePanelLeftClose,
   LucidePanelLeftOpen,
+  LucidePaperclip,
   LucidePlay,
   LucidePlayCircle,
   LucidePlug,
@@ -147,5 +152,6 @@ export const APP_ICONS = [
   LucideUserRound,
   LucideUsers,
   LucideVideo,
-  LucideWorkflow
+  LucideWorkflow,
+  LucideX
 ] as const;
