@@ -1,20 +1,43 @@
-<section class="cta">
-  <div class="cta__card">
-    <div class="cta__blob cta__blob--accent"></div>
-    <div class="cta__blob cta__blob--violet"></div>
-    <div class="cta__content">
-      <h2 class="serif cta__title">Schedule your first<br />meeting in minutes</h2>
-      <p class="cta__subtitle">Connect your calendar, let the bot do the rest, and never write minutes by hand again.</p>
-      <div class="cta__actions">
-        <a routerLink="/app/dashboard" appButton variant="primary-lg">
+<section class="cta-cinematic">
+  <div class="cta-cinematic__pin">
+    <div class="cta-cinematic__grid" aria-hidden="true"></div>
+    <div class="cta-cinematic__aurora" aria-hidden="true"></div>
+    <div class="cta-cinematic__giant-text" aria-hidden="true">KORIVA</div>
+
+    <div class="cta-cinematic__marquee" aria-hidden="true">
+      <div class="cta-cinematic__marquee-track">
+        @for (row of marqueeRows; track row) {
+          <div class="cta-cinematic__marquee-group">
+            @for (item of marqueeItems; track item) {
+              <span>{{ item }}</span>
+              <span class="cta-cinematic__marquee-dot">✦</span>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="cta-cinematic__content" appScrollReveal>
+      <h2 class="serif cta-cinematic__title">Schedule your first<br />meeting in minutes</h2>
+      <p class="cta-cinematic__subtitle">Connect your calendar, let the bot do the rest, and never write minutes by hand again.</p>
+      <div class="cta-cinematic__actions">
+        <a routerLink="/app/dashboard" appMagnetic class="cta-cinematic__btn cta-cinematic__btn--primary">
           Get started
           <app-icon name="arrow-right" size="18" />
         </a>
-        <a routerLink="/app/dashboard" appButton variant="secondary-lg">
+        <a routerLink="/app/dashboard" appMagnetic class="cta-cinematic__btn cta-cinematic__btn--glass">
           <app-icon name="calendar-plus" size="18" color="#8B5CF6" />
           Schedule your first meeting
         </a>
       </div>
+    </div>
+
+    <div class="cta-cinematic__bottom">
+      <span class="mono cta-cinematic__copyright">© 2026 KORIVA</span>
+      <span class="mono cta-cinematic__tagline">Built for teams that decide fast</span>
+      <button type="button" appMagnetic class="cta-cinematic__top-btn" (click)="scrollToTop()" aria-label="Back to top">
+        <app-icon name="arrow-up" size="18" />
+      </button>
     </div>
   </div>
 </section>

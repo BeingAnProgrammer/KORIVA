@@ -115,3 +115,23 @@
   background-clip: text;
   color: transparent;
 }
+
+// Scroll-triggered entrance (paired with ScrollRevealDirective).
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--dur-slower) var(--ease-spring), transform var(--dur-slower) var(--ease-spring);
+
+  &--visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@include m.reduced-motion {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
