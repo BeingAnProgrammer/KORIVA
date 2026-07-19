@@ -10,7 +10,7 @@ export const FEATURES: readonly Feature[] = [
     desc: 'Structured minutes tailored to each meeting type — decisions, owners, and deadlines, not a wall of text.'
   },
   {
-    icon: 'clapperboard',
+    icon: 'video',
     title: 'Meeting recording',
     desc: 'Video and audio captured, indexed, and searchable down to the sentence.'
   },
@@ -45,7 +45,7 @@ export const FEATURES: readonly Feature[] = [
     desc: 'Purpose-built formats for sales, product, HR, and a dozen more.'
   },
   {
-    icon: 'download',
+    icon: 'file-text',
     title: 'Export to PDF and DOCX',
     desc: 'Board-ready documents in one click, formatted to your brand.'
   },
@@ -123,8 +123,8 @@ export const FEATURE_CARDS: readonly FeatureCard[] = [
   },
   {
     ...FEATURES[8],
-    color: 'var(--ochre)',
-    softColor: 'var(--ochre-soft)',
+    color: '#EF4444',
+    softColor: 'color-mix(in srgb, #EF4444 15%, transparent)',
     badge: 'Ready',
     meta: '1-click',
     tags: ['#Export', '#Docs']
