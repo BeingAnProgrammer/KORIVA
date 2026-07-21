@@ -1,31 +1,66 @@
-<header class="site-header">
-  <div class="site-header__inner">
-    <div class="site-header__brand">
-      <app-logo-mark [size]="28" />
-      <span class="serif site-header__brand-name">KORIVA</span>
+<header class="marketing-nav">
+  <div class="marketing-nav__inner">
+    <div class="marketing-nav__cluster">
+      <a routerLink="/" class="marketing-nav__brand" aria-label="KORIVA home">
+        <app-logo-mark [size]="22" />
+        <span class="serif marketing-nav__brand-name">KORIVA</span>
+      </a>
+
+      <nav class="marketing-nav__links" aria-label="Primary">
+        @for (pill of navPills(); track pill.name) {
+          <a
+            [href]="pill.href"
+            class="marketing-nav__link"
+            [class.marketing-nav__link--active]="pill.name === activeNav()"
+            (click)="setActive(pill.name)"
+          >
+            {{ pill.name }}
+          </a>
+        }
+      </nav>
     </div>
 
-    <nav class="site-header__nav">
+    <div class="marketing-nav__actions">
+      <a routerLink="/app/dashboard" class="marketing-nav__signin">Sign in</a>
+    </div>
+
+    <button
+      type="button"
+      class="marketing-nav__toggle"
+      [class.marketing-nav__toggle--open]="mobileOpen()"
+      (click)="toggleMobile()"
+      [attr.aria-expanded]="mobileOpen()"
+      aria-controls="marketing-nav-mobile"
+      aria-label="Toggle navigation menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div
+    class="marketing-nav__mobile"
+    id="marketing-nav-mobile"
+    [class.marketing-nav__mobile--open]="mobileOpen()"
+    [inert]="!mobileOpen()"
+  >
+    <nav class="marketing-nav__mobile-links" aria-label="Mobile">
       @for (pill of navPills(); track pill.name) {
         <a
           [href]="pill.href"
-          class="nav-pill"
-          [class.nav-pill--active]="pill.name === activeNav()"
-          (click)="setActive(pill.name)"
+          class="marketing-nav__mobile-link"
+          [class.marketing-nav__mobile-link--active]="pill.name === activeNav()"
+          (click)="onMobileLinkClick(pill.name)"
         >
-          @if (pill.name === activeNav()) {
-            <span class="nav-pill__notch"><span class="nav-pill__notch-glow"></span></span>
-          }
           {{ pill.name }}
         </a>
       }
     </nav>
 
-    <div class="site-header__actions">
-      <a routerLink="/app/dashboard" appButton variant="ghost">Sign in</a>
-      <a routerLink="/app/dashboard" appButton variant="primary">
-        Get started
-        <app-icon name="arrow-right" size="16" />
+    <div class="marketing-nav__mobile-actions">
+      <a routerLink="/app/dashboard" class="marketing-nav__signin marketing-nav__signin--block" (click)="closeMobile()">
+        Sign in
       </a>
     </div>
   </div>

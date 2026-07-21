@@ -1,103 +1,240 @@
 @use 'mixins' as m;
 
-.site-header {
+.marketing-nav {
   position: sticky;
-  top: 0;
+  top: var(--space-4);
   z-index: var(--z-nav);
-  background: color-mix(in srgb, var(--canvas) 82%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--hairline);
+  margin: var(--space-4) var(--space-6) var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--canvas) 74%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+
+  @include m.respond-down(md) {
+    margin: var(--space-3) var(--space-4) var(--space-4);
+  }
+
+  @include m.respond-down(sm) {
+    margin: var(--space-2) var(--space-3) var(--space-3);
+    border-radius: var(--radius-md);
+  }
 }
 
-.site-header__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 66px;
+.marketing-nav__inner {
+  height: 48px;
   padding: 0 var(--space-6);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-6);
 
+  @include m.respond-down(md) {
+    height: 44px;
+    padding: 0 var(--space-5);
+  }
+
   @include m.respond-down(sm) {
+    height: 40px;
     padding: 0 var(--space-4);
   }
 }
 
-.site-header__brand {
+.marketing-nav__cluster {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-width: 0;
+}
+
+.marketing-nav__brand {
   display: flex;
   align-items: center;
   gap: 9px;
   flex-shrink: 0;
+  color: inherit;
+  text-decoration: none;
 }
 
-.site-header__brand-name {
-  font-size: 22px;
+.marketing-nav__brand-name {
+  font-size: 17px;
   color: var(--ink);
   line-height: 1;
   letter-spacing: -0.01em;
 }
 
-.site-header__nav {
+.marketing-nav__links {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px;
-  border: 1px solid var(--hairline);
-  background: color-mix(in srgb, var(--surface) 40%, transparent);
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-sm);
+  gap: var(--space-1);
 
   @include m.respond-down(lg) {
     display: none;
   }
 }
 
-.nav-pill {
+.marketing-nav__link {
   position: relative;
-  cursor: pointer;
   font-size: var(--text-sm);
-  font-weight: 600;
-  padding: 8px 20px;
-  border-radius: var(--radius-pill);
-  transition: color var(--dur-fast);
+  font-weight: 500;
+  line-height: 1;
   color: var(--ink-3);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
   background: transparent;
+  transition: color var(--dur-fast) var(--ease-standard), background var(--dur-fast) var(--ease-standard);
   @include m.focus-ring;
 
+  &:hover {
+    color: var(--ink-2);
+    background: color-mix(in srgb, var(--ink) 5%, transparent);
+  }
+
   &--active {
-    color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--ink);
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
   }
 }
 
-.nav-pill__notch {
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 32px;
-  height: 4px;
-  background: var(--accent);
-  border-radius: 0 0 999px 999px;
-  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--accent) 70%, transparent);
-}
-
-.nav-pill__notch-glow {
-  position: absolute;
-  top: -3px;
-  left: -8px;
-  width: 48px;
-  height: 16px;
-  background: color-mix(in srgb, var(--accent) 30%, transparent);
-  border-radius: 999px;
-  filter: blur(8px);
-}
-
-.site-header__actions {
+.marketing-nav__actions {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-4);
   flex-shrink: 0;
+
+  @include m.respond-down(lg) {
+    display: none;
+  }
+}
+
+.marketing-nav__signin {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ink-2);
+  text-decoration: none;
+  padding: 8px 6px;
+  border-radius: var(--radius-sm);
+  transition: color var(--dur-fast) var(--ease-standard);
+  @include m.focus-ring;
+
+  &:hover {
+    color: var(--ink);
+  }
+}
+
+.marketing-nav__toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: pointer;
+  @include m.focus-ring;
+
+  @include m.respond-down(lg) {
+    display: flex;
+  }
+
+  span {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    border-radius: 1px;
+    background: var(--ink-2);
+    transition: transform var(--dur-base) var(--ease-standard), opacity var(--dur-fast) var(--ease-standard);
+  }
+
+  &--open {
+    span:nth-child(1) {
+      transform: translateY(5.5px) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: translateY(-5.5px) rotate(-45deg);
+    }
+  }
+}
+
+.marketing-nav__mobile {
+  display: none;
+
+  @include m.respond-down(lg) {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    border-top: 1px solid var(--hairline);
+    background: var(--canvas);
+    transition: max-height var(--dur-slow) var(--ease-standard), opacity var(--dur-base) var(--ease-standard), transform var(--dur-base) var(--ease-standard);
+  }
+
+  &--open {
+    @include m.respond-down(lg) {
+      max-height: 480px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.marketing-nav__mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-4) var(--space-5);
+}
+
+.marketing-nav__mobile-link {
+  display: block;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-standard), background var(--dur-fast) var(--ease-standard);
+
+  &:hover {
+    color: var(--ink);
+    background: color-mix(in srgb, var(--ink) 6%, transparent);
+  }
+
+  &--active {
+    color: var(--ink);
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
+  }
+}
+
+.marketing-nav__mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-5) var(--space-6);
+}
+
+.marketing-nav__signin--block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  color: var(--ink);
 }
