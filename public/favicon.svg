@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    path { fill: #15120D; }
+    @media (prefers-color-scheme: dark) {
+      path { fill: #F1F4F8; }
+    }
+  </style>
+  <path d="M61 55L71 13L89 41Z" opacity="0.5" />
+  <path d="M61 55L89 41L81 75Z" opacity="0.68" />
+  <path d="M61 55L81 75L35 87Z" opacity="1" />
+  <path d="M61 55L35 87L11 51Z" opacity="0.82" />
+  <path d="M61 55L11 51L71 13Z" opacity="0.6" />
+</svg>
