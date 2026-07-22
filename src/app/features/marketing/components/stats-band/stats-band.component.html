@@ -1,10 +1,18 @@
 <section class="stats-band">
-  <div class="stats-band__grid">
-    @for (stat of stats(); track stat.label) {
-      <div class="stats-band__item" [style.border-left-color]="stat.color">
-        <div class="serif num stats-band__value">{{ stat.value }}</div>
-        <div class="stats-band__label">{{ stat.label }}</div>
-      </div>
-    }
+  <div class="stats-band__dot-grid" aria-hidden="true"></div>
+  <div class="stats-band__inner">
+    <div class="stats-band__intro">
+      <app-section-eyebrow color="var(--accent)">Impact</app-section-eyebrow>
+      <h2 class="serif stats-band__title">Proof, not promises</h2>
+    </div>
+
+    <div class="stats-band__grid" appStaggerReveal>
+      @for (stat of stats(); track stat.label) {
+        <div class="stats-band__item">
+          <div class="num stats-band__value" [style.--stat-color]="stat.color">{{ stat.value }}</div>
+          <div class="stats-band__label">{{ stat.label }}</div>
+        </div>
+      }
+    </div>
   </div>
 </section>

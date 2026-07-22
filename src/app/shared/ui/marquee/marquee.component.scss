@@ -5,6 +5,11 @@
   overflow: hidden;
 }
 
+.marquee--edge-fade {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
 .marquee__track {
   display: flex;
   width: max-content;

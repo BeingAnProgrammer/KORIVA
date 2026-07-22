@@ -1,10 +1,12 @@
 @use 'mixins' as m;
+@use 'effects' as fx;
 
 .ai-showcase {
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--space-24) var(--space-6);
   background: var(--canvas);
+  overflow: hidden;
 }
 
 .ai-showcase__grid {
@@ -62,7 +64,65 @@
   font-size: var(--text-md);
 }
 
+.ai-showcase__prompts {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--hairline);
+}
+
+.ai-showcase__prompts-label {
+  display: block;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-4);
+  margin-bottom: var(--space-3);
+}
+
+.ai-showcase__prompt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ai-showcase__prompt {
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--canvas-sub);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: border-color var(--dur-fast), background var(--dur-fast), color var(--dur-fast);
+  @include m.focus-ring;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--hairline));
+    color: var(--ink);
+  }
+
+  &--active {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+}
+
+.ai-chat-card-wrap {
+  position: relative;
+}
+
+.ai-chat-card-wrap__aurora {
+  position: absolute;
+  inset: -12%;
+  z-index: 0;
+  @include fx.aurora-blob($alpha-a: 16%, $alpha-b: 14%);
+}
+
 .ai-chat-card {
+  position: relative;
+  z-index: 1;
   border-radius: var(--radius-xl);
   border: 1px solid var(--hairline);
   background: var(--canvas-sub);
@@ -137,49 +197,11 @@
   gap: var(--space-3);
 }
 
-.ai-chat-card__bubble {
-  &--user {
-    align-self: flex-end;
-    max-width: 82%;
-    padding: 10px 15px;
-    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-xs) var(--radius-lg);
-    background: var(--surface-alt);
-    border: 1px solid var(--hairline);
-    color: var(--ink-2);
-    font-size: var(--text-sm);
-    line-height: var(--leading-snug);
-  }
-
-  &--ai {
-    align-self: flex-start;
-    max-width: 88%;
-    padding: var(--space-4);
-    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) var(--radius-xs);
-    background: var(--surface);
-    border: 1px solid var(--hairline);
-  }
-}
-
-.ai-chat-card__ai-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--accent);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-caps);
-}
-
-.ai-chat-card__ai-text {
-  font-size: var(--text-sm);
-  color: var(--ink-2);
-  line-height: var(--leading-normal);
-
-  strong {
-    color: var(--ink);
-  }
+// Rest state for the transient typing indicator — `display: none` so it
+// doesn't reserve empty flex space between the query and answer bubbles;
+// the component itself toggles this inline via GSAP while it plays.
+.ai-chat-card__typing-slot {
+  display: none;
 }
 
 .ai-chat-card__citations {

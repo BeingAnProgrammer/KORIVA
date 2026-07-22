@@ -10,7 +10,13 @@
       KORIVA
     </div>
   }
-  <div class="chat-bubble__content">
-    <ng-content />
-  </div>
+  @if (typing()) {
+    <div class="chat-bubble__typing" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  } @else {
+    <div class="chat-bubble__content">
+      <ng-content />
+    </div>
+  }
 </div>

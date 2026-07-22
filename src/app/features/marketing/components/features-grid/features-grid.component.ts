@@ -3,6 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 import { MarketingContentService } from '../../../../data/services/marketing-content.service';
 import { GlowBorderDirective } from '../../../../shared/directives/glow-border.directive';
+import { StaggerRevealDirective } from '../../../../shared/directives/stagger-reveal.directive';
 import { ChipComponent } from '../../../../shared/ui/chip/chip.component';
 import { IconComponent } from '../../../../shared/ui/icon/icon.component';
 import { SectionEyebrowComponent } from '../../../../shared/ui/section-eyebrow/section-eyebrow.component';
@@ -10,7 +11,7 @@ import { SectionEyebrowComponent } from '../../../../shared/ui/section-eyebrow/s
 /** Landing page features grid — lead card + 9 feature cards, ported verbatim. */
 @Component({
   selector: 'app-features-grid',
-  imports: [GlowBorderDirective, ChipComponent, IconComponent, SectionEyebrowComponent],
+  imports: [GlowBorderDirective, StaggerRevealDirective, ChipComponent, IconComponent, SectionEyebrowComponent],
   templateUrl: './features-grid.component.html',
   styleUrl: './features-grid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

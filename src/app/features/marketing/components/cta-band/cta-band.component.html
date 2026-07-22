@@ -5,7 +5,7 @@
     <div class="cta-cinematic__giant-text" aria-hidden="true">KORIVA</div>
 
     <div class="cta-cinematic__marquee" aria-hidden="true">
-      <app-marquee [items]="marqueeItems" [speed]="32">
+      <app-marquee [items]="marqueeItems" [speed]="32" [edgeFade]="true">
         <ng-template let-item>
           <div class="cta-cinematic__marquee-item">
             <span>{{ item }}</span>

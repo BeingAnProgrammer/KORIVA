@@ -1,18 +1,29 @@
 <section id="types" class="meeting-types">
+  <div class="meeting-types__dot-grid" aria-hidden="true"></div>
+
   <div class="meeting-types__inner">
-    <div class="meeting-types__intro">
-      <app-section-eyebrow color="#8B5CF6">Templates</app-section-eyebrow>
-      <h2 class="serif meeting-types__title">
-        Every meeting type gets its own <span class="text-gradient-mom">MOM</span>
-      </h2>
-      <p class="meeting-types__subtitle">
-        A sales call and an architecture review shouldn't produce the same document. KORIVA structures each around what
-        matters.
-      </p>
+    <div class="meeting-types__intro" appScrollReveal>
+      <div class="meeting-types__intro-copy">
+        <app-section-eyebrow color="#8B5CF6">Templates</app-section-eyebrow>
+        <h2 class="serif meeting-types__title">
+          Every meeting type gets its own <span class="text-gradient-mom">MOM</span>
+        </h2>
+        <p class="meeting-types__subtitle">
+          A sales call and an architecture review shouldn't produce the same document. KORIVA structures each around what
+          matters.
+        </p>
+      </div>
+      <div class="meeting-types__intro-meta">
+        <span class="mono meeting-types__count">{{ meetingTypes().length }} templates</span>
+        <a routerLink="/app/templates" class="meeting-types__link">
+          See all templates
+          <app-icon name="arrow-right" size="14" />
+        </a>
+      </div>
     </div>
   </div>
 
-  <app-marquee [items]="meetingTypes()" [speed]="55" [pauseOnHover]="true">
+  <app-marquee [items]="meetingTypes()" [speed]="55" [pauseOnHover]="true" [edgeFade]="true">
     <ng-template let-type>
       <div class="glow-wrap meeting-type-card">
         <div appGlowBorder></div>
@@ -21,6 +32,7 @@
             <span class="meeting-type-card__icon" [style.color]="type.tint"><app-icon [name]="type.icon" size="18" /></span>
             <span class="meeting-type-card__name">{{ type.name }}</span>
           </div>
+          <div class="mono meeting-type-card__label">MOM structure</div>
           <div class="meeting-type-card__fields">
             @for (field of type.fields; track field) {
               <div class="meeting-type-card__field">

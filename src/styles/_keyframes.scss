@@ -99,6 +99,19 @@
   }
 }
 
+// Ambient atmosphere — the aurora glow blob's breathing pulse, shared by
+// every section that includes the `aurora-blob` mixin (see _effects.scss).
+@keyframes auroraBreathe {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 1;
+  }
+}
+
 // Hero "lamp" effect keyframes
 @keyframes lampBeam {
   from {

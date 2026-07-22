@@ -1,4 +1,5 @@
 @use 'mixins' as m;
+@use 'effects' as fx;
 
 .features {
   max-width: 1200px;
@@ -123,8 +124,21 @@
   bottom: -120px;
   width: 520px;
   height: 340px;
-  background: radial-gradient(closest-side, color-mix(in srgb, #34d399 22%, transparent), transparent 72%);
-  pointer-events: none;
+  @include fx.aurora-blob($color-a: var(--accent), $alpha-a: 16%, $color-b: #34d399, $alpha-b: 22%, $blur: 50px);
+}
+
+.feature-lead__watermark {
+  position: absolute;
+  right: -3%;
+  bottom: -14%;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(120px, 20vw, 220px);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  @include fx.ghost-watermark;
 }
 
 .feature-lead__left {

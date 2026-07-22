@@ -1,14 +1,36 @@
 @use 'mixins' as m;
+@use 'effects' as fx;
 
 .hero-lamp {
   position: relative;
   overflow: hidden;
-  background: #020617;
+  background: var(--canvas);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding-top: 0;
   padding-bottom: var(--space-16);
+}
+
+// Shared atmosphere — ties the hero back into the same visual language as
+// the rest of the page without competing with the lamp beams below.
+.hero-lamp__dot-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  @include fx.dot-grid-field($opacity: 0.12);
+}
+
+.hero-lamp__aurora {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  z-index: 0;
+  width: min(70vw, 640px);
+  height: min(70vw, 640px);
+  transform: translate(-50%, 0);
+  @include fx.aurora-blob($alpha-a: 12%, $alpha-b: 8%);
+  animation: auroraBreathe 10s ease-in-out infinite alternate;
 }
 
 .hero-lamp__stage {
@@ -34,19 +56,19 @@
   &--left {
     right: 50%;
     overflow: visible;
-    background-image: conic-gradient(from 70deg at center top, #06b6d4, transparent, transparent);
+    background-image: conic-gradient(from 70deg at center top, color-mix(in srgb, var(--accent) 80%, black), transparent, transparent);
   }
 
   &--right {
     left: 50%;
-    background-image: conic-gradient(from 290deg at center top, transparent, transparent, #06b6d4);
+    background-image: conic-gradient(from 290deg at center top, transparent, transparent, color-mix(in srgb, var(--accent) 80%, black));
   }
 }
 
 .hero-lamp__beam-mask {
   position: absolute;
   z-index: 20;
-  background: #020617;
+  background: var(--canvas);
 
   &--left-bottom {
     width: 100%;
@@ -91,7 +113,7 @@
   height: 12rem;
   width: 100%;
   transform: translateY(3rem) scaleX(1.5);
-  background: #020617;
+  background: var(--canvas);
   filter: blur(40px);
 }
 
@@ -114,7 +136,7 @@
   width: 28rem;
   transform: translateY(-50%);
   border-radius: 9999px;
-  background: #06b6d4;
+  background: var(--accent);
   opacity: 0.5;
   filter: blur(60px);
 }
@@ -127,7 +149,7 @@
   width: 16rem;
   transform: translateY(-6rem);
   border-radius: 9999px;
-  background: #22d3ee;
+  background: var(--accent);
   filter: blur(40px);
   animation: lampBar 0.8s ease-in-out 0.3s both;
 }
@@ -139,7 +161,7 @@
   height: 2px;
   width: 30rem;
   transform: translateY(-7rem);
-  background: #22d3ee;
+  background: var(--accent);
   animation: lampLine 0.8s ease-in-out 0.3s both;
 }
 
@@ -150,7 +172,7 @@
   height: 11rem;
   width: 100%;
   transform: translateY(-12.5rem);
-  background: #020617;
+  background: var(--canvas);
 }
 
 .hero-lamp__content {
@@ -169,8 +191,8 @@
   gap: 8px;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
   margin-bottom: var(--space-6);
   animation: lampRise 0.8s ease-in-out 0.4s both;
 }
@@ -179,12 +201,12 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #22d3ee;
-  box-shadow: 0 0 12px #22d3ee;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
 }
 
 .hero-lamp__badge-label {
-  color: #cbd5e1;
+  color: var(--ink-2);
   white-space: nowrap;
 }
 
@@ -194,7 +216,7 @@
   line-height: 1.15;
   letter-spacing: -0.035em;
   font-weight: 600;
-  background: linear-gradient(to bottom right, #cbd5e1, #64748b);
+  background: linear-gradient(to bottom right, var(--ink), var(--ink-3));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -206,7 +228,7 @@
   margin: 0 auto var(--space-8);
   font-size: var(--text-lg);
   line-height: var(--leading-normal);
-  color: #94a3b8;
+  color: var(--ink-3);
   text-wrap: pretty;
   animation: lampRise 0.8s ease-in-out 0.5s both;
 }
@@ -221,6 +243,7 @@
 }
 
 @include m.reduced-motion {
+  .hero-lamp__aurora,
   .hero-lamp__beam,
   .hero-lamp__bar,
   .hero-lamp__line,

@@ -23,6 +23,8 @@ export type ChatBubbleVariant = 'user' | 'ai';
 export class ChatBubbleComponent {
   readonly variant = input<ChatBubbleVariant>('user');
   readonly maxWidth = input<string>();
+  /** Shows a 3-dot typing pulse instead of the projected content. */
+  readonly typing = input<boolean>(false);
 
   protected readonly isAi = computed(() => this.variant() === 'ai');
   protected readonly resolvedMaxWidth = computed(() => this.maxWidth() ?? (this.isAi() ? '88%' : '82%'));
