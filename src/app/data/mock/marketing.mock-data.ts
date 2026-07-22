@@ -99,10 +99,10 @@ export const AI_QUERIES: readonly string[] = [
   'Which meetings discussed AI agents last quarter?'
 ];
 
-/** First stat is the deliberate "hero" figure (accent-colored); the rest stay neutral. */
+/** First and last stats are the deliberate "hero" figures (indigo + amber); the middle two stay neutral. */
 export const STATS: readonly Stat[] = [
   { value: '128', label: 'Hours saved this quarter', color: 'var(--accent)' },
   { value: '342', label: 'MOMs generated', color: 'var(--ink)' },
   { value: '96%', label: 'Action items completed', color: 'var(--ink)' },
-  { value: '12k', label: 'Meetings searchable', color: 'var(--ink)' }
+  { value: '12k', label: 'Meetings searchable', color: 'var(--accent-2)' }
 ];

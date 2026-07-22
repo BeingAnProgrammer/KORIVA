@@ -32,5 +32,12 @@
   --accent-ink: #c7c4f8;
   --accent-fg: #0b0b12;
 
+  // Second accent — warm amber, paired deliberately against the cool indigo
+  // primary. Used in exactly two places (see features-showcase and
+  // stats-band); everywhere else stays on the indigo/neutral balance.
+  --accent-2: #e8a945;
+  --accent-2-soft: #3a2a12;
+  --accent-2-ink: #f3ce8e;
+
   --glow-accent: 0 0 0 6px rgba(123, 118, 240, 0.16), 0 0 34px rgba(123, 118, 240, 0.34);
 }
