@@ -2,6 +2,5 @@
 export interface MeetingType {
   icon: string;
   name: string;
-  tint: string;
   fields: string[];
 }

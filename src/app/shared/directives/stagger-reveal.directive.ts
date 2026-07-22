@@ -4,20 +4,17 @@ import gsap from 'gsap';
 import { registerScrollTrigger } from '../../core/utils/gsap';
 
 /**
- * Fades/slides an element in the first time it scrolls into view.
- * Unlike `.reveal` (which fires immediately on route mount), this is for
- * content further down a long page — e.g. the cinematic CTA band — that
- * should animate in as the user scrolls to it, not on initial paint.
+ * Reveals a grid/list's direct children with a grid-aware wave the first
+ * time the container scrolls into view — used for the features grid and
+ * stats band, where `appScrollReveal`'s single-element fade isn't enough.
  *
- * Uses gsap.matchMedia() so the reveal only ever runs under
- * `(prefers-reduced-motion: no-preference)` — if that condition doesn't
- * match (or later stops matching), the element simply keeps its normal,
- * fully-visible CSS state and no tween is created.
+ * Uses gsap.matchMedia() so the stagger only ever runs under
+ * `(prefers-reduced-motion: no-preference)` — see ScrollRevealDirective.
  */
 @Directive({
-  selector: '[appScrollReveal]'
+  selector: '[appStaggerReveal]'
 })
-export class ScrollRevealDirective implements OnDestroy {
+export class StaggerRevealDirective implements OnDestroy {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private matchMedia?: ReturnType<typeof gsap.matchMedia>;
 
@@ -30,17 +27,24 @@ export class ScrollRevealDirective implements OnDestroy {
   }
 
   private bind(): void {
+    const element = this.elementRef.nativeElement;
+    const children = Array.from(element.children);
+
+    if (!children.length) {
+      return;
+    }
+
     registerScrollTrigger();
 
-    const element = this.elementRef.nativeElement;
     this.matchMedia = gsap.matchMedia();
 
     this.matchMedia.add('(prefers-reduced-motion: no-preference)', () => {
-      const tween = gsap.from(element, {
+      const tween = gsap.from(children, {
         autoAlpha: 0,
-        y: 28,
-        duration: 0.6,
+        y: 16,
+        duration: 0.4,
         ease: 'power2.out',
+        stagger: { each: 0.06, from: 'start', grid: 'auto' },
         scrollTrigger: {
           trigger: element,
           start: 'top 85%',

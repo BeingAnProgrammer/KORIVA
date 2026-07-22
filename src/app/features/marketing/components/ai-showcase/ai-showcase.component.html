@@ -1,8 +1,8 @@
 <section id="ai" class="ai-showcase">
   <div class="ai-showcase__grid">
-    <div class="ai-showcase__copy">
-      <app-section-eyebrow color="#34D399">Intelligence</app-section-eyebrow>
-      <h2 class="serif ai-showcase__title">Ask a year of <span class="text-gradient-mom">meetings</span> anything</h2>
+    <div class="ai-showcase__copy" appScrollReveal>
+      <app-section-eyebrow>Intelligence</app-section-eyebrow>
+      <h2 class="serif ai-showcase__title">Ask a year of <span class="text-accent">meetings</span> anything</h2>
       <p class="ai-showcase__subtitle">
         KORIVA reads every transcript, MOM, and decision, then answers in plain language — with citations back to the
         exact meeting and moment.
@@ -10,60 +10,78 @@
       <div class="ai-showcase__capabilities">
         @for (row of capabilityRows; track row.icon) {
           <div class="ai-showcase__capability">
-            <span class="ai-showcase__capability-icon" [style.color]="row.color"><app-icon [name]="row.icon" size="26" /></span>
+            <span class="ai-showcase__capability-icon"><app-icon [name]="row.icon" size="26" /></span>
             <span class="ai-showcase__capability-text">{{ row.text }}</span>
           </div>
         }
       </div>
+
+      <div class="ai-showcase__prompts">
+        <span class="mono ai-showcase__prompts-label">Try asking</span>
+        <div class="ai-showcase__prompt-list">
+          @for (exchange of chatExchanges(); track exchange.query; let i = $index) {
+            <button
+              type="button"
+              class="ai-showcase__prompt"
+              [class.ai-showcase__prompt--active]="activeIndex() === i"
+              (click)="selectExchange(i)"
+            >
+              {{ exchange.query }}
+            </button>
+          }
+        </div>
+      </div>
     </div>
 
-    <div class="ai-chat-card">
-      <div class="ai-chat-card__header">
-        <div class="ai-chat-card__header-left">
-          <span class="ai-chat-card__dot"></span>
-          <span class="mono ai-chat-card__header-label">AI Assistant</span>
-        </div>
-        <div class="ai-chat-card__header-right">
-          <span class="mono ai-chat-card__badge">GPT-4</span>
-          <span class="mono ai-chat-card__badge ai-chat-card__badge--pro">Pro</span>
-          <span class="ai-chat-card__close"><app-icon name="x" size="14" /></span>
-        </div>
-      </div>
+    <div class="ai-chat-card-wrap">
+      <div class="ai-chat-card-wrap__aurora" aria-hidden="true"></div>
 
-      <div class="ai-chat-card__body">
-        @for (query of aiQueries(); track query) {
-          <div class="ai-chat-card__bubble ai-chat-card__bubble--user">{{ query }}</div>
-        }
-        <div class="ai-chat-card__bubble ai-chat-card__bubble--ai">
-          <div class="ai-chat-card__ai-header"><app-icon name="sparkles" size="15" />KORIVA</div>
-          <div class="ai-chat-card__ai-text">
-            Azure OpenAI came up in 6 meetings this quarter. The API integration is owned by
-            <strong>Priya Nair</strong>, due Friday — flagged in the Oct 14 development review.
+      <div class="ai-chat-card">
+        <div class="ai-chat-card__header">
+          <div class="ai-chat-card__header-left">
+            <span class="ai-chat-card__dot"></span>
+            <span class="mono ai-chat-card__header-label">AI Assistant</span>
           </div>
-          <div class="ai-chat-card__citations">
-            <span class="mono ai-chat-card__citation">Dev review · Oct 14</span>
-            <span class="mono ai-chat-card__citation">Sales sync · Oct 9</span>
+          <div class="ai-chat-card__header-right">
+            <span class="mono ai-chat-card__badge">GPT-4</span>
+            <span class="mono ai-chat-card__badge ai-chat-card__badge--pro">Pro</span>
+            <span class="ai-chat-card__close"><app-icon name="x" size="14" /></span>
           </div>
         </div>
-      </div>
 
-      <div class="ai-chat-card__composer">
-        <div class="ai-chat-card__toolbar">
-          <div class="ai-chat-card__tools">
-            <span class="ai-chat-card__tool"><app-icon name="paperclip" size="16" /></span>
-            <span class="ai-chat-card__tool"><app-icon name="link" size="16" /></span>
-            <span class="ai-chat-card__tool"><app-icon name="code-2" size="16" /></span>
-            <span class="ai-chat-card__tool"><app-icon name="layout-grid" size="16" /></span>
-          </div>
-          <div class="ai-chat-card__tools ai-chat-card__tools--right">
-            <span class="ai-chat-card__tool"><app-icon name="mic" size="16" /></span>
-            <span class="mono ai-chat-card__counter">0/2000</span>
-            <span class="ai-chat-card__send"><app-icon name="arrow-up" size="16" /></span>
-          </div>
+        <div class="ai-chat-card__body" aria-live="polite">
+          <app-chat-bubble #queryBubble variant="user">{{ activeExchange().query }}</app-chat-bubble>
+
+          <app-chat-bubble #typingBubble variant="ai" [typing]="true" class="ai-chat-card__typing-slot" />
+
+          <app-chat-bubble #answerBubble variant="ai">
+            <div [innerHTML]="activeExchange().answer"></div>
+            <div class="ai-chat-card__citations">
+              @for (citation of activeExchange().citations; track citation) {
+                <span class="mono ai-chat-card__citation">{{ citation }}</span>
+              }
+            </div>
+          </app-chat-bubble>
         </div>
-        <div class="ai-chat-card__footer">
-          <span class="ai-chat-card__hint">Press <kbd>Shift + Enter</kbd> for new line</span>
-          <span class="ai-chat-card__online"><span class="ai-chat-card__dot ai-chat-card__dot--sm"></span>All systems operational</span>
+
+        <div class="ai-chat-card__composer">
+          <div class="ai-chat-card__toolbar">
+            <div class="ai-chat-card__tools">
+              <span class="ai-chat-card__tool"><app-icon name="paperclip" size="16" /></span>
+              <span class="ai-chat-card__tool"><app-icon name="link" size="16" /></span>
+              <span class="ai-chat-card__tool"><app-icon name="code-2" size="16" /></span>
+              <span class="ai-chat-card__tool"><app-icon name="layout-grid" size="16" /></span>
+            </div>
+            <div class="ai-chat-card__tools ai-chat-card__tools--right">
+              <span class="ai-chat-card__tool"><app-icon name="mic" size="16" /></span>
+              <span class="mono ai-chat-card__counter">0/2000</span>
+              <span class="ai-chat-card__send"><app-icon name="arrow-up" size="16" /></span>
+            </div>
+          </div>
+          <div class="ai-chat-card__footer">
+            <span class="ai-chat-card__hint">Press <kbd>Shift + Enter</kbd> for new line</span>
+            <span class="ai-chat-card__online"><span class="ai-chat-card__dot ai-chat-card__dot--sm"></span>All systems operational</span>
+          </div>
         </div>
       </div>
     </div>

@@ -1,3 +1,12 @@
+@use 'mixins' as m;
+
+// The component itself must not participate in the parent's flex layout —
+// only the inner `.chat-bubble` div should, so its `align-self` (user
+// bubbles right, AI bubbles left) actually takes effect.
+:host {
+  display: contents;
+}
+
 .chat-bubble {
   &--user {
     align-self: flex-end;
@@ -43,5 +52,35 @@
 .chat-bubble__content {
   ::ng-deep strong {
     color: var(--ink);
+  }
+}
+
+.chat-bubble__typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 0;
+
+  span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ink-4);
+    animation: blink 1.2s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+@include m.reduced-motion {
+  .chat-bubble__typing span {
+    animation: none;
+    opacity: 0.6;
   }
 }

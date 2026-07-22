@@ -1,4 +1,5 @@
 @use 'mixins' as m;
+@use 'effects' as fx;
 
 // Extra scroll distance the pinned panel dwells for before releasing.
 .cta-cinematic {
@@ -18,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000;
+  background: var(--canvas);
   isolation: isolate;
 
   @include m.respond-down(lg) {
@@ -33,12 +34,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: radial-gradient(circle, var(--ink-5) 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.2;
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
-  pointer-events: none;
+  @include fx.dot-grid-field;
 }
 
 .cta-cinematic__aurora {
@@ -49,12 +45,8 @@
   width: min(90vw, 900px);
   height: min(90vw, 900px);
   transform: translate(-50%, -50%);
-  background:
-    radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 60%),
-    radial-gradient(circle at 65% 65%, color-mix(in srgb, #8b5cf6 22%, transparent), transparent 60%);
-  filter: blur(80px);
-  pointer-events: none;
-  animation: ctaAuroraBreathe 8s ease-in-out infinite alternate;
+  @include fx.aurora-blob;
+  animation: auroraBreathe 8s ease-in-out infinite alternate;
 }
 
 .cta-cinematic__giant-text {
@@ -69,13 +61,7 @@
   line-height: 0.75;
   letter-spacing: -0.04em;
   white-space: nowrap;
-  color: transparent;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 16%, transparent) 0%, transparent 70%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 8%, transparent);
-  pointer-events: none;
-  user-select: none;
+  @include fx.ghost-watermark;
 
   @include m.respond-down(lg) {
     position: relative;
@@ -257,17 +243,6 @@
 
   &:hover {
     color: var(--ink);
-  }
-}
-
-@keyframes ctaAuroraBreathe {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.6;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1.12);
-    opacity: 1;
   }
 }
 

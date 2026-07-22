@@ -30,6 +30,8 @@ export class MarqueeComponent<T> {
   readonly speed = input<number>(30);
   readonly direction = input<MarqueeDirection>('left');
   readonly pauseOnHover = input<boolean>(false);
+  /** Fades items out at the left/right edges instead of a hard clip. */
+  readonly edgeFade = input<boolean>(false);
 
   readonly itemTemplate = contentChild.required(TemplateRef<MarqueeItemContext<T>>);
 

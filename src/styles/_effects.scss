@@ -1,0 +1,44 @@
+// Shared atmosphere primitives — the glow/gradient-depth language introduced
+// by the CTA band, extracted so every section can draw from the same three
+// devices instead of each one inventing its own ad hoc background CSS.
+//
+// Callers own placement (position/inset/size) on the class that includes
+// these mixins; the mixins only own the visual treatment itself.
+
+// Dual-radial blurred glow blob — the ambient light source behind hero,
+// feature, and AI content. Two stops of the SAME accent (base + its lighter
+// hover tint) so the blob reads as depth without introducing a second hue —
+// callers needing a different second tone can still override $color-b.
+@mixin aurora-blob($color-a: var(--accent), $alpha-a: 26%, $color-b: var(--accent-hover), $alpha-b: 22%, $blur: 80px) {
+  background:
+    radial-gradient(circle at 35% 35%, color-mix(in srgb, #{$color-a} #{$alpha-a}, transparent), transparent 60%),
+    radial-gradient(circle at 65% 65%, color-mix(in srgb, #{$color-b} #{$alpha-b}, transparent), transparent 60%);
+  filter: blur($blur);
+  pointer-events: none;
+}
+
+// Masked radial dot-grid texture — connective tissue reused as a section
+// backdrop so sections feel like one continuous surface rather than
+// independently-styled bands.
+@mixin dot-grid-field($size: 32px, $opacity: 0.2, $solid: 40%, $fade: 75%) {
+  background-image: radial-gradient(circle, var(--ink-5) 1px, transparent 1px);
+  background-size: $size $size;
+  opacity: $opacity;
+  mask-image: radial-gradient(ellipse at center, black $solid, transparent $fade);
+  -webkit-mask-image: radial-gradient(ellipse at center, black $solid, transparent $fade);
+  pointer-events: none;
+}
+
+// Oversized gradient-clipped "ghost" text watermark — ink fading to
+// transparent with a faint stroke, the same treatment as the CTA band's
+// giant "KORIVA". Caller sets font-size/position; content is the element's
+// own text node.
+@mixin ghost-watermark($from: color-mix(in srgb, var(--ink) 16%, transparent), $stroke: color-mix(in srgb, var(--ink) 8%, transparent)) {
+  color: transparent;
+  background: linear-gradient(180deg, $from 0%, transparent 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 1px $stroke;
+  pointer-events: none;
+  user-select: none;
+}

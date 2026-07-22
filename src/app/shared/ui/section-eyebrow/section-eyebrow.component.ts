@@ -35,5 +35,5 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SectionEyebrowComponent {
-  readonly color = input<string>('var(--accent)');
+  readonly color = input<string>('var(--ink-3)');
 }
