@@ -13,13 +13,12 @@ import { SectionEyebrowComponent } from '../../../../shared/ui/section-eyebrow/s
 interface CapabilityRow {
   icon: string;
   text: string;
-  color: string;
 }
 
 const CAPABILITY_ROWS: readonly CapabilityRow[] = [
-  { icon: 'search', text: 'Search organizational knowledge instantly', color: 'var(--accent)' },
-  { icon: 'git-compare', text: 'Compare meetings and track decisions over time', color: '#8B5CF6' },
-  { icon: 'quote', text: 'Every answer cites its source meeting', color: 'var(--ochre)' }
+  { icon: 'search', text: 'Search organizational knowledge instantly' },
+  { icon: 'git-compare', text: 'Compare meetings and track decisions over time' },
+  { icon: 'quote', text: 'Every answer cites its source meeting' }
 ];
 
 /**

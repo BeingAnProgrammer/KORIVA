@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { ChatExchange } from '../models/chat-exchange.model';
-import { Feature, FeatureCard } from '../models/feature.model';
+import { Feature } from '../models/feature.model';
 import { MeetingType } from '../models/meeting-type.model';
 import { NavPill } from '../models/nav-pill.model';
+import { PipelineStep } from '../models/pipeline-step.model';
 import { Stat } from '../models/stat.model';
 import { CHAT_EXCHANGES } from '../mock/chat-demo.mock-data';
-import { AI_QUERIES, FEATURE_CARDS, FEATURE_LEAD, FEATURES, MEETING_TYPES, STATS } from '../mock/marketing.mock-data';
+import { AI_QUERIES, MEETING_TYPES, PIPELINE_STEPS, SHOWCASE_FEATURES, STATS } from '../mock/marketing.mock-data';
 import { NAV_PILLS } from '../mock/navigation.mock-data';
 
 /**
@@ -21,16 +22,12 @@ export class MarketingContentService {
     return of(NAV_PILLS);
   }
 
-  getFeatures(): Observable<readonly Feature[]> {
-    return of(FEATURES);
+  getPipelineSteps(): Observable<readonly PipelineStep[]> {
+    return of(PIPELINE_STEPS);
   }
 
-  getFeatureLead(): Observable<Feature> {
-    return of(FEATURE_LEAD);
-  }
-
-  getFeatureCards(): Observable<readonly FeatureCard[]> {
-    return of(FEATURE_CARDS);
+  getShowcaseFeatures(): Observable<readonly Feature[]> {
+    return of(SHOWCASE_FEATURES);
   }
 
   getMeetingTypes(): Observable<readonly MeetingType[]> {

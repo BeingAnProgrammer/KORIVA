@@ -1,5 +1,4 @@
-// Utility classes — ported verbatim from the handoff (typography helpers,
-// the glow-border card treatment, and the section reveal/fade-up animation).
+// Utility classes — typography helpers and the fade-up entrance animation.
 @use 'mixins' as m;
 
 .num {
@@ -26,68 +25,6 @@
   color: var(--ink-3);
 }
 
-// Pointer-tracked conic-gradient glow ring used on landing-page cards.
-// --start / --active are written at runtime by GlowBorderDirective.
-.glow-wrap {
-  position: relative;
-  border-radius: var(--radius-lg);
-}
-
-.glow-border {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  --start: 0;
-  --active: 0;
-  --spread: 40;
-  --glow-bw: 2px;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: calc(-1 * var(--glow-bw));
-    border-radius: inherit;
-    border: var(--glow-bw) solid transparent;
-    background:
-      radial-gradient(circle, #34e0e8 10%, #34e0e800 20%),
-      radial-gradient(circle at 40% 40%, #8b5cf6 5%, #8b5cf600 15%),
-      radial-gradient(circle at 60% 60%, #34d399 10%, #34d39900 20%),
-      radial-gradient(circle at 40% 60%, #e0b15e 10%, #e0b15e00 20%),
-      repeating-conic-gradient(
-        from 236.84deg at 50% 50%,
-        #34e0e8 0%,
-        #8b5cf6 calc(25% / 5),
-        #34d399 calc(50% / 5),
-        #e0b15e calc(75% / 5),
-        #34e0e8 calc(100% / 5)
-      );
-    background-attachment: fixed;
-    opacity: var(--active);
-    transition: opacity 0.3s;
-    -webkit-mask-clip: padding-box, border-box;
-    mask-clip: padding-box, border-box;
-    -webkit-mask-composite: source-in, xor;
-    mask-composite: intersect;
-    -webkit-mask-image:
-      linear-gradient(#0000, #0000),
-      conic-gradient(
-        from calc((var(--start) - var(--spread)) * 1deg),
-        #00000000 0deg,
-        #fff,
-        #00000000 calc(var(--spread) * 2deg)
-      );
-    mask-image:
-      linear-gradient(#0000, #0000),
-      conic-gradient(
-        from calc((var(--start) - var(--spread)) * 1deg),
-        #00000000 0deg,
-        #fff,
-        #00000000 calc(var(--spread) * 2deg)
-      );
-  }
-}
-
 .fade-up {
   animation: fadeUp var(--dur-slow) var(--ease-spring) both;
 }
@@ -107,10 +44,10 @@
   @include m.visually-hidden;
 }
 
-// Landing-page "MOM" gradient text treatment (features lead card + meeting
-// types heading).
-.text-gradient-mom {
-  background: linear-gradient(90deg, #f472b6, #fb923c, #fcd34d);
+// Single-accent text highlight — the one place color is used inline with
+// body copy, reserved for the word that matters most in a given headline.
+.text-accent {
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

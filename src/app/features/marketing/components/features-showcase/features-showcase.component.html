@@ -1,0 +1,23 @@
+<section class="features-showcase">
+  <div class="features-showcase__inner">
+    <div class="features-showcase__intro">
+      <app-section-eyebrow>Platform</app-section-eyebrow>
+      <h2 class="serif features-showcase__title">Everything from calendar to knowledge base</h2>
+      <p class="features-showcase__subtitle">
+        The full lifecycle of a meeting — captured, understood, and made useful long after the call ends.
+      </p>
+    </div>
+
+    <div class="features-showcase__grid" appStaggerReveal>
+      @for (feature of features(); track feature.title) {
+        <div class="features-showcase__item" [class.features-showcase__item--featured]="feature.featured">
+          <span class="features-showcase__icon" [class.features-showcase__icon--featured]="feature.featured">
+            <app-icon [name]="feature.icon" [size]="feature.featured ? 26 : 20" />
+          </span>
+          <h3 class="features-showcase__item-title">{{ feature.title }}</h3>
+          <p class="features-showcase__item-desc">{{ feature.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

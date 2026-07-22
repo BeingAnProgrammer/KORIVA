@@ -2,8 +2,35 @@
 // standard dark-theme canvas shades (#08090B / #0D0F13) — overriding the
 // tokens here (rather than in the global dark theme) keeps the authenticated
 // app shell's palette untouched.
+// KORIVA brand override for the marketing site — a single indigo accent and
+// a real elevation scale (canvas < canvas-sub < surface < surface-alt) so
+// cards read as distinct surfaces from luminance/hairline contrast alone,
+// not from colorful glow borders. Scoped to the landing page only; the
+// authenticated app shell keeps the cyan/multi-hue dark theme in
+// _theme-dark.scss untouched.
 :host {
   display: block;
-  --canvas: #000000;
-  --canvas-sub: #000000;
+
+  --canvas: #09090b;
+  --canvas-sub: #121216;
+  --surface: #18181e;
+  --surface-alt: #202027;
+
+  --hairline: #2a2a33;
+  --hairline-2: #23232a;
+
+  --ink: #f8f8fa;
+  --ink-2: #cbcbd6;
+  --ink-3: #9d9dac;
+  --ink-4: #6c6c7c;
+  --ink-5: #3c3c46;
+
+  --accent: #7b76f0;
+  --accent-hover: #928df5;
+  --accent-press: #a9a5f7;
+  --accent-soft: #1e1b3a;
+  --accent-ink: #c7c4f8;
+  --accent-fg: #0b0b12;
+
+  --glow-accent: 0 0 0 6px rgba(123, 118, 240, 0.16), 0 0 34px rgba(123, 118, 240, 0.34);
 }

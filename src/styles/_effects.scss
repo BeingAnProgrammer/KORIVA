@@ -6,9 +6,10 @@
 // these mixins; the mixins only own the visual treatment itself.
 
 // Dual-radial blurred glow blob — the ambient light source behind hero,
-// feature, and AI content. Two color stops so the blob reads as depth
-// rather than a flat tint.
-@mixin aurora-blob($color-a: var(--accent), $alpha-a: 26%, $color-b: #8b5cf6, $alpha-b: 22%, $blur: 80px) {
+// feature, and AI content. Two stops of the SAME accent (base + its lighter
+// hover tint) so the blob reads as depth without introducing a second hue —
+// callers needing a different second tone can still override $color-b.
+@mixin aurora-blob($color-a: var(--accent), $alpha-a: 26%, $color-b: var(--accent-hover), $alpha-b: 22%, $blur: 80px) {
   background:
     radial-gradient(circle at 35% 35%, color-mix(in srgb, #{$color-a} #{$alpha-a}, transparent), transparent 60%),
     radial-gradient(circle at 65% 65%, color-mix(in srgb, #{$color-b} #{$alpha-b}, transparent), transparent 60%);

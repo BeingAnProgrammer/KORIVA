@@ -1,13 +1,40 @@
-import { Feature, FeatureCard } from '../models/feature.model';
+import { Feature } from '../models/feature.model';
 import { MeetingType } from '../models/meeting-type.model';
+import { PipelineStep } from '../models/pipeline-step.model';
 import { Stat } from '../models/stat.model';
 
-/** All 10 platform capabilities; index 0 is the features-grid lead card. */
-export const FEATURES: readonly Feature[] = [
+/** The 3-beat "how it works" pipeline — capture, structure, recall. */
+export const PIPELINE_STEPS: readonly PipelineStep[] = [
+  {
+    icon: 'video',
+    title: 'Bot joins & records',
+    desc: 'Schedule once. KORIVA joins the call, records it, and transcribes every word.'
+  },
   {
     icon: 'file-text',
-    title: 'AI-generated MOM',
-    desc: 'Structured minutes tailored to each meeting type — decisions, owners, and deadlines, not a wall of text.'
+    title: 'Structured into a MOM',
+    desc: 'Decisions, owners, and deadlines extracted automatically — not a wall of text.'
+  },
+  {
+    icon: 'sparkles',
+    title: 'Ask anything, anytime',
+    desc: 'Query a year of meetings in plain language. Every answer cites its source.'
+  }
+];
+
+/**
+ * The platform capabilities not already given their own deep-dive section
+ * (MOM has `mom-spotlight`). "AI knowledge search" and "Multi-meeting
+ * templates" are marked `featured` — they render as larger bento tiles here
+ * since they also get their own dedicated section further down the page
+ * (`ai-showcase`, `meeting-types-grid`) — a preview, not the full depth.
+ */
+export const SHOWCASE_FEATURES: readonly Feature[] = [
+  {
+    icon: 'layout-template',
+    title: 'Multi-meeting templates',
+    desc: 'Purpose-built formats for sales, product, HR, and a dozen more.',
+    featured: true
   },
   {
     icon: 'video',
@@ -15,14 +42,15 @@ export const FEATURES: readonly Feature[] = [
     desc: 'Video and audio captured, indexed, and searchable down to the sentence.'
   },
   {
+    icon: 'sparkles',
+    title: 'AI knowledge search',
+    desc: 'Ask across every meeting you have ever held. Answers cite their source.',
+    featured: true
+  },
+  {
     icon: 'calendar-days',
     title: 'Meeting scheduling',
     desc: 'Schedule once. A bot joins, records, and files the outcome automatically.'
-  },
-  {
-    icon: 'sparkles',
-    title: 'AI knowledge search',
-    desc: 'Ask across every meeting you have ever held. Answers cite their source.'
   },
   {
     icon: 'bar-chart-3',
@@ -40,12 +68,7 @@ export const FEATURES: readonly Feature[] = [
     desc: 'Autonomous agents that join, summarize, and route follow-ups on your behalf.'
   },
   {
-    icon: 'layout-template',
-    title: 'Multi-meeting templates',
-    desc: 'Purpose-built formats for sales, product, HR, and a dozen more.'
-  },
-  {
-    icon: 'file-text',
+    icon: 'download',
     title: 'Export to PDF and DOCX',
     desc: 'Board-ready documents in one click, formatted to your brand.'
   },
@@ -56,100 +79,17 @@ export const FEATURES: readonly Feature[] = [
   }
 ];
 
-/** The features-grid lead card (span-6 tile) — always FEATURES[0]. */
-export const FEATURE_LEAD: Feature = FEATURES[0];
-
-/**
- * The remaining 9 features enriched with the accent colour + chip content
- * the design assigns each card (a 6-colour palette cycle plus a per-card
- * badge/meta/tag set), ported verbatim from the handoff's derivation logic.
- */
-export const FEATURE_CARDS: readonly FeatureCard[] = [
-  {
-    ...FEATURES[1],
-    color: '#8B5CF6',
-    softColor: 'color-mix(in srgb, #8B5CF6 16%, transparent)',
-    badge: 'Active',
-    meta: 'HD',
-    tags: ['#Video', '#Audio']
-  },
-  {
-    ...FEATURES[2],
-    color: 'var(--ochre)',
-    softColor: 'var(--ochre-soft)',
-    badge: 'Auto',
-    meta: 'Calendars',
-    tags: ['#Bots', '#Calendar']
-  },
-  {
-    ...FEATURES[3],
-    color: 'var(--rust)',
-    softColor: 'var(--rust-soft)',
-    badge: 'Live',
-    meta: 'RAG',
-    tags: ['#Search', '#AI']
-  },
-  {
-    ...FEATURES[4],
-    color: 'var(--ink-blue)',
-    softColor: 'var(--ink-blue-soft)',
-    badge: 'Updated',
-    meta: 'Real-time',
-    tags: ['#Metrics', '#Reports']
-  },
-  {
-    ...FEATURES[5],
-    color: '#34D399',
-    softColor: 'color-mix(in srgb, #34D399 15%, transparent)',
-    badge: 'Live',
-    meta: '84 open',
-    tags: ['#Tasks', '#Owners']
-  },
-  {
-    ...FEATURES[6],
-    color: 'var(--accent)',
-    softColor: 'var(--accent-soft)',
-    badge: 'Beta',
-    meta: 'Autonomous',
-    tags: ['#Agents', '#Automation']
-  },
-  {
-    ...FEATURES[7],
-    color: '#8B5CF6',
-    softColor: 'color-mix(in srgb, #8B5CF6 16%, transparent)',
-    badge: 'New',
-    meta: '12 types',
-    tags: ['#Templates', '#Formats']
-  },
-  {
-    ...FEATURES[8],
-    color: '#EF4444',
-    softColor: 'color-mix(in srgb, #EF4444 15%, transparent)',
-    badge: 'Ready',
-    meta: '1-click',
-    tags: ['#Export', '#Docs']
-  },
-  {
-    ...FEATURES[9],
-    color: 'var(--rust)',
-    softColor: 'var(--rust-soft)',
-    badge: 'Live',
-    meta: 'Searchable',
-    tags: ['#Knowledge', '#Memory']
-  }
-];
-
 export const MEETING_TYPES: readonly MeetingType[] = [
-  { icon: 'trending-up', name: 'Sales', tint: 'var(--accent)', fields: ['Opportunities', 'Budget', 'Client requirements', 'Follow-ups'] },
-  { icon: 'megaphone', name: 'Marketing', tint: '#8B5CF6', fields: ['Campaigns', 'Channels', 'Metrics', 'Next steps'] },
-  { icon: 'code-2', name: 'Development', tint: 'var(--ink-blue)', fields: ['Technical discussions', 'Risks', 'Dependencies', 'Architecture decisions'] },
-  { icon: 'compass', name: 'Product', tint: 'var(--rust)', fields: ['Roadmaps', 'Requirements', 'Decisions', 'Milestones'] },
-  { icon: 'handshake', name: 'Client', tint: '#34D399', fields: ['Objectives', 'Concerns', 'Commitments', 'Follow-ups'] },
-  { icon: 'user-round', name: 'HR', tint: 'var(--ochre)', fields: ['Topics', 'Sentiment', 'Actions', 'Confidential notes'] },
-  { icon: 'sun', name: 'Daily standup', tint: '#8B5CF6', fields: ['Yesterday', 'Today', 'Blockers', 'Owners'] },
-  { icon: 'clipboard-list', name: 'Interview', tint: 'var(--rust)', fields: ['Signals', 'Strengths', 'Concerns', 'Recommendation'] },
-  { icon: 'crown', name: 'Leadership', tint: 'var(--ochre)', fields: ['Priorities', 'Decisions', 'Risks', 'Accountability'] },
-  { icon: 'settings-2', name: 'Custom template', tint: 'var(--ink-3)', fields: ['Your sections', 'Your prompts', 'Your format', 'Your owners'] }
+  { icon: 'trending-up', name: 'Sales', fields: ['Opportunities', 'Budget', 'Client requirements', 'Follow-ups'] },
+  { icon: 'megaphone', name: 'Marketing', fields: ['Campaigns', 'Channels', 'Metrics', 'Next steps'] },
+  { icon: 'code-2', name: 'Development', fields: ['Technical discussions', 'Risks', 'Dependencies', 'Architecture decisions'] },
+  { icon: 'compass', name: 'Product', fields: ['Roadmaps', 'Requirements', 'Decisions', 'Milestones'] },
+  { icon: 'handshake', name: 'Client', fields: ['Objectives', 'Concerns', 'Commitments', 'Follow-ups'] },
+  { icon: 'user-round', name: 'HR', fields: ['Topics', 'Sentiment', 'Actions', 'Confidential notes'] },
+  { icon: 'sun', name: 'Daily standup', fields: ['Yesterday', 'Today', 'Blockers', 'Owners'] },
+  { icon: 'clipboard-list', name: 'Interview', fields: ['Signals', 'Strengths', 'Concerns', 'Recommendation'] },
+  { icon: 'crown', name: 'Leadership', fields: ['Priorities', 'Decisions', 'Risks', 'Accountability'] },
+  { icon: 'settings-2', name: 'Custom template', fields: ['Your sections', 'Your prompts', 'Your format', 'Your owners'] }
 ];
 
 export const AI_QUERIES: readonly string[] = [
@@ -159,9 +99,10 @@ export const AI_QUERIES: readonly string[] = [
   'Which meetings discussed AI agents last quarter?'
 ];
 
+/** First stat is the deliberate "hero" figure (accent-colored); the rest stay neutral. */
 export const STATS: readonly Stat[] = [
   { value: '128', label: 'Hours saved this quarter', color: 'var(--accent)' },
-  { value: '342', label: 'MOMs generated', color: '#8B5CF6' },
-  { value: '96%', label: 'Action items completed', color: 'var(--ochre)' },
-  { value: '12k', label: 'Meetings searchable', color: '#34D399' }
+  { value: '342', label: 'MOMs generated', color: 'var(--ink)' },
+  { value: '96%', label: 'Action items completed', color: 'var(--ink)' },
+  { value: '12k', label: 'Meetings searchable', color: 'var(--ink)' }
 ];

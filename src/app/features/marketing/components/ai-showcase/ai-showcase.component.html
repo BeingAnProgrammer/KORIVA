@@ -1,8 +1,8 @@
 <section id="ai" class="ai-showcase">
   <div class="ai-showcase__grid">
     <div class="ai-showcase__copy" appScrollReveal>
-      <app-section-eyebrow color="#34D399">Intelligence</app-section-eyebrow>
-      <h2 class="serif ai-showcase__title">Ask a year of <span class="text-gradient-mom">meetings</span> anything</h2>
+      <app-section-eyebrow>Intelligence</app-section-eyebrow>
+      <h2 class="serif ai-showcase__title">Ask a year of <span class="text-accent">meetings</span> anything</h2>
       <p class="ai-showcase__subtitle">
         KORIVA reads every transcript, MOM, and decision, then answers in plain language — with citations back to the
         exact meeting and moment.
@@ -10,7 +10,7 @@
       <div class="ai-showcase__capabilities">
         @for (row of capabilityRows; track row.icon) {
           <div class="ai-showcase__capability">
-            <span class="ai-showcase__capability-icon" [style.color]="row.color"><app-icon [name]="row.icon" size="26" /></span>
+            <span class="ai-showcase__capability-icon"><app-icon [name]="row.icon" size="26" /></span>
             <span class="ai-showcase__capability-text">{{ row.text }}</span>
           </div>
         }

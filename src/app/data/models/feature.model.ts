@@ -1,15 +1,8 @@
-/** A platform capability, as shown on the landing page features grid. */
+/** A platform capability, as shown in the landing page's features showcase. */
 export interface Feature {
   icon: string;
   title: string;
   desc: string;
-}
-
-/** A feature-grid card enriched with its accent colour and chip content. */
-export interface FeatureCard extends Feature {
-  color: string;
-  softColor: string;
-  badge: string;
-  meta: string;
-  tags: string[];
+  /** Featured tiles render larger (bento-style) — reserved for capabilities with their own deep-dive section elsewhere on the page. */
+  featured?: boolean;
 }
