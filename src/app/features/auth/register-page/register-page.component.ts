@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Va
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
-import { ButtonDirective } from '../../../shared/directives/button.directive';
+import { IconComponent } from '../../../shared/ui/icon/icon.component';
 import { LogoMarkComponent } from '../../../shared/ui/logo-mark/logo-mark.component';
 
 function passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
@@ -14,7 +14,7 @@ function passwordsMatchValidator(control: AbstractControl): ValidationErrors | n
 
 @Component({
   selector: 'app-register-page',
-  imports: [ReactiveFormsModule, RouterLink, LogoMarkComponent, ButtonDirective],
+  imports: [ReactiveFormsModule, RouterLink, LogoMarkComponent, IconComponent],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -29,6 +29,8 @@ export class RegisterPageComponent {
   protected readonly isGoogleSubmitting = signal(false);
   protected readonly errorMessage = signal<string | null>(null);
   protected readonly requiresEmailConfirmation = signal(false);
+  protected readonly showPassword = signal(false);
+  protected readonly showConfirmPassword = signal(false);
 
   protected readonly form = this.fb.nonNullable.group(
     {
@@ -81,6 +83,14 @@ export class RegisterPageComponent {
       this.isGoogleSubmitting.set(false);
       this.errorMessage.set(result.message);
     }
+  }
+
+  protected togglePasswordVisibility(): void {
+    this.showPassword.update((show) => !show);
+  }
+
+  protected toggleConfirmPasswordVisibility(): void {
+    this.showConfirmPassword.update((show) => !show);
   }
 
   protected fieldError(name: 'fullName' | 'email' | 'password' | 'confirmPassword'): string | null {

@@ -3,12 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
-import { ButtonDirective } from '../../../shared/directives/button.directive';
+import { IconComponent } from '../../../shared/ui/icon/icon.component';
 import { LogoMarkComponent } from '../../../shared/ui/logo-mark/logo-mark.component';
 
 @Component({
   selector: 'app-login-page',
-  imports: [ReactiveFormsModule, RouterLink, LogoMarkComponent, ButtonDirective],
+  imports: [ReactiveFormsModule, RouterLink, LogoMarkComponent, IconComponent],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -21,6 +21,7 @@ export class LoginPageComponent {
 
   protected readonly isSubmitting = signal(false);
   protected readonly isGoogleSubmitting = signal(false);
+  protected readonly showPassword = signal(false);
   protected readonly errorMessage = signal<string | null>(this.readUrlError());
 
   protected readonly form = this.fb.nonNullable.group({
@@ -64,6 +65,10 @@ export class LoginPageComponent {
       this.isGoogleSubmitting.set(false);
       this.errorMessage.set(result.message);
     }
+  }
+
+  protected togglePasswordVisibility(): void {
+    this.showPassword.update((show) => !show);
   }
 
   protected fieldError(name: 'email' | 'password'): string | null {
