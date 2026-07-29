@@ -21,6 +21,12 @@
     cursor: not-allowed;
     opacity: 0.6;
   }
+
+  // Universal press feedback — every variant already transitions `transform`
+  // for its hover lift, so the press-down reuses the same timing.
+  &:not(:disabled):active {
+    transform: scale(0.97);
+  }
 }
 
 .btn--primary,
@@ -87,7 +93,7 @@
   background: transparent;
   color: var(--ink-2);
   font-size: var(--text-sm);
-  transition: background var(--dur-fast), color var(--dur-fast);
+  transition: background var(--dur-fast), color var(--dur-fast), transform var(--dur-fast);
 
   &:not(:disabled):hover {
     background: var(--surface-alt);

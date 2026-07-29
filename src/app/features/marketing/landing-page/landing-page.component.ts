@@ -2,16 +2,13 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { SeoService } from '../../../core/services/seo.service';
 import { SITE_URL } from '../../../core/constants/seo.constants';
-import { AiShowcaseComponent } from '../components/ai-showcase/ai-showcase.component';
 import { CtaBandComponent } from '../components/cta-band/cta-band.component';
 import { FeaturesShowcaseComponent } from '../components/features-showcase/features-showcase.component';
 import { HeroLampComponent } from '../components/hero-lamp/hero-lamp.component';
-import { HowItWorksComponent } from '../components/how-it-works/how-it-works.component';
-import { IntegrationsStripComponent } from '../components/integrations-strip/integrations-strip.component';
 import { MarketingFooterComponent } from '../components/marketing-footer/marketing-footer.component';
 import { MarketingHeaderComponent } from '../components/marketing-header/marketing-header.component';
 import { MeetingTypesGridComponent } from '../components/meeting-types-grid/meeting-types-grid.component';
-import { MomSpotlightComponent } from '../components/mom-spotlight/mom-spotlight.component';
+import { ProductStoryComponent } from '../components/product-story/product-story.component';
 import { StatsBandComponent } from '../components/stats-band/stats-band.component';
 
 @Component({
@@ -19,13 +16,10 @@ import { StatsBandComponent } from '../components/stats-band/stats-band.componen
   imports: [
     MarketingHeaderComponent,
     HeroLampComponent,
-    IntegrationsStripComponent,
-    HowItWorksComponent,
-    MomSpotlightComponent,
+    ProductStoryComponent,
     FeaturesShowcaseComponent,
-    StatsBandComponent,
     MeetingTypesGridComponent,
-    AiShowcaseComponent,
+    StatsBandComponent,
     CtaBandComponent,
     MarketingFooterComponent
   ],

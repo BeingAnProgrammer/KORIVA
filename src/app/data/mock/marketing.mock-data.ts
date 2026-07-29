@@ -22,19 +22,12 @@ export const PIPELINE_STEPS: readonly PipelineStep[] = [
   }
 ];
 
-/**
- * The platform capabilities not already given their own deep-dive section
- * (MOM has `mom-spotlight`). "AI knowledge search" and "Multi-meeting
- * templates" are marked `featured` — they render as larger bento tiles here
- * since they also get their own dedicated section further down the page
- * (`ai-showcase`, `meeting-types-grid`) — a preview, not the full depth.
- */
+/** The platform capabilities not already given their own deep-dive section (MOM and AI search get the merged `product-story` narrative; templates get `meeting-types-grid`). */
 export const SHOWCASE_FEATURES: readonly Feature[] = [
   {
     icon: 'layout-template',
     title: 'Multi-meeting templates',
-    desc: 'Purpose-built formats for sales, product, HR, and a dozen more.',
-    featured: true
+    desc: 'Purpose-built formats for sales, product, HR, and a dozen more.'
   },
   {
     icon: 'video',
@@ -44,8 +37,7 @@ export const SHOWCASE_FEATURES: readonly Feature[] = [
   {
     icon: 'sparkles',
     title: 'AI knowledge search',
-    desc: 'Ask across every meeting you have ever held. Answers cite their source.',
-    featured: true
+    desc: 'Ask across every meeting you have ever held. Answers cite their source.'
   },
   {
     icon: 'calendar-days',
@@ -92,6 +84,7 @@ export const MEETING_TYPES: readonly MeetingType[] = [
   { icon: 'settings-2', name: 'Custom template', fields: ['Your sections', 'Your prompts', 'Your format', 'Your owners'] }
 ];
 
+/** Suggested queries for the authenticated app's AI Assistant page (`/app/ai-assistant`). */
 export const AI_QUERIES: readonly string[] = [
   'Show me all meetings where Azure OpenAI was discussed.',
   'Who was assigned the API integration task?',
@@ -99,10 +92,15 @@ export const AI_QUERIES: readonly string[] = [
   'Which meetings discussed AI agents last quarter?'
 ];
 
-/** First and last stats are the deliberate "hero" figures (indigo + amber); the middle two stay neutral. */
+/**
+ * What the product itself guarantees on every meeting — true by design, not
+ * a usage claim about customers KORIVA doesn't have yet. First and last
+ * figures are the deliberate "hero" ones (indigo + amber); the middle two
+ * stay neutral.
+ */
 export const STATS: readonly Stat[] = [
-  { value: '128', label: 'Hours saved this quarter', color: 'var(--accent)' },
-  { value: '342', label: 'MOMs generated', color: 'var(--ink)' },
-  { value: '96%', label: 'Action items completed', color: 'var(--ink)' },
-  { value: '12k', label: 'Meetings searchable', color: 'var(--accent-2)' }
+  { value: '3', label: 'Things captured every time — decisions, owners, deadlines', color: 'var(--accent)' },
+  { value: '10+', label: 'Meeting types with their own MOM structure', color: 'var(--ink)' },
+  { value: '1', label: 'Searchable knowledge base for every meeting you hold', color: 'var(--ink)' },
+  { value: '24/7', label: 'AI assistant ready to answer, with citations', color: 'var(--accent-2)' }
 ];

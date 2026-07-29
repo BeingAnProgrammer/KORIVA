@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { ThemeMode } from '../../../../core/models/theme.model';
 import { ThemeService } from '../../../../core/services/theme.service';
@@ -16,7 +17,7 @@ const THEME_OPTIONS: readonly SegmentedOption<ThemeMode>[] = [
 /** Landing page footer — brand blurb, link columns, theme switcher. */
 @Component({
   selector: 'app-marketing-footer',
-  imports: [IconComponent, LogoMarkComponent, SegmentedControlComponent],
+  imports: [RouterLink, IconComponent, LogoMarkComponent, SegmentedControlComponent],
   templateUrl: './marketing-footer.component.html',
   styleUrl: './marketing-footer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

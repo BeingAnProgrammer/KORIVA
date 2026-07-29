@@ -4,9 +4,9 @@ import { NavPill } from '../models/nav-pill.model';
 
 /** Marketing header pill-nav (scroll-spy anchor links). */
 export const NAV_PILLS: readonly NavPill[] = [
-  { name: 'Features', href: '#features' },
-  { name: 'Meeting types', href: '#types' },
-  { name: 'AI assistant', href: '#ai' }
+  { name: 'How it works', href: '#how-it-works' },
+  { name: 'Platform', href: '#platform' },
+  { name: 'Meeting types', href: '#types' }
 ];
 
 /** App-shell sidebar navigation, in display order. */

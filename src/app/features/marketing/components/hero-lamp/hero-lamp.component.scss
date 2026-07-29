@@ -242,6 +242,14 @@
   animation: lampRise 0.8s ease-in-out 0.6s both;
 }
 
+.hero-lamp__connects {
+  margin: var(--space-8) 0 0;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-4);
+  animation: lampRise 0.8s ease-in-out 0.7s both;
+}
+
 @include m.reduced-motion {
   .hero-lamp__aurora,
   .hero-lamp__beam,
@@ -250,7 +258,8 @@
   .hero-lamp__badge,
   .hero-lamp__title,
   .hero-lamp__subtitle,
-  .hero-lamp__actions {
+  .hero-lamp__actions,
+  .hero-lamp__connects {
     animation: none;
   }
 }

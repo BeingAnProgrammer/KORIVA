@@ -1,0 +1,533 @@
+@use 'mixins' as m;
+@use 'effects' as fx;
+
+.product-story {
+  position: relative;
+  overflow: hidden;
+  background: var(--canvas);
+}
+
+.product-story__dot-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  @include fx.dot-grid-field($opacity: 0.1);
+}
+
+.product-story__intro {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-20) var(--space-6) var(--space-4);
+  text-align: center;
+}
+
+.product-story__title {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-4xl);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+
+  @include m.respond-down(md) {
+    font-size: var(--text-3xl);
+  }
+}
+
+.product-story__subtitle {
+  margin: 0;
+  font-size: var(--text-lg);
+  color: var(--ink-3);
+  line-height: var(--leading-normal);
+}
+
+.product-story__chapter {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6);
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-16);
+  align-items: center;
+
+  @include m.respond-down(lg) {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    padding: var(--space-12) var(--space-6);
+  }
+
+  &--reverse {
+    .product-story__chapter-copy {
+      order: 2;
+    }
+
+    .product-story__chapter-visual {
+      order: 1;
+    }
+
+    @include m.respond-down(lg) {
+      .product-story__chapter-copy,
+      .product-story__chapter-visual {
+        order: initial;
+      }
+    }
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--hairline-2);
+  }
+}
+
+.product-story__chapter-index {
+  display: block;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-4);
+  margin-bottom: var(--space-4);
+}
+
+.product-story__chapter-title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.product-story__chapter-desc {
+  margin: 0;
+  font-size: var(--text-md);
+  color: var(--ink-3);
+  line-height: var(--leading-normal);
+}
+
+.product-story__chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+}
+
+// --- chapter 01: capture card ---------------------------------------------
+.product-story__capture-card {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.product-story__capture-topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface-alt);
+}
+
+.product-story__capture-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &--red {
+    background: #ff5f57;
+  }
+
+  &--yellow {
+    background: #febc2e;
+  }
+
+  &--green {
+    background: #28c840;
+  }
+}
+
+.product-story__capture-meeting-name {
+  flex: 1;
+  margin-left: 6px;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.product-story__capture-body {
+  padding: var(--space-8) var(--space-6);
+}
+
+.product-story__avatars {
+  display: flex;
+  margin-bottom: var(--space-5);
+
+  app-avatar {
+    margin-left: -10px;
+    border: 2px solid var(--surface);
+    border-radius: 50%;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.product-story__capture-caption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 var(--space-8);
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+
+  app-icon {
+    color: var(--ink-4);
+    flex-shrink: 0;
+  }
+}
+
+.product-story__rec-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-ink);
+  animation: blink 1.4s ease-in-out infinite;
+  margin-right: 2px;
+}
+
+.product-story__waveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 40px;
+
+  span {
+    flex: 1;
+    max-width: 6px;
+    border-radius: 3px;
+    background: var(--ink-4);
+    animation: eq 1s ease-in-out infinite;
+
+    &:nth-child(1) {
+      height: 40%;
+      animation-delay: 0s;
+    }
+
+    &:nth-child(2) {
+      height: 70%;
+      animation-delay: 0.1s;
+    }
+
+    &:nth-child(3) {
+      height: 100%;
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(4) {
+      height: 55%;
+      animation-delay: 0.3s;
+    }
+
+    &:nth-child(5) {
+      height: 85%;
+      animation-delay: 0.15s;
+    }
+
+    &:nth-child(6) {
+      height: 45%;
+      animation-delay: 0.25s;
+    }
+
+    &:nth-child(7) {
+      height: 65%;
+      animation-delay: 0.05s;
+    }
+  }
+}
+
+// --- chapter 02: MOM doc card (ported from the former mom-spotlight) ------
+.product-story__chapter-visual--doc {
+  position: relative;
+}
+
+.product-story__watermark {
+  position: absolute;
+  z-index: 0;
+  right: -4%;
+  bottom: -14%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(90px, 14vw, 180px);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  @include fx.ghost-watermark;
+}
+
+.product-story__doc {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.product-story__doc-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-5);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.product-story__doc-title {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: var(--text-md);
+  margin-bottom: 4px;
+}
+
+.product-story__doc-meta {
+  font-size: var(--text-xs);
+  color: var(--ink-4);
+}
+
+.product-story__doc-badge {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  color: var(--ink-3);
+  background: var(--surface-alt);
+  border: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+
+.product-story__doc-section {
+  margin-bottom: var(--space-5);
+}
+
+.product-story__doc-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-4);
+  margin-bottom: var(--space-3);
+}
+
+.product-story__doc-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &--owner span:first-of-type {
+    flex: 1;
+  }
+}
+
+.product-story__doc-due {
+  font-size: 11px;
+  color: var(--ink-4);
+  flex-shrink: 0;
+}
+
+.product-story__doc-risk {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--canvas-sub);
+  border: 1px solid var(--hairline);
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}
+
+// --- chapter 03: capabilities + prompts + chat card (ported from the former ai-showcase) --------
+.product-story__capabilities {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.product-story__capability {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+
+.product-story__capability-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--ink-3);
+}
+
+.product-story__prompts {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--hairline);
+}
+
+.product-story__prompts-label {
+  display: block;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-4);
+  margin-bottom: var(--space-3);
+}
+
+.product-story__prompt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-story__prompt {
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: border-color var(--dur-fast), background var(--dur-fast), color var(--dur-fast);
+  @include m.focus-ring;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--hairline));
+    color: var(--ink);
+  }
+
+  &--active {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+}
+
+.product-story__chapter-visual--chat {
+  position: relative;
+}
+
+.product-story__chat-aurora {
+  position: absolute;
+  inset: -12%;
+  z-index: 0;
+  @include fx.aurora-blob($alpha-a: 16%, $alpha-b: 14%);
+}
+
+.product-story__chat-card {
+  position: relative;
+  z-index: 1;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-story__chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.product-story__chat-header-left,
+.product-story__chat-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-story__chat-header-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.product-story__chat-badge {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--hairline);
+  background: var(--surface-alt);
+  color: var(--ink-3);
+
+  &--pro {
+    border-color: var(--hairline-2);
+    background: var(--surface);
+    color: var(--ink-2);
+  }
+}
+
+.product-story__chat-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink-3) 18%, transparent);
+  flex-shrink: 0;
+}
+
+.product-story__chat-body {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 240px;
+}
+
+// Rest state for the transient typing indicator — `display: none` so it
+// doesn't reserve empty flex space between the query and answer bubbles;
+// the component itself toggles this inline via GSAP while it plays.
+.product-story__chat-typing-slot {
+  display: none;
+}
+
+.product-story__citations {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.product-story__citation {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--surface-alt);
+  border: 1px solid var(--hairline);
+  color: var(--ink-3);
+}
+
+@include m.reduced-motion {
+  .product-story__rec-dot,
+  .product-story__waveform span {
+    animation: none;
+  }
+}
