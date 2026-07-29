@@ -57,6 +57,24 @@
     max-width: 560px;
   }
 
+  &__back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    width: 100%;
+    margin-top: var(--space-6);
+    color: var(--auth-subtitle);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: color var(--dur-fast);
+    @include m.focus-ring;
+
+    &:hover {
+      color: var(--auth-heading);
+    }
+  }
+
   &__brand {
     display: flex;
     align-items: center;

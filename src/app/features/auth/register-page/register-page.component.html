@@ -10,7 +10,6 @@
       <p class="auth-card__subtitle">
         We've sent a confirmation link to your inbox. Click it to activate your account and sign in.
       </p>
-      <p class="auth-card__footer"><a routerLink="/login">Back to log in</a></p>
     } @else {
       <h1 class="serif auth-card__title">Create your account</h1>
       <p class="auth-card__subtitle">Set up your KORIVA workspace.</p>
@@ -116,5 +115,10 @@
 
       <p class="auth-card__footer">Already have an account? <a routerLink="/login">Log in</a></p>
     }
+
+    <a routerLink="/login" class="auth-card__back">
+      <app-icon name="arrow-left" size="16" />
+      Back
+    </a>
   </div>
 </div>
