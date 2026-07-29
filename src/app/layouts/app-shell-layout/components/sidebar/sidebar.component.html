@@ -40,12 +40,13 @@
       }
     </button>
     <div class="sidebar__user">
-      <app-avatar initials="AR" [size]="32" />
+      <app-avatar [initials]="userInitials()" [size]="32" />
       @if (sidebar.showLabels()) {
         <div class="sidebar__user-info">
-          <div class="sidebar__user-name">Ava Reyes</div>
-          <div class="sidebar__user-role">Chief of staff</div>
+          <div class="sidebar__user-name">{{ userName() }}</div>
+          <div class="sidebar__user-role">{{ userSubtitle() }}</div>
         </div>
+        <app-icon-button icon="log-out" ariaLabel="Log out" (pressed)="signOut()" />
       }
     </div>
   </div>

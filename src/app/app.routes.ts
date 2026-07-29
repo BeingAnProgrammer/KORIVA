@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { RouteTitleData } from './core/models/route-title-data.model';
+import { authGuard, guestGuard } from './core/guards/auth.guard';
 
 const title = (title: string): { data: RouteTitleData } => ({ data: { title } });
 
@@ -16,7 +17,20 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'login',
+    canActivate: [guestGuard],
+    loadComponent: () => import('./features/auth/login-page/login-page.component').then((m) => m.LoginPageComponent),
+    ...title('Log in')
+  },
+  {
+    path: 'register',
+    canActivate: [guestGuard],
+    loadComponent: () => import('./features/auth/register-page/register-page.component').then((m) => m.RegisterPageComponent),
+    ...title('Sign up')
+  },
+  {
     path: 'app',
+    canActivate: [authGuard],
     loadComponent: () => import('./layouts/app-shell-layout/app-shell-layout.component').then((m) => m.AppShellLayoutComponent),
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },

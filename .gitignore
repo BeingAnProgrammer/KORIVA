@@ -7,6 +7,12 @@
 /bazel-out
 .claude/
 
+# Environment config — holds the real Supabase URL/anon key, never commit.
+# Copy src/environments/environment.example.ts to environment.ts and
+# environment.development.ts locally (see that file for instructions).
+/src/environments/environment.ts
+/src/environments/environment.development.ts
+
 # Node
 /node_modules
 npm-debug.log

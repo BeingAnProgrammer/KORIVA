@@ -21,7 +21,7 @@
     </div>
 
     <div class="marketing-nav__actions">
-      <a routerLink="/app/dashboard" class="marketing-nav__signin">Sign in</a>
+      <a [routerLink]="accountLink()" class="marketing-nav__signin">{{ accountLabel() }}</a>
     </div>
 
     <button
@@ -59,8 +59,8 @@
     </nav>
 
     <div class="marketing-nav__mobile-actions">
-      <a routerLink="/app/dashboard" class="marketing-nav__signin marketing-nav__signin--block" (click)="closeMobile()">
-        Sign in
+      <a [routerLink]="accountLink()" class="marketing-nav__signin marketing-nav__signin--block" (click)="closeMobile()">
+        {{ accountLabel() }}
       </a>
     </div>
   </div>
