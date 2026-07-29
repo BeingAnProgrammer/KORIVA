@@ -185,31 +185,6 @@
   text-align: center;
 }
 
-.hero-lamp__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--ink) 4%, transparent);
-  border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
-  margin-bottom: var(--space-6);
-  animation: lampRise 0.8s ease-in-out 0.4s both;
-}
-
-.hero-lamp__badge-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 12px var(--accent);
-}
-
-.hero-lamp__badge-label {
-  color: var(--ink-2);
-  white-space: nowrap;
-}
-
 .hero-lamp__title {
   margin: 0 0 var(--space-5);
   font-size: clamp(48px, 7vw, 80px);
@@ -255,7 +230,6 @@
   .hero-lamp__beam,
   .hero-lamp__bar,
   .hero-lamp__line,
-  .hero-lamp__badge,
   .hero-lamp__title,
   .hero-lamp__subtitle,
   .hero-lamp__actions,
