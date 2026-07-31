@@ -21,7 +21,7 @@
             <div class="features-showcase__tile-dot-grid" aria-hidden="true"></div>
           }
           <span class="features-showcase__tile-icon">
-            <app-icon [name]="feature.icon" [size]="isSpotlight(i) ? 28 : 20" />
+            <img [src]="iconSrc(feature.icon)" alt="" aria-hidden="true" loading="lazy" width="56" height="56" />
           </span>
           <h3 class="features-showcase__tile-title">{{ feature.title }}</h3>
           <p class="features-showcase__tile-desc">{{ feature.desc }}</p>
