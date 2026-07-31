@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-import { IconComponent } from '../icon/icon.component';
+import { LogoMarkComponent } from '../logo-mark/logo-mark.component';
 
 export type ChatBubbleVariant = 'user' | 'ai';
 
@@ -15,7 +15,7 @@ export type ChatBubbleVariant = 'user' | 'ai';
  */
 @Component({
   selector: 'app-chat-bubble',
-  imports: [IconComponent],
+  imports: [LogoMarkComponent],
   templateUrl: './chat-bubble.component.html',
   styleUrl: './chat-bubble.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -22,6 +22,7 @@ import { AvatarComponent } from '../../../../shared/ui/avatar/avatar.component';
 import { ChatBubbleComponent } from '../../../../shared/ui/chat-bubble/chat-bubble.component';
 import { ChipComponent } from '../../../../shared/ui/chip/chip.component';
 import { IconComponent } from '../../../../shared/ui/icon/icon.component';
+import { LogoMarkComponent } from '../../../../shared/ui/logo-mark/logo-mark.component';
 import { SectionEyebrowComponent } from '../../../../shared/ui/section-eyebrow/section-eyebrow.component';
 import { StatusPillComponent } from '../../../../shared/ui/status-pill/status-pill.component';
 
@@ -67,6 +68,7 @@ const TRANSCRIPT_SNIPPETS: readonly string[] = [
     ChatBubbleComponent,
     ChipComponent,
     IconComponent,
+    LogoMarkComponent,
     SectionEyebrowComponent,
     StatusPillComponent
   ],
