@@ -1,3 +1,4 @@
+@use 'mixins' as m;
 @use 'effects' as fx;
 
 .stats-band {
@@ -33,15 +34,64 @@
   color: var(--ink);
 }
 
+// Asymmetric weight instead of 4 equal columns — the closing "24/7" stat
+// (brand indigo, the flagship one) gets its own large cell spanning all 3
+// rows; the other three (which recap capture/structure/recall in order)
+// stack beside it at standard size.
 .stats-band__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-8);
+  grid-template-columns: 1.3fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  gap: var(--space-6) var(--space-10);
+
+  @include m.respond-down(md) {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
 }
 
 .stats-band__item {
   padding-left: var(--space-5);
   border-left: 1px solid var(--hairline);
+
+  &:nth-child(4) {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &:nth-child(1) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  &:nth-child(2) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  &:nth-child(3) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  // `:nth-child(n)` matches every item — same selector "weight" as the
+  // desktop-only `:nth-child(1..4)` placements above, so being last in
+  // source order is what lets this actually override them (a plain
+  // `.stats-band__item` reset here would have lower specificity and lose
+  // regardless of order).
+  @include m.respond-down(md) {
+    &:nth-child(n) {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    &:nth-child(4) {
+      order: -1;
+    }
+  }
 }
 
 .stats-band__value {
@@ -54,6 +104,10 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+
+  .stats-band__item:nth-child(4) & {
+    font-size: clamp(64px, 9vw, 140px);
+  }
 }
 
 .stats-band__label {

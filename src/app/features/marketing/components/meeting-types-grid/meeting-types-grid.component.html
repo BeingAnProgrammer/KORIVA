@@ -23,22 +23,43 @@
     </div>
   </div>
 
-  <app-marquee [items]="meetingTypes()" [speed]="55" [pauseOnHover]="true" [edgeFade]="true">
-    <ng-template let-type>
-      <div class="meeting-type-card">
-        <div class="meeting-type-card__head">
-          <span class="meeting-type-card__icon"><app-icon [name]="type.icon" size="18" /></span>
-          <span class="meeting-type-card__name">{{ type.name }}</span>
+  <div class="meeting-types__rows">
+    <app-marquee [items]="topRow()" [speed]="50" [pauseOnHover]="true" [edgeFade]="true">
+      <ng-template let-type>
+        <div class="meeting-type-card" [style.--type-color]="type.color">
+          <div class="meeting-type-card__head">
+            <span class="meeting-type-card__icon"><app-icon [name]="type.icon" size="18" /></span>
+            <span class="meeting-type-card__name">{{ type.name }}</span>
+          </div>
+          <div class="mono meeting-type-card__label">MOM structure</div>
+          <div class="meeting-type-card__fields">
+            @for (field of type.fields; track field) {
+              <div class="meeting-type-card__field">
+                <span class="meeting-type-card__dot"></span>{{ field }}
+              </div>
+            }
+          </div>
         </div>
-        <div class="mono meeting-type-card__label">MOM structure</div>
-        <div class="meeting-type-card__fields">
-          @for (field of type.fields; track field) {
-            <div class="meeting-type-card__field">
-              <span class="meeting-type-card__dot"></span>{{ field }}
-            </div>
-          }
+      </ng-template>
+    </app-marquee>
+
+    <app-marquee [items]="bottomRow()" [speed]="50" direction="right" [pauseOnHover]="true" [edgeFade]="true">
+      <ng-template let-type>
+        <div class="meeting-type-card" [style.--type-color]="type.color">
+          <div class="meeting-type-card__head">
+            <span class="meeting-type-card__icon"><app-icon [name]="type.icon" size="18" /></span>
+            <span class="meeting-type-card__name">{{ type.name }}</span>
+          </div>
+          <div class="mono meeting-type-card__label">MOM structure</div>
+          <div class="meeting-type-card__fields">
+            @for (field of type.fields; track field) {
+              <div class="meeting-type-card__field">
+                <span class="meeting-type-card__dot"></span>{{ field }}
+              </div>
+            }
+          </div>
         </div>
-      </div>
-    </ng-template>
-  </app-marquee>
+      </ng-template>
+    </app-marquee>
+  </div>
 </section>

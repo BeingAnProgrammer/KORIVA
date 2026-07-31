@@ -42,3 +42,17 @@
   pointer-events: none;
   user-select: none;
 }
+
+// Shared "glass" hover treatment for elevated demo cards (product-story's
+// capture/doc/chat cards, the features panel, meeting-type cards) — a
+// color-matched border tint and soft outer glow so every card's hover state
+// speaks the same language, tinted to whichever story hue that card belongs
+// to instead of each card hardcoding its own accent.
+@mixin elevated-card-hover($color: var(--accent)) {
+  transition: border-color var(--dur-base) var(--ease-standard), box-shadow var(--dur-base) var(--ease-standard);
+
+  &:hover {
+    border-color: color-mix(in srgb, #{$color} 35%, var(--hairline));
+    box-shadow: var(--shadow-lg), 0 0 32px -12px color-mix(in srgb, #{$color} 35%, transparent);
+  }
+}

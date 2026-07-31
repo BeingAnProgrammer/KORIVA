@@ -152,3 +152,33 @@
     transform: translateY(0);
   }
 }
+
+// Ambient bob for the hero's floating "live call" badge — subtle enough to
+// read as "alive" without competing with the headline below it.
+@keyframes heroFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+// Transcript fragments drifting upward past the capture card — captured
+// speech rising out of frame, not a ticker to be read.
+@keyframes transcriptDrift {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.55;
+  }
+  80% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(-220px);
+    opacity: 0;
+  }
+}

@@ -2,14 +2,21 @@
 // standard dark-theme canvas shades (#08090B / #0D0F13) — overriding the
 // tokens here (rather than in the global dark theme) keeps the authenticated
 // app shell's palette untouched.
-// KORIVA brand override for the marketing site — a single indigo accent and
-// a real elevation scale (canvas < canvas-sub < surface < surface-alt) so
-// cards read as distinct surfaces from luminance/hairline contrast alone,
-// not from colorful glow borders. Scoped to the landing page only; the
-// authenticated app shell keeps the cyan/multi-hue dark theme in
-// _theme-dark.scss untouched.
+// KORIVA brand override for the marketing site — indigo remains the single
+// "brand action" color (buttons, links, focus rings — anywhere the user
+// needs one consistent signal for "this is interactive/primary"). Everywhere
+// else, the page draws on a small narrative palette instead of repeating
+// that same indigo as decoration: the product-story section tells a 3-act
+// story (capture → structure → recall) and each act gets its own hue, which
+// then recurs in stats-band and features-showcase so the whole page reads
+// as one deliberate system rather than isolated sections. A real elevation
+// scale (canvas < canvas-sub < surface < surface-alt) still does the heavy
+// lifting for card hierarchy — color augments that, it doesn't replace it.
+// Scoped to the landing page only; the authenticated app shell keeps the
+// cyan/multi-hue dark theme in _theme-dark.scss untouched.
 :host {
   display: block;
+  position: relative;
 
   --canvas: #09090b;
   --canvas-sub: #121216;
@@ -33,11 +40,38 @@
   --accent-fg: #0b0b12;
 
   // Second accent — warm amber, paired deliberately against the cool indigo
-  // primary. Used in exactly two places (see features-showcase and
-  // stats-band); everywhere else stays on the indigo/neutral balance.
+  // primary. Doubles as the "structure" story hue below.
   --accent-2: #e8a945;
   --accent-2-soft: #3a2a12;
   --accent-2-ink: #f3ce8e;
 
+  // Cool, analytical blue and warm coral/rust — both already exist as
+  // semantic tokens in the app's dark theme (_theme-dark.scss) but go
+  // unused on the marketing site. Pulling them in gives the page a real
+  // three-hue narrative palette instead of inventing new colors.
+  --rust: #e67b5a;
+  --ink-blue: #6baef0;
+
+  // Story hues — one per product-story chapter, reused wherever that
+  // chapter's idea resurfaces later on the page (stats-band, features).
+  --story-capture: var(--rust); // 01 · Capture — live, human, urgent
+  --story-structure: var(--accent-2); // 02 · Structure — documented, organized
+  --story-recall: var(--ink-blue); // 03 · Recall — analytical, intelligent
+
   --glow-accent: 0 0 0 6px rgba(123, 118, 240, 0.16), 0 0 34px rgba(123, 118, 240, 0.34);
+}
+
+// Whole-page film-grain — a fixed, viewport-covering noise layer so the
+// large flat-black areas between sections read as a tactile dark material
+// rather than a flat vector fill. One overlay for the entire route instead
+// of each section inventing its own texture.
+:host::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }

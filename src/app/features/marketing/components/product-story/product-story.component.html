@@ -10,17 +10,28 @@
     </p>
   </div>
 
-  <!-- Chapter 01 — Capture -->
-  <article class="product-story__chapter">
-    <div class="product-story__chapter-copy" appScrollReveal>
-      <span class="mono product-story__chapter-index">01 · Capture</span>
+  <!-- Chapter 01 — Capture: a centered spotlight, not a split column — the
+       first chapter should feel like the call itself just started. -->
+  <article class="product-story__chapter product-story__chapter--capture" [appJourneyStage]="1">
+    <div class="product-story__spotlight-intro" appScrollReveal>
+      <span class="mono product-story__chapter-index"><span class="product-story__chapter-dot"></span>01 · Capture</span>
       @if (steps()[0]; as step) {
         <h3 class="product-story__chapter-title">{{ step.title }}</h3>
         <p class="product-story__chapter-desc">{{ step.desc }}</p>
       }
     </div>
 
-    <div class="product-story__chapter-visual" appScrollReveal>
+    <div class="product-story__chapter-visual product-story__chapter-visual--capture" appScrollReveal>
+      <div class="product-story__capture-aurora" aria-hidden="true"></div>
+
+      <div class="product-story__transcript-drift" aria-hidden="true">
+        <span class="mono product-story__transcript-line">{{ transcriptSnippets[0] }}</span>
+        <span class="mono product-story__transcript-line">{{ transcriptSnippets[1] }}</span>
+        <span class="mono product-story__transcript-line">{{ transcriptSnippets[2] }}</span>
+        <span class="mono product-story__transcript-line">{{ transcriptSnippets[3] }}</span>
+        <span class="mono product-story__transcript-line">{{ transcriptSnippets[4] }}</span>
+      </div>
+
       <div class="product-story__capture-card">
         <div class="product-story__capture-topbar">
           <span class="product-story__capture-dot product-story__capture-dot--red"></span>
@@ -39,7 +50,7 @@
             <app-icon name="video" size="14" />
             KORIVA joined the call and started recording
           </p>
-          <div class="product-story__waveform" aria-hidden="true">
+          <div class="product-story__waveform" #waveform aria-hidden="true">
             <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
         </div>
@@ -47,10 +58,13 @@
     </div>
   </article>
 
-  <!-- Chapter 02 — Structure -->
-  <article class="product-story__chapter product-story__chapter--reverse">
-    <div class="product-story__chapter-copy" appScrollReveal>
-      <span class="mono product-story__chapter-index">02 · Structure</span>
+  <!-- Chapter 02 — Structure: the transformation itself, shown — a raw
+       transcript resolving into a structured MOM as you scroll, pinned for
+       one short span so the "before → after" reads as a demonstration
+       rather than two static cards side by side. -->
+  <article class="product-story__chapter product-story__chapter--structure" [appJourneyStage]="2" #transformPin>
+    <div class="product-story__spotlight-intro" appScrollReveal>
+      <span class="mono product-story__chapter-index"><span class="product-story__chapter-dot"></span>02 · Structure</span>
       @if (steps()[1]; as step) {
         <h3 class="product-story__chapter-title">{{ step.title }}</h3>
         <p class="product-story__chapter-desc">{{ step.desc }}</p>
@@ -63,115 +77,142 @@
       </div>
     </div>
 
-    <div class="product-story__chapter-visual product-story__chapter-visual--doc">
-      <div class="product-story__watermark" aria-hidden="true">MOM</div>
-
-      <div class="product-story__doc" appStaggerReveal>
-        <div class="product-story__doc-header">
-          <div>
-            <div class="product-story__doc-title">Series B renewal — Sales sync</div>
-            <div class="mono product-story__doc-meta">Oct 14 · 42 min · 5 participants</div>
-          </div>
-          <span class="mono product-story__doc-badge">MOM</span>
+    <div class="product-story__transform">
+      <div class="product-story__transform-grid">
+        <div class="product-story__transform-raw">
+          <div class="mono product-story__transform-raw-label">Raw transcript</div>
+          <div class="mono product-story__transform-raw-line">[14:02] Marcus: Where are we on the Northwind renewal?</div>
+          <div class="mono product-story__transform-raw-line">[14:03] Priya: Move forward at the current terms.</div>
+          <div class="mono product-story__transform-raw-line">[14:04] Marcus: Agreed — need someone on Azure OpenAI for Q1.</div>
+          <div class="mono product-story__transform-raw-line">[14:05] Priya: I'll take that, own the API integration.</div>
+          <div class="mono product-story__transform-raw-line">[14:06] Marcus: I'll handle the contract redline, due Monday.</div>
+          <div class="mono product-story__transform-raw-line">[14:07] Priya: One flag — timeline depends on legal sign-off.</div>
         </div>
 
-        <div class="product-story__doc-section">
-          <div class="mono product-story__doc-label">Decisions</div>
-          <div class="product-story__doc-row">
-            <app-icon name="circle-check" size="15" color="var(--ink-3)" />
-            Move forward with the Northwind renewal at the current terms
-          </div>
-          <div class="product-story__doc-row">
-            <app-icon name="circle-check" size="15" color="var(--ink-3)" />
-            Prioritize the Azure OpenAI integration for Q1
-          </div>
+        <div class="product-story__transform-arrow" aria-hidden="true">
+          <app-icon name="sparkles" size="20" />
         </div>
 
-        <div class="product-story__doc-section">
-          <div class="mono product-story__doc-label">Owners</div>
-          <div class="product-story__doc-row product-story__doc-row--owner">
-            <app-avatar initials="PN" [size]="24" variant="neutral" />
-            <span>Priya Nair — API integration</span>
-            <span class="mono product-story__doc-due">Due Fri</span>
-          </div>
-          <div class="product-story__doc-row product-story__doc-row--owner">
-            <app-avatar initials="MC" [size]="24" variant="neutral" />
-            <span>Marcus Chen — Contract redline</span>
-            <span class="mono product-story__doc-due">Due Mon</span>
-          </div>
-        </div>
+        <div class="product-story__chapter-visual--doc">
+          <div class="product-story__watermark" aria-hidden="true">MOM</div>
 
-        <div class="product-story__doc-risk">
-          <app-icon name="target" size="14" />
-          Risk flagged: renewal timeline depends on legal sign-off
+          <div class="product-story__doc">
+            <div class="product-story__doc-header">
+              <div>
+                <div class="product-story__doc-title">Series B renewal — Sales sync</div>
+                <div class="mono product-story__doc-meta">Oct 14 · 42 min · 5 participants</div>
+              </div>
+              <span class="mono product-story__doc-badge">MOM</span>
+            </div>
+
+            <div class="product-story__doc-section">
+              <div class="mono product-story__doc-label">Decisions</div>
+              <div class="product-story__doc-row">
+                <app-icon name="circle-check" size="15" color="var(--story-structure)" />
+                Move forward with the Northwind renewal at the current terms
+              </div>
+              <div class="product-story__doc-row">
+                <app-icon name="circle-check" size="15" color="var(--story-structure)" />
+                Prioritize the Azure OpenAI integration for Q1
+              </div>
+            </div>
+
+            <div class="product-story__doc-section">
+              <div class="mono product-story__doc-label">Owners</div>
+              <div class="product-story__doc-row product-story__doc-row--owner">
+                <app-avatar initials="PN" [size]="24" variant="neutral" />
+                <span>Priya Nair — API integration</span>
+                <span class="mono product-story__doc-due">Due Fri</span>
+              </div>
+              <div class="product-story__doc-row product-story__doc-row--owner">
+                <app-avatar initials="MC" [size]="24" variant="neutral" />
+                <span>Marcus Chen — Contract redline</span>
+                <span class="mono product-story__doc-due">Due Mon</span>
+              </div>
+            </div>
+
+            <div class="product-story__doc-risk">
+              <app-icon name="target" size="14" />
+              Risk flagged: renewal timeline depends on legal sign-off
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </article>
 
-  <!-- Chapter 03 — Recall -->
-  <article class="product-story__chapter" #recallChapter>
-    <div class="product-story__chapter-copy" appScrollReveal>
-      <span class="mono product-story__chapter-index">03 · Recall</span>
+  <!-- Chapter 03 — Recall: an asymmetric bento (chat card + two supporting
+       tiles) instead of the text-column/card-column pattern chapters 1 and
+       2 already broke away from in their own ways. -->
+  <article class="product-story__chapter product-story__chapter--recall" [appJourneyStage]="3" #recallChapter>
+    <div class="product-story__spotlight-intro" appScrollReveal>
+      <span class="mono product-story__chapter-index"><span class="product-story__chapter-dot"></span>03 · Recall</span>
       @if (steps()[2]; as step) {
         <h3 class="product-story__chapter-title">{{ step.title }}</h3>
         <p class="product-story__chapter-desc">{{ step.desc }}</p>
       }
-
-      <div class="product-story__capabilities">
-        @for (row of recallCapabilities; track row.icon) {
-          <div class="product-story__capability">
-            <span class="product-story__capability-icon"><app-icon [name]="row.icon" size="20" /></span>
-            <span>{{ row.text }}</span>
-          </div>
-        }
-      </div>
-
-      <div class="product-story__prompts">
-        <span class="mono product-story__prompts-label">Try asking</span>
-        <div class="product-story__prompt-list">
-          @for (exchange of chatExchanges(); track exchange.query; let i = $index) {
-            <button
-              type="button"
-              class="product-story__prompt"
-              [class.product-story__prompt--active]="activeIndex() === i"
-              (click)="selectExchange(i)"
-            >
-              {{ exchange.query }}
-            </button>
-          }
-        </div>
-      </div>
     </div>
 
-    <div class="product-story__chapter-visual product-story__chapter-visual--chat">
-      <div class="product-story__chat-aurora" aria-hidden="true"></div>
+    <div class="product-story__recall-bento">
+      <div class="product-story__chapter-visual--chat">
+        <div class="product-story__chat-aurora" aria-hidden="true"></div>
 
-      <div class="product-story__chat-card">
-        <div class="product-story__chat-header">
-          <div class="product-story__chat-header-left">
-            <span class="product-story__chat-dot"></span>
-            <span class="mono product-story__chat-header-label">AI Assistant</span>
+        <div class="product-story__chat-card">
+          <div class="product-story__chat-header">
+            <div class="product-story__chat-header-left">
+              <span class="product-story__chat-dot"></span>
+              <span class="mono product-story__chat-header-label">AI Assistant</span>
+            </div>
+            <div class="product-story__chat-header-right">
+              <span class="mono product-story__chat-badge">GPT-4</span>
+              <span class="mono product-story__chat-badge product-story__chat-badge--pro">Pro</span>
+            </div>
           </div>
-          <div class="product-story__chat-header-right">
-            <span class="mono product-story__chat-badge">GPT-4</span>
-            <span class="mono product-story__chat-badge product-story__chat-badge--pro">Pro</span>
+
+          <div class="product-story__chat-body" aria-live="polite">
+            <app-chat-bubble #queryBubble variant="user">{{ activeExchange().query }}</app-chat-bubble>
+
+            <app-chat-bubble #typingBubble variant="ai" [typing]="true" class="product-story__chat-typing-slot" />
+
+            <app-chat-bubble #answerBubble variant="ai">
+              <div [innerHTML]="activeExchange().answer"></div>
+              <div class="product-story__citations">
+                @for (citation of activeExchange().citations; track citation) {
+                  <span class="mono product-story__citation">{{ citation }}</span>
+                }
+              </div>
+            </app-chat-bubble>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-story__recall-side">
+        <div class="product-story__recall-tile product-story__recall-tile--prompts" [appTilt]="4">
+          <span class="mono product-story__prompts-label">Try asking</span>
+          <div class="product-story__prompt-list">
+            @for (exchange of chatExchanges(); track exchange.query; let i = $index) {
+              <button
+                type="button"
+                class="product-story__prompt"
+                [class.product-story__prompt--active]="activeIndex() === i"
+                (click)="selectExchange(i)"
+              >
+                {{ exchange.query }}
+              </button>
+            }
           </div>
         </div>
 
-        <div class="product-story__chat-body" aria-live="polite">
-          <app-chat-bubble #queryBubble variant="user">{{ activeExchange().query }}</app-chat-bubble>
-
-          <app-chat-bubble #typingBubble variant="ai" [typing]="true" class="product-story__chat-typing-slot" />
-
-          <app-chat-bubble #answerBubble variant="ai">
-            <div [innerHTML]="activeExchange().answer"></div>
-            <div class="product-story__citations">
-              @for (citation of activeExchange().citations; track citation) {
-                <span class="mono product-story__citation">{{ citation }}</span>
-              }
-            </div>
-          </app-chat-bubble>
+        <div class="product-story__recall-tile product-story__recall-tile--capabilities" [appTilt]="4">
+          <div class="mono product-story__recall-stat">340 hrs searchable</div>
+          <div class="product-story__capabilities">
+            @for (row of recallCapabilities; track row.icon) {
+              <div class="product-story__capability">
+                <span class="product-story__capability-icon"><app-icon [name]="row.icon" size="18" /></span>
+                <span>{{ row.text }}</span>
+              </div>
+            }
+          </div>
         </div>
       </div>
     </div>

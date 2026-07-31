@@ -37,7 +37,13 @@
   @include fx.dot-grid-field;
 }
 
-.cta-cinematic__aurora {
+// Split in two: the outer `-parallax` wrapper is the JS pointermove target
+// (plain inline `transform`, no CSS animation to fight with), the inner
+// `.cta-cinematic__aurora` keeps its own CSS breathing animation. Combining
+// both concerns on one element would mean whichever sets `transform` last
+// — the running keyframe animation, every frame — silently wins and the
+// parallax would never actually show.
+.cta-cinematic__aurora-parallax {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -45,7 +51,26 @@
   width: min(90vw, 900px);
   height: min(90vw, 900px);
   transform: translate(-50%, -50%);
-  @include fx.aurora-blob;
+  pointer-events: none;
+}
+
+// Dual-tone: brand indigo at the core with a faint "recall" blue at the
+// edge — the same two hues the AI-recall chapter closed on, so the finale
+// reads as a continuation of that story beat rather than a fresh color.
+//
+// Positioned with the same top/left/translate(-50%,-50%) recipe the shared
+// `auroraBreathe` keyframe (see _keyframes.scss) itself animates — at
+// width/height: 100% that's equivalent to `inset: 0` at rest, but it has to
+// match the keyframe's own transform values or the animated frames would
+// jump to a different position than the resting one.
+.cta-cinematic__aurora {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  @include fx.aurora-blob($alpha-a: 28%, $color-b: var(--ink-blue), $alpha-b: 14%);
   animation: auroraBreathe 8s ease-in-out infinite alternate;
 }
 
@@ -61,7 +86,7 @@
   line-height: 0.75;
   letter-spacing: -0.04em;
   white-space: nowrap;
-  @include fx.ghost-watermark;
+  @include fx.ghost-watermark($from: color-mix(in srgb, var(--accent) 20%, var(--ink) 80%));
 
   @include m.respond-down(lg) {
     position: relative;

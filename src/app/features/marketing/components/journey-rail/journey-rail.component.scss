@@ -1,0 +1,143 @@
+@use 'mixins' as m;
+
+// Desktop: a fixed left-edge stepper. Hidden below xl (1280px) — there's no
+// gutter to spare once the content column needs the full viewport width.
+.journey-rail {
+  display: none;
+  position: fixed;
+  left: var(--space-6);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-nav);
+  pointer-events: none;
+
+  @include m.respond-up(xl) {
+    display: block;
+  }
+}
+
+.journey-rail__nodes {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.journey-rail__node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 30px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  // Connector to the next node — a static preview of the full path at low
+  // opacity, brightening once the visitor actually reaches it. Each segment
+  // reprises the exact hue handoff its two chapters use on the page itself
+  // (see the product-story chapter seams), so the rail isn't a separate
+  // decorative device — it's the same color story, compressed.
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 15px;
+    bottom: 0;
+    width: 2px;
+    border-radius: 2px;
+    opacity: 0.28;
+    transition: opacity var(--dur-slow) var(--ease-standard);
+  }
+
+  &--passed:not(:last-child)::after {
+    opacity: 1;
+  }
+
+  &:nth-child(1):not(:last-child)::after {
+    background: linear-gradient(to bottom, var(--accent), var(--story-capture));
+  }
+
+  &:nth-child(2):not(:last-child)::after {
+    background: linear-gradient(to bottom, var(--story-capture), var(--story-structure));
+  }
+
+  &:nth-child(3):not(:last-child)::after {
+    background: linear-gradient(to bottom, var(--story-structure), var(--story-recall));
+  }
+
+  &:nth-child(4):not(:last-child)::after {
+    background: linear-gradient(to bottom, var(--story-recall), var(--accent));
+  }
+
+  &:nth-child(5):not(:last-child)::after {
+    background: var(--accent);
+  }
+}
+
+.journey-rail__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--ink-5);
+  transition: background var(--dur-base) var(--ease-standard), box-shadow var(--dur-base) var(--ease-standard), transform var(--dur-base) var(--ease-standard);
+}
+
+.journey-rail__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--ink-4);
+  white-space: nowrap;
+  transition: color var(--dur-base) var(--ease-standard);
+}
+
+.journey-rail__node--passed {
+  .journey-rail__dot {
+    background: var(--accent);
+  }
+
+  .journey-rail__label {
+    color: var(--ink-3);
+  }
+}
+
+.journey-rail__node--active {
+  .journey-rail__dot {
+    background: var(--accent);
+    transform: scale(1.35);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent), 0 0 14px color-mix(in srgb, var(--accent) 65%, transparent);
+  }
+
+  .journey-rail__label {
+    color: var(--ink);
+    font-weight: 600;
+  }
+}
+
+// Mobile/tablet: a thin reading-progress line pinned to the very top edge —
+// simpler than trying to cram labels into a narrow viewport.
+.journey-bar {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: var(--z-nav);
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+
+  @include m.respond-up(xl) {
+    display: none;
+  }
+}
+
+.journey-bar__fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--accent), var(--story-capture), var(--story-structure), var(--story-recall));
+  transition: width var(--dur-slow) var(--ease-standard);
+}

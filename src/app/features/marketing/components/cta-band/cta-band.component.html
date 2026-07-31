@@ -1,7 +1,9 @@
-<section class="cta-cinematic">
-  <div class="cta-cinematic__pin">
+<section class="cta-cinematic" [appJourneyStage]="5">
+  <div class="cta-cinematic__pin" #pinArea>
     <div class="cta-cinematic__grid" aria-hidden="true"></div>
-    <div class="cta-cinematic__aurora" aria-hidden="true"></div>
+    <div class="cta-cinematic__aurora-parallax" #aurora aria-hidden="true">
+      <div class="cta-cinematic__aurora"></div>
+    </div>
     <div class="cta-cinematic__giant-text" aria-hidden="true">KORIVA</div>
 
     <div class="cta-cinematic__marquee" aria-hidden="true">

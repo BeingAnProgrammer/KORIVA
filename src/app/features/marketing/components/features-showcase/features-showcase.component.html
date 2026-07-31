@@ -1,4 +1,4 @@
-<section id="platform" class="features-showcase">
+<section id="platform" class="features-showcase" [appJourneyStage]="4">
   <div class="features-showcase__inner">
     <div class="features-showcase__intro" appScrollReveal>
       <app-section-eyebrow>Platform</app-section-eyebrow>
@@ -8,32 +8,25 @@
       </p>
     </div>
 
-    <div class="features-showcase__layout" appScrollReveal (mouseenter)="pauseAutoAdvance()" (mouseleave)="resumeAutoAdvance()">
-      <div class="features-showcase__list" appStaggerReveal>
-        @for (feature of features(); track feature.title; let i = $index) {
-          <button
-            type="button"
-            class="features-showcase__list-item"
-            [class.features-showcase__list-item--active]="activeIndex() === i"
-            [attr.aria-current]="activeIndex() === i ? 'true' : null"
-            (click)="selectFeature(i)"
-          >
-            <span class="features-showcase__list-icon"><app-icon [name]="feature.icon" size="18" /></span>
-            <span class="features-showcase__list-title">{{ feature.title }}</span>
-          </button>
-        }
-      </div>
-
-      <div class="features-showcase__panel-wrap">
-        <div class="features-showcase__panel-dot-grid" aria-hidden="true"></div>
-        @if (activeFeature(); as feature) {
-          <div class="features-showcase__panel" #panelContent aria-live="polite">
-            <span class="features-showcase__panel-icon"><app-icon [name]="feature.icon" size="28" /></span>
-            <h3 class="features-showcase__panel-title">{{ feature.title }}</h3>
-            <p class="features-showcase__panel-desc">{{ feature.desc }}</p>
-          </div>
-        }
-      </div>
+    <div class="features-showcase__bento" appStaggerReveal>
+      @for (feature of features(); track feature.title; let i = $index) {
+        <div
+          class="features-showcase__tile"
+          [class.features-showcase__tile--spotlight]="isSpotlight(i)"
+          [style.grid-area]="areaFor(i)"
+          [style.--feature-color]="feature.color"
+          [appTilt]="isSpotlight(i) ? 5 : 3"
+        >
+          @if (isSpotlight(i)) {
+            <div class="features-showcase__tile-dot-grid" aria-hidden="true"></div>
+          }
+          <span class="features-showcase__tile-icon">
+            <app-icon [name]="feature.icon" [size]="isSpotlight(i) ? 28 : 20" />
+          </span>
+          <h3 class="features-showcase__tile-title">{{ feature.title }}</h3>
+          <p class="features-showcase__tile-desc">{{ feature.desc }}</p>
+        </div>
+      }
     </div>
   </div>
 </section>

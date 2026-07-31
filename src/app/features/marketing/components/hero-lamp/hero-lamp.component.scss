@@ -191,11 +191,76 @@
   line-height: 1.15;
   letter-spacing: -0.035em;
   font-weight: 600;
+}
+
+.hero-lamp__title-line {
+  display: block;
+}
+
+// `background` isn't an inherited CSS property, so a gradient-clip set on
+// the line wrapper wouldn't paint through these nested (inline-block, for
+// transform-stagger) word spans — each word carries its own clip instead.
+// The gradient is diagonal and subtle (ink → ink-3), so recalculating it
+// per word rather than once per line is visually seamless.
+.hero-lamp__word {
+  display: inline-block;
   background: linear-gradient(to bottom right, var(--ink), var(--ink-3));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: lampRise 0.8s ease-in-out 0.3s both;
+}
+
+// Small "live call" badge above the headline — the hero's one focal object
+// instead of empty gradient text on glow. Reuses the capture chapter's
+// rec-dot/avatar language so it reads as a preview of what's coming.
+.hero-lamp__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 var(--space-6);
+  padding: 8px 16px 8px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--hairline);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+  // Entrance (fade + rise) is handled by GSAP alongside the headline's word
+  // stagger, so it can be sequenced with — and cleanly kill-switched
+  // together with — that tween. Only the ambient infinite bob is plain CSS,
+  // delayed until well after the entrance settles so the two never fight
+  // over the same `transform`.
+  animation: heroFloat 5s ease-in-out 1.2s infinite;
+  will-change: transform;
+}
+
+.hero-lamp__live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--story-capture, var(--rust));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--story-capture, var(--rust)) 70%, transparent);
+  animation: blink 1.4s ease-in-out infinite;
+}
+
+.hero-lamp__live-avatars {
+  display: flex;
+
+  app-avatar {
+    margin-left: -8px;
+    border: 2px solid var(--surface);
+    border-radius: 50%;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.hero-lamp__live-caption {
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+  white-space: nowrap;
 }
 
 .hero-lamp__subtitle {
@@ -230,10 +295,11 @@
   .hero-lamp__beam,
   .hero-lamp__bar,
   .hero-lamp__line,
-  .hero-lamp__title,
   .hero-lamp__subtitle,
   .hero-lamp__actions,
-  .hero-lamp__connects {
+  .hero-lamp__connects,
+  .hero-lamp__live,
+  .hero-lamp__live-dot {
     animation: none;
   }
 }

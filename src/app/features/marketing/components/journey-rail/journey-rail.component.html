@@ -1,0 +1,18 @@
+<nav class="journey-rail" aria-label="Page progress">
+  <ol class="journey-rail__nodes">
+    @for (stage of stages; track stage; let i = $index) {
+      <li
+        class="journey-rail__node"
+        [class.journey-rail__node--active]="activeIndex() === i"
+        [class.journey-rail__node--passed]="activeIndex() > i"
+      >
+        <span class="journey-rail__dot" aria-hidden="true"></span>
+        <span class="journey-rail__label">{{ stage }}</span>
+      </li>
+    }
+  </ol>
+</nav>
+
+<div class="journey-bar" aria-hidden="true">
+  <div class="journey-bar__fill" [style.width.%]="fillPercent()"></div>
+</div>

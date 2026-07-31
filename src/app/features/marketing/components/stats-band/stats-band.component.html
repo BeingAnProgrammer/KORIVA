@@ -9,7 +9,7 @@
     <div class="stats-band__grid" appStaggerReveal>
       @for (stat of stats(); track stat.label) {
         <div class="stats-band__item">
-          <div class="num stats-band__value" [style.--stat-color]="stat.color">{{ stat.value }}</div>
+          <div class="num stats-band__value" [style.--stat-color]="stat.color" [appCountUp]="stat.value"></div>
           <div class="stats-band__label">{{ stat.label }}</div>
         </div>
       }

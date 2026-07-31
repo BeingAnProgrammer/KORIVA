@@ -5,6 +5,7 @@ import { SITE_URL } from '../../../core/constants/seo.constants';
 import { CtaBandComponent } from '../components/cta-band/cta-band.component';
 import { FeaturesShowcaseComponent } from '../components/features-showcase/features-showcase.component';
 import { HeroLampComponent } from '../components/hero-lamp/hero-lamp.component';
+import { JourneyRailComponent } from '../components/journey-rail/journey-rail.component';
 import { MarketingFooterComponent } from '../components/marketing-footer/marketing-footer.component';
 import { MarketingHeaderComponent } from '../components/marketing-header/marketing-header.component';
 import { MeetingTypesGridComponent } from '../components/meeting-types-grid/meeting-types-grid.component';
@@ -14,6 +15,7 @@ import { StatsBandComponent } from '../components/stats-band/stats-band.componen
 @Component({
   selector: 'app-landing-page',
   imports: [
+    JourneyRailComponent,
     MarketingHeaderComponent,
     HeroLampComponent,
     ProductStoryComponent,

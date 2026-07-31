@@ -3,4 +3,6 @@ export interface Feature {
   icon: string;
   title: string;
   desc: string;
+  /** CSS color value (e.g. `var(--story-capture)`) tinting this feature's list icon and panel. */
+  color?: string;
 }

@@ -1,4 +1,4 @@
-<section class="hero-lamp">
+<section class="hero-lamp" [appJourneyStage]="0">
   <div class="hero-lamp__dot-grid" aria-hidden="true"></div>
   <div class="hero-lamp__aurora" aria-hidden="true"></div>
 
@@ -20,7 +20,29 @@
   </div>
 
   <div class="hero-lamp__content">
-    <h1 class="serif hero-lamp__title">Meetings, turned into<br />organizational intelligence</h1>
+    <div class="hero-lamp__live" [appTilt]="6">
+      <span class="hero-lamp__live-dot" aria-hidden="true"></span>
+      <span class="hero-lamp__live-avatars" aria-hidden="true">
+        <app-avatar initials="AK" [size]="20" />
+        <app-avatar initials="PN" [size]="20" variant="neutral" />
+        <app-avatar initials="MC" [size]="20" variant="neutral" />
+      </span>
+      <span class="mono hero-lamp__live-caption" #liveCaption>{{ captions[captionIndex()] }}</span>
+    </div>
+
+    <h1 class="serif hero-lamp__title">
+      <span class="hero-lamp__title-line">
+        @for (word of titleLine1; track word) {
+          <span class="hero-lamp__word">{{ word }}&nbsp;</span>
+        }
+      </span>
+      <span class="hero-lamp__title-line">
+        @for (word of titleLine2; track word) {
+          <span class="hero-lamp__word">{{ word }}&nbsp;</span>
+        }
+      </span>
+    </h1>
+
     <p class="hero-lamp__subtitle">
       KORIVA joins your meetings, writes the minutes, tracks every commitment, and turns a year of conversations into a
       knowledge base you can simply ask.

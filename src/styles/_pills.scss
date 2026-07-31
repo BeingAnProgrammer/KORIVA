@@ -50,15 +50,17 @@
   padding: 4px 10px;
 }
 
-// "Lead" chip — landing page lead feature card (Decisions/Owners/…).
+// "Lead" chip — landing page lead feature card (Decisions/Owners/…), tinted
+// to the "structure" story hue since it only ever labels the product-story
+// MOM-structure chapter.
 .chip--lead {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--accent-ink);
+  color: var(--accent-2-ink, var(--accent-2));
   padding: 5px 12px;
   border-radius: var(--radius-pill);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--hairline));
+  border: 1px solid color-mix(in srgb, var(--accent-2) 30%, var(--hairline));
 }
 
 // Recording / action-count pills (meeting summary cards).
