@@ -1,0 +1,120 @@
+@use 'mixins' as m;
+
+.ai-search-hero {
+  max-width: 720px;
+  margin: 0 auto var(--space-10);
+  padding: var(--space-6) 0 0;
+  text-align: center;
+}
+
+.ai-search-hero__title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-4xl);
+  color: var(--ink);
+  letter-spacing: -0.02em;
+
+  @include m.respond-down(sm) {
+    font-size: var(--text-3xl);
+  }
+}
+
+.ai-search-hero__subtitle {
+  margin: 0 0 var(--space-8);
+  font-size: var(--text-md);
+  color: var(--ink-3);
+}
+
+.ai-search-hero__form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 60px;
+  padding: 0 10px 0 22px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  color: var(--ink-4);
+  margin-bottom: var(--space-5);
+  transition: border-color var(--dur-fast);
+
+  &:focus-within {
+    border-color: var(--accent);
+  }
+}
+
+.ai-search-hero__input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: none;
+  background: none;
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  color: var(--ink);
+
+  &::placeholder {
+    color: var(--ink-4);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.ai-search-hero__chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: var(--space-6);
+}
+
+.ai-search-hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition: border-color var(--dur-fast), background var(--dur-fast), color var(--dur-fast);
+  @include m.focus-ring;
+
+  app-icon {
+    color: var(--accent);
+    display: inline-flex;
+  }
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--hairline));
+    background: var(--surface-alt);
+    color: var(--ink);
+  }
+}
+
+.ai-search-hero__secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+}
+
+.ai-search-hero__secondary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color var(--dur-fast);
+  @include m.focus-ring;
+
+  &:hover {
+    color: var(--ink);
+  }
+}

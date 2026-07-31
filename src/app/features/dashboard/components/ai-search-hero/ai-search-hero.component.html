@@ -1,0 +1,42 @@
+<div class="ai-search-hero">
+  <h2 class="serif ai-search-hero__title">What would you like to know?</h2>
+  <p class="ai-search-hero__subtitle">
+    Ask Koriva anything across every meeting — decisions, blockers, action items, customer feedback.
+  </p>
+
+  <form class="ai-search-hero__form" (submit)="$event.preventDefault(); ask()">
+    <app-icon name="search" size="20" />
+    <input
+      class="ai-search-hero__input"
+      type="text"
+      [value]="query()"
+      (input)="query.set($any($event.target).value)"
+      placeholder="Summarize last week's meetings"
+      aria-label="Ask Koriva a question"
+    />
+    <button type="submit" appButton variant="primary">
+      Ask
+      <app-icon name="arrow-right" size="16" />
+    </button>
+  </form>
+
+  <div class="ai-search-hero__chips">
+    @for (question of popularQuestions(); track question) {
+      <button type="button" class="ai-search-hero__chip" (click)="ask(question)">
+        <app-icon name="sparkles" size="14" />
+        {{ question }}
+      </button>
+    }
+  </div>
+
+  <div class="ai-search-hero__secondary">
+    <a routerLink="/app/meetings" class="ai-search-hero__secondary-link">
+      <app-icon name="plus" size="14" />
+      New meeting
+    </a>
+    <a routerLink="/app/action-items" class="ai-search-hero__secondary-link">
+      <app-icon name="square-check-big" size="14" />
+      Action items
+    </a>
+  </div>
+</div>

@@ -82,20 +82,21 @@
   padding: var(--space-2) var(--space-3);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
 .sidebar__nav-heading {
-  padding: var(--space-3) var(--space-3) var(--space-2);
+  padding: var(--space-4) var(--space-3) var(--space-2);
 }
 
 .sidebar-nav-item {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 11px;
   width: 100%;
-  padding: 9px var(--space-3);
-  border-radius: var(--radius-sm);
+  padding: 7px var(--space-3) 7px 9px;
+  border-radius: var(--radius-md);
   border: none;
   cursor: pointer;
   font-family: var(--font-sans);
@@ -107,9 +108,30 @@
   color: var(--ink-3);
   @include m.focus-ring;
 
+  // A slim accent rail flush to the item's own left edge — grows in from
+  // nothing rather than just appearing, so the "you are here" cue reads as
+  // motion, not just a color swap.
+  &::before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 50%;
+    width: 3px;
+    height: 0;
+    border-radius: 0 3px 3px 0;
+    background: var(--accent);
+    transform: translateY(-50%);
+    transition: height var(--dur-fast) var(--ease-standard);
+  }
+
   &:hover:not(&--active) {
     background: var(--surface-alt);
     color: var(--ink-2);
+
+    .sidebar-nav-item__icon {
+      background: var(--surface);
+      color: var(--ink-2);
+    }
   }
 
   &--active {
@@ -117,23 +139,34 @@
     background: var(--accent-soft);
     color: var(--accent-ink);
 
+    &::before {
+      height: 18px;
+    }
+
     .sidebar-nav-item__icon {
-      color: var(--accent);
+      background: var(--accent);
+      color: var(--accent-fg);
     }
   }
 }
 
 .sidebar-nav-divider {
   height: 1px;
-  margin: var(--space-3) var(--space-3) var(--space-2);
+  margin: var(--space-4) var(--space-3) var(--space-3);
   background: var(--hairline);
 }
 
 .sidebar-nav-item__icon {
-  font-size: 19px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  font-size: 17px;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   color: var(--ink-3);
+  transition: background var(--dur-fast), color var(--dur-fast);
 }
 
 .sidebar-nav-item__label {
@@ -152,21 +185,33 @@
 .sidebar__collapse-btn {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: 9px var(--space-3);
-  border-radius: var(--radius-sm);
+  gap: 11px;
+  padding: 7px var(--space-3) 7px 9px;
+  border-radius: var(--radius-md);
   border: none;
   background: transparent;
   color: var(--ink-3);
   cursor: pointer;
   font-family: var(--font-sans);
   font-size: var(--text-sm);
+  transition: background var(--dur-fast), color var(--dur-fast);
   @include m.focus-ring;
+
+  &:hover {
+    background: var(--surface-alt);
+    color: var(--ink-2);
+  }
 }
 
 .sidebar__collapse-icon {
-  font-size: 18px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  font-size: 17px;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .sidebar__user {
@@ -177,6 +222,11 @@
   border-radius: var(--radius-md);
   background: var(--surface);
   border: 1px solid var(--hairline);
+  transition: border-color var(--dur-fast);
+
+  &:hover {
+    border-color: var(--ink-5);
+  }
 }
 
 .sidebar__user-info {

@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { IntelligenceSignal } from '../models/intelligence-signal.model';
 import { Insight } from '../models/insight.model';
 import { Kpi } from '../models/kpi.model';
 import { MeetingSummary } from '../models/meeting-summary.model';
-import { TeamActivity } from '../models/team-activity.model';
+import { NeedsAttentionItem } from '../models/needs-attention-item.model';
 import { UpcomingMeeting } from '../models/upcoming-meeting.model';
-import { INSIGHTS, KPIS, RECENT_MEETINGS, TEAM_ACTIVITY, UPCOMING_MEETINGS } from '../mock/dashboard.mock-data';
+import {
+  INSIGHTS,
+  INTELLIGENCE_FEED,
+  KPIS,
+  NEEDS_ATTENTION,
+  POPULAR_QUESTIONS,
+  RECENT_MEETINGS,
+  UPCOMING_MEETINGS
+} from '../mock/dashboard.mock-data';
 
 /** Read-only content for the Dashboard page. */
 @Injectable({ providedIn: 'root' })
@@ -23,8 +32,16 @@ export class DashboardDataService {
     return of(RECENT_MEETINGS);
   }
 
-  getTeamActivity(): Observable<readonly TeamActivity[]> {
-    return of(TEAM_ACTIVITY);
+  getNeedsAttention(): Observable<readonly NeedsAttentionItem[]> {
+    return of(NEEDS_ATTENTION);
+  }
+
+  getIntelligenceFeed(): Observable<readonly IntelligenceSignal[]> {
+    return of(INTELLIGENCE_FEED);
+  }
+
+  getPopularQuestions(): Observable<readonly string[]> {
+    return of(POPULAR_QUESTIONS);
   }
 
   getInsights(): Observable<readonly Insight[]> {

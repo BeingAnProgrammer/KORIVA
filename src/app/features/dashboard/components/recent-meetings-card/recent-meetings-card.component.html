@@ -9,7 +9,12 @@
       <div class="recent-card__body">
         <div class="recent-card__meta-row">
           <span class="recent-card__title-text">{{ meeting.title }}</span>
-          <span class="mono recent-card__meta">{{ meeting.type }} · {{ meeting.date }} · {{ meeting.duration }}</span>
+          <span class="mono recent-card__meta">
+            {{ meeting.type }} · {{ meeting.date }} · {{ meeting.duration }}
+            @if (meeting.participants) {
+              · {{ meeting.participants }}
+            }
+          </span>
         </div>
         <div class="recent-card__summary">{{ meeting.summary }}</div>
       </div>

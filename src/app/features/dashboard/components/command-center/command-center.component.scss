@@ -24,24 +24,3 @@
   gap: var(--space-6);
   min-width: 0;
 }
-
-.command-center__chart-card {
-  border-radius: var(--radius-md);
-  border: 1px solid var(--hairline);
-  background: var(--surface);
-  padding: var(--space-5);
-}
-
-.command-center__chart-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-5);
-}
-
-.command-center__chart-title {
-  margin: 0;
-  font-size: var(--text-md);
-  font-weight: 600;
-  color: var(--ink);
-}

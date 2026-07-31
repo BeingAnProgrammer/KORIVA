@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
 import { SeoService } from '../../../core/services/seo.service';
-import { ButtonDirective } from '../../../shared/directives/button.directive';
-import { IconComponent } from '../../../shared/ui/icon/icon.component';
+import { AiSearchHeroComponent } from '../components/ai-search-hero/ai-search-hero.component';
 import { CommandCenterComponent } from '../components/command-center/command-center.component';
 
 @Component({
   selector: 'app-dashboard-page',
-  imports: [RouterLink, ButtonDirective, IconComponent, CommandCenterComponent],
+  imports: [AiSearchHeroComponent, CommandCenterComponent],
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -19,7 +17,7 @@ export class DashboardPageComponent {
   constructor() {
     this.seo.setPage({
       title: 'Dashboard',
-      description: 'Your meetings, action items, and AI insights at a glance.',
+      description: 'Ask Koriva anything across your meetings, and see what needs attention.',
       path: '/app/dashboard'
     });
   }
