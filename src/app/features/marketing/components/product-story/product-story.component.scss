@@ -351,7 +351,10 @@
     flex: 1;
     max-width: 6px;
     border-radius: 3px;
-    background: var(--story-capture);
+    // A deliberate one-off cyan rather than the chapter's rust story-hue —
+    // the waveform is meant to pop as its own "live audio" signal against
+    // the otherwise rust-toned capture card, not blend into it.
+    background: #00e8f7;
     opacity: 0.75;
     transform-origin: bottom;
 
