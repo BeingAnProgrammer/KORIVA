@@ -160,12 +160,15 @@
         <div class="product-story__chat-card">
           <div class="product-story__chat-header">
             <div class="product-story__chat-header-left">
-              <span class="product-story__chat-dot"></span>
+              <span class="product-story__chat-dot" aria-hidden="true"></span>
               <span class="mono product-story__chat-header-label">AI Assistant</span>
             </div>
             <div class="product-story__chat-header-right">
               <span class="mono product-story__chat-badge">GPT-4</span>
               <span class="mono product-story__chat-badge product-story__chat-badge--pro">Pro</span>
+              <span class="product-story__chat-close" aria-hidden="true">
+                <app-icon name="x" size="14" />
+              </span>
             </div>
           </div>
 
@@ -182,6 +185,28 @@
                 }
               </div>
             </app-chat-bubble>
+          </div>
+
+          <!-- Static compose bar — illustrative chrome only (not a working
+               input) so the card reads as a complete product screenshot
+               rather than a bare Q&A snippet; entirely aria-hidden since
+               none of it is interactive. -->
+          <div class="product-story__chat-compose" aria-hidden="true">
+            <p class="product-story__chat-placeholder">Ask about your meetings, request a summary, or search past decisions…</p>
+            <div class="product-story__chat-toolbar">
+              <span class="product-story__chat-tool"><app-icon name="paperclip" size="16" /></span>
+              <span class="product-story__chat-tool"><app-icon name="link" size="16" /></span>
+              <span class="product-story__chat-tool"><app-icon name="code-2" size="16" /></span>
+              <span class="product-story__chat-tool"><app-icon name="layout-grid" size="16" /></span>
+              <span class="product-story__chat-tool"><app-icon name="mic" size="16" /></span>
+              <span class="product-story__chat-toolbar-spacer"></span>
+              <span class="mono product-story__chat-counter">0/2000</span>
+              <span class="product-story__chat-send"><app-icon name="send" size="15" /></span>
+            </div>
+            <div class="product-story__chat-footer">
+              <span class="mono product-story__chat-hint">Press <span class="product-story__chat-key">Shift + Enter</span> for new line</span>
+              <span class="product-story__chat-status"><span class="product-story__chat-status-dot"></span>All systems operational</span>
+            </div>
           </div>
         </div>
       </div>

@@ -669,8 +669,14 @@
   }
 }
 
+// `.product-story__recall-bento`'s grid stretches this wrapper to match the
+// side column's height (two stacked tiles, usually taller than the chat
+// card's own content) — without `display:flex` here, the card inside just
+// sizes to its own content and floats at the top, leaving empty space below
+// it. Flexing this wrapper lets `.product-story__chat-card` grow to fill it.
 .product-story__chapter-visual--chat {
   position: relative;
+  display: flex;
 }
 
 // Blends the "recall" blue with a faint hint of the brand indigo — the AI
@@ -687,6 +693,8 @@
 .product-story__chat-card {
   position: relative;
   z-index: 1;
+  width: 100%;
+  flex: 1;
   border-radius: var(--radius-xl);
   border: 1px solid var(--hairline);
   background: var(--surface);
@@ -727,28 +735,136 @@
   background: var(--surface-alt);
   color: var(--ink-3);
 
+  // Warm rust rather than a literal red — keeps the "paid tier" pop of
+  // color the reference uses while staying inside the page's existing
+  // three-hue story palette instead of introducing a new one.
   &--pro {
-    border-color: var(--hairline-2);
-    background: var(--surface);
-    color: var(--ink-2);
+    border-color: color-mix(in srgb, var(--rust) 45%, var(--hairline));
+    background: color-mix(in srgb, var(--rust) 14%, var(--surface));
+    color: var(--rust);
   }
 }
 
+// A literal "online" indicator, not a story-hue accent — same green used
+// for the capture-card's traffic-light dot elsewhere in this component.
 .product-story__chat-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--story-recall);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--story-recall) 22%, transparent);
+  background: #28c840;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #28c840 22%, transparent);
   flex-shrink: 0;
+}
+
+.product-story__chat-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-left: 2px;
+  border-radius: var(--radius-pill);
+  color: var(--ink-4);
 }
 
 .product-story__chat-body {
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: var(--space-3);
-  min-height: 240px;
+  flex: 1;
+  min-height: 190px;
+}
+
+// Static compose bar — illustrative chrome so the card reads as a full
+// product screenshot, not a bare Q&A snippet. See the template comment:
+// none of this is interactive, so nothing here needs hover/focus states.
+.product-story__chat-compose {
+  border-top: 1px solid var(--hairline);
+  background: color-mix(in srgb, var(--surface-alt) 60%, transparent);
+  padding: var(--space-4) var(--space-5) var(--space-3);
+}
+
+.product-story__chat-placeholder {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--ink-4);
+}
+
+.product-story__chat-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: var(--space-3);
+}
+
+.product-story__chat-toolbar-spacer {
+  flex: 1;
+}
+
+.product-story__chat-tool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-md);
+  color: var(--ink-4);
+}
+
+.product-story__chat-counter {
+  font-size: 11px;
+  color: var(--ink-4);
+  margin-right: var(--space-3);
+}
+
+.product-story__chat-send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-fg);
+  flex-shrink: 0;
+}
+
+.product-story__chat-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--hairline);
+  font-size: 11px;
+  color: var(--ink-4);
+  flex-wrap: wrap;
+}
+
+.product-story__chat-key {
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--hairline-2);
+  background: var(--surface-alt);
+  color: var(--ink-3);
+  font-size: 10px;
+}
+
+.product-story__chat-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.product-story__chat-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #28c840;
+  box-shadow: 0 0 6px color-mix(in srgb, #28c840 60%, transparent);
+  flex-shrink: 0;
 }
 
 // Rest state for the transient typing indicator — `display: none` so it
