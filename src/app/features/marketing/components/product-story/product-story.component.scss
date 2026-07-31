@@ -435,6 +435,9 @@
   }
 }
 
+// Holds the KORIVA logo mark — a brand glyph, not a directional icon, so
+// (unlike the story-tinted ring this replaced) it stays neutral and never
+// rotates at the mobile breakpoint where the layout goes vertical.
 .product-story__transform-arrow {
   display: flex;
   align-items: center;
@@ -442,15 +445,10 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--story-structure) 30%, var(--hairline));
-  background: color-mix(in srgb, var(--story-structure) 10%, var(--surface));
-  color: var(--story-structure);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
   flex-shrink: 0;
   justify-self: center;
-
-  @include m.respond-down(lg) {
-    transform: rotate(90deg);
-  }
 }
 
 .product-story__chapter-visual--doc {

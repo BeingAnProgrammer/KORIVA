@@ -39,11 +39,12 @@
   --accent-ink: #c7c4f8;
   --accent-fg: #0b0b12;
 
-  // Second accent — warm amber, paired deliberately against the cool indigo
-  // primary. Doubles as the "structure" story hue below.
-  --accent-2: #e8a945;
-  --accent-2-soft: #3a2a12;
-  --accent-2-ink: #f3ce8e;
+  // Second accent — a green-blue teal, distinct from both the warm rust
+  // (Capture) and the cool ink-blue (Recall) below so all three story hues
+  // stay visually separable. Doubles as the "structure" story hue.
+  --accent-2: #2dd4bf;
+  --accent-2-soft: #0d2e2b;
+  --accent-2-ink: #99e6da;
 
   // Cool, analytical blue and warm coral/rust — both already exist as
   // semantic tokens in the app's dark theme (_theme-dark.scss) but go
