@@ -17,3 +17,10 @@
   color: var(--ink);
   letter-spacing: -0.01em;
 }
+
+.dashboard-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}

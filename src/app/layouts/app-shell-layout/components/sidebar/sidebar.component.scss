@@ -107,6 +107,11 @@
   color: var(--ink-3);
   @include m.focus-ring;
 
+  &:hover:not(&--active) {
+    background: var(--surface-alt);
+    color: var(--ink-2);
+  }
+
   &--active {
     font-weight: 600;
     background: var(--accent-soft);
@@ -116,6 +121,12 @@
       color: var(--accent);
     }
   }
+}
+
+.sidebar-nav-divider {
+  height: 1px;
+  margin: var(--space-3) var(--space-3) var(--space-2);
+  background: var(--hairline);
 }
 
 .sidebar-nav-item__icon {

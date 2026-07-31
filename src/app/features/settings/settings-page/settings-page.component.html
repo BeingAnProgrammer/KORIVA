@@ -1,11 +1,12 @@
 <div class="reveal settings-layout">
   <nav class="settings-nav">
-    @for (item of navItems(); track item.label) {
+    @for (item of navItems(); track item.key) {
       <button
         type="button"
         class="settings-nav__item"
-        [class.settings-nav__item--active]="item.active"
-        [attr.aria-current]="item.active ? 'page' : null"
+        [class.settings-nav__item--active]="activeSection() === item.key"
+        [attr.aria-current]="activeSection() === item.key ? 'page' : null"
+        (click)="activeSection.set(item.key)"
       >
         <app-icon [name]="item.icon" size="16" />
         {{ item.label }}
@@ -14,51 +15,88 @@
   </nav>
 
   <div class="settings-content">
-    <div class="settings-card">
-      <h3 class="settings-card__title">Profile</h3>
-      <div class="settings-profile">
-        <app-avatar initials="AR" [size]="56" />
-        <button type="button" class="settings-profile__change-btn">Change photo</button>
-      </div>
-      <div class="settings-fields">
-        <div>
-          <div class="eyebrow settings-field__label">Name</div>
-          <div class="settings-field__value">Ava Reyes</div>
+    @switch (activeSection()) {
+      @case ('profile') {
+        <div class="settings-card">
+          <h3 class="settings-card__title">Profile</h3>
+          <div class="settings-profile">
+            <app-avatar initials="AR" [size]="56" />
+            <button type="button" class="settings-profile__change-btn">Change photo</button>
+          </div>
+          <div class="settings-fields">
+            <div>
+              <div class="eyebrow settings-field__label">Name</div>
+              <div class="settings-field__value">Ava Reyes</div>
+            </div>
+            <div>
+              <div class="eyebrow settings-field__label">Role</div>
+              <div class="settings-field__value">Chief of staff</div>
+            </div>
+          </div>
         </div>
-        <div>
-          <div class="eyebrow settings-field__label">Role</div>
-          <div class="settings-field__value">Chief of staff</div>
+      }
+      @case ('theme') {
+        <div class="settings-card">
+          <h3 class="settings-card__title settings-card__title--tight">Theme</h3>
+          <p class="settings-card__desc">
+            Match your system, or lock light or dark. Also available in the switcher at the bottom of the screen.
+          </p>
+          <app-segmented-control [options]="themeOptions" [value]="themeService.theme()" (valueChange)="themeService.setTheme($event)" />
         </div>
-      </div>
-    </div>
-
-    <div class="settings-card">
-      <h3 class="settings-card__title settings-card__title--tight">Theme</h3>
-      <p class="settings-card__desc">
-        Match your system, or lock light or dark. Also available in the switcher at the bottom of the screen.
-      </p>
-      <app-segmented-control [options]="themeOptions" [value]="themeService.theme()" (valueChange)="themeService.setTheme($event)" />
-    </div>
-
-    <div class="settings-card">
-      <h3 class="settings-card__title">Integrations</h3>
-      <div class="settings-integrations">
-        <div class="settings-integration-row">
-          <app-icon name="video" size="18" />
-          <span class="settings-integration-row__name">Zoom</span>
-          <app-status-pill variant="accent">Connected</app-status-pill>
+      }
+      @case ('integrations') {
+        <div class="settings-card">
+          <h3 class="settings-card__title">Integrations</h3>
+          <div class="settings-integrations">
+            <div class="settings-integration-row">
+              <app-icon name="video" size="18" />
+              <span class="settings-integration-row__name">Zoom</span>
+              <app-status-pill variant="accent">Connected</app-status-pill>
+            </div>
+            <div class="settings-integration-row">
+              <app-icon name="calendar" size="18" />
+              <span class="settings-integration-row__name">Google Calendar</span>
+              <app-status-pill variant="accent">Connected</app-status-pill>
+            </div>
+            <div class="settings-integration-row">
+              <app-icon name="message-square" size="18" />
+              <span class="settings-integration-row__name">Slack</span>
+              <button type="button" class="settings-integration-row__connect">Connect</button>
+            </div>
+          </div>
         </div>
-        <div class="settings-integration-row">
-          <app-icon name="calendar" size="18" />
-          <span class="settings-integration-row__name">Google Calendar</span>
-          <app-status-pill variant="accent">Connected</app-status-pill>
+      }
+      @case ('teams') {
+        <p class="settings-section-desc">Meeting activity and ownership across every team. Only workspace admins can manage teams.</p>
+        <div class="settings-card-grid settings-card-grid--teams">
+          @for (team of teams(); track team.name) {
+            <app-team-card [team]="team" />
+          }
         </div>
-        <div class="settings-integration-row">
-          <app-icon name="message-square" size="18" />
-          <span class="settings-integration-row__name">Slack</span>
-          <button type="button" class="settings-integration-row__connect">Connect</button>
+      }
+      @case ('automations') {
+        <p class="settings-section-desc">Let agents handle the busywork. Toggle what runs automatically after every meeting.</p>
+        <div class="settings-card-grid settings-card-grid--automations">
+          @for (automation of automations(); track automation.title) {
+            <app-automation-card [automation]="automation" />
+          }
         </div>
-      </div>
-    </div>
+      }
+      @case ('templates') {
+        <p class="settings-section-desc">Build the formats your organization runs on — meeting agendas, MOM structures, and AI prompts, per department.</p>
+        <div class="settings-card-grid settings-card-grid--templates">
+          <button type="button" class="templates-create">
+            <span class="templates-create__icon"><app-icon name="plus" size="20" /></span>
+            <div>
+              <div class="templates-create__title">Create template</div>
+              <div class="templates-create__subtitle">Start from scratch or a preset</div>
+            </div>
+          </button>
+          @for (template of templates(); track template.name) {
+            <app-template-card [template]="template" />
+          }
+        </div>
+      }
+    }
   </div>
 </div>

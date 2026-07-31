@@ -76,18 +76,17 @@ $breakpoints: (
   }
 }
 
-@mixin flex-center($gap: 0) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @if $gap != 0 {
-    gap: $gap;
-  }
+@mixin card-surface($bg: var(--canvas-sub), $radius: var(--radius-xl)) {
+  background: $bg;
+  border: 1px solid var(--hairline);
+  border-radius: $radius;
 }
 
-@mixin card-surface {
-  background: var(--canvas-sub);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-xl);
+@mixin hover-lift {
+  transition: transform var(--dur-base) var(--ease-spring), box-shadow var(--dur-base);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
 }

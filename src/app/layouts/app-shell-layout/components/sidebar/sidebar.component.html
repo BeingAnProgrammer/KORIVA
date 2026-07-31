@@ -30,6 +30,21 @@
         }
       </a>
     }
+
+    <div class="sidebar-nav-divider"></div>
+
+    <a
+      routerLink="/app/settings"
+      routerLinkActive="sidebar-nav-item--active"
+      class="sidebar-nav-item"
+      title="Settings"
+      (click)="sidebar.closeMobile()"
+    >
+      <span class="sidebar-nav-item__icon"><app-icon name="settings" size="19" /></span>
+      @if (sidebar.showLabels()) {
+        <span class="sidebar-nav-item__label">Settings</span>
+      }
+    </a>
   </nav>
 
   <div class="sidebar__footer">

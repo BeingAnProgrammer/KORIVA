@@ -1,5 +1,125 @@
 @use 'mixins' as m;
 
+.intelligence-page__toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-8);
+}
+
+// --- Browse view (former knowledge-base page) ---
+
+.kb-intro {
+  max-width: 720px;
+  margin: 0 auto var(--space-10);
+  text-align: center;
+}
+
+.kb-intro__title {
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-3xl);
+  color: var(--ink);
+}
+
+.kb-intro__search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 20px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  color: var(--ink-4);
+
+  span {
+    flex: 1;
+    text-align: left;
+    font-size: var(--text-md);
+    color: var(--ink-4);
+  }
+}
+
+.kb-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+}
+
+.kb-recent-title {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.kb-recent-list {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.kb-recent-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--hairline);
+  cursor: pointer;
+  transition: background var(--dur-fast);
+  color: inherit;
+  min-width: 0;
+  @include m.focus-ring;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--surface-alt);
+  }
+}
+
+.kb-recent-row__icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--canvas-sub);
+  color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.kb-recent-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.kb-recent-row__title {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: var(--text-sm);
+  @include m.truncate;
+}
+
+.kb-recent-row__meta {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.kb-recent-row__chevron {
+  color: var(--ink-4);
+  flex-shrink: 0;
+  display: inline-flex;
+}
+
+// --- Ask Koriva view (former ai-assistant page) ---
+
 .ai-page {
   max-width: 840px;
   margin: 0 auto;
@@ -7,7 +127,7 @@
 
 .ai-page__hero {
   text-align: center;
-  padding: var(--space-8) 0 var(--space-10);
+  padding: 0 0 var(--space-10);
 }
 
 .ai-page__hero-icon {
@@ -56,8 +176,8 @@
   background: var(--surface);
   cursor: pointer;
   text-align: left;
-  transition: transform var(--dur-base) var(--ease-spring), box-shadow var(--dur-base);
   color: var(--ink-4);
+  @include m.hover-lift;
   @include m.focus-ring;
 
   span {
@@ -65,11 +185,6 @@
     color: var(--ink-2);
     font-weight: 500;
     line-height: var(--leading-snug);
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
   }
 }
 

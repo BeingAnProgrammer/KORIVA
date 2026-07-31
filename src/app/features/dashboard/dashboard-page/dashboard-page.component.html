@@ -4,12 +4,21 @@
       <div class="eyebrow dashboard-header__date">Tuesday, October 15</div>
       <h2 class="serif dashboard-header__greeting">Good morning, Ava</h2>
     </div>
-    <app-segmented-control [options]="layoutOptions" [value]="layout()" (valueChange)="layout.set($event)" />
+    <div class="dashboard-header__actions">
+      <a routerLink="/app/meetings" appButton variant="primary">
+        <app-icon name="plus" size="16" />
+        New meeting
+      </a>
+      <a routerLink="/app/intelligence" appButton variant="secondary">
+        <app-icon name="sparkles" size="16" />
+        Ask Koriva
+      </a>
+      <a routerLink="/app/action-items" appButton variant="secondary">
+        <app-icon name="square-check-big" size="16" />
+        Action items
+      </a>
+    </div>
   </div>
 
-  @if (layout() === 'command-center') {
-    <app-command-center />
-  } @else {
-    <app-daily-focus />
-  }
+  <app-command-center />
 </div>

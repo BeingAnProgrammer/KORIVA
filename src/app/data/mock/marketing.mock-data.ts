@@ -121,7 +121,7 @@ export const MEETING_TYPES: readonly MeetingType[] = [
   }
 ];
 
-/** Suggested queries for the authenticated app's AI Assistant page (`/app/ai-assistant`). */
+/** Suggested queries for the authenticated app's Intelligence page (`/app/intelligence`, "Ask Koriva" view). */
 export const AI_QUERIES: readonly string[] = [
   'Show me all meetings where Azure OpenAI was discussed.',
   'Who was assigned the API integration task?',

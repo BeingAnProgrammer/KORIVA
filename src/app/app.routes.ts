@@ -58,18 +58,10 @@ export const routes: Routes = [
         data: { title: 'Meetings', backLink: { route: '/app/meetings', label: 'All meetings' } } satisfies RouteTitleData
       },
       {
-        path: 'ai-assistant',
+        path: 'intelligence',
         loadComponent: () =>
-          import('./features/ai-assistant/ai-assistant-page/ai-assistant-page.component').then((m) => m.AiAssistantPageComponent),
-        ...title('AI Assistant')
-      },
-      {
-        path: 'knowledge-base',
-        loadComponent: () =>
-          import('./features/knowledge-base/knowledge-base-page/knowledge-base-page.component').then(
-            (m) => m.KnowledgeBasePageComponent
-          ),
-        ...title('Knowledge base')
+          import('./features/intelligence/intelligence-page/intelligence-page.component').then((m) => m.IntelligencePageComponent),
+        ...title('Intelligence')
       },
       {
         path: 'analytics',
@@ -78,33 +70,10 @@ export const routes: Routes = [
         ...title('Analytics')
       },
       {
-        path: 'recordings',
-        loadComponent: () =>
-          import('./features/recordings/recordings-page/recordings-page.component').then((m) => m.RecordingsPageComponent),
-        ...title('Recordings')
-      },
-      {
-        path: 'templates',
-        loadComponent: () =>
-          import('./features/templates/templates-page/templates-page.component').then((m) => m.TemplatesPageComponent),
-        ...title('Templates')
-      },
-      {
         path: 'action-items',
         loadComponent: () =>
           import('./features/action-items/action-items-page/action-items-page.component').then((m) => m.ActionItemsPageComponent),
         ...title('Action items')
-      },
-      {
-        path: 'teams',
-        loadComponent: () => import('./features/teams/teams-page/teams-page.component').then((m) => m.TeamsPageComponent),
-        ...title('Teams')
-      },
-      {
-        path: 'automations',
-        loadComponent: () =>
-          import('./features/automations/automations-page/automations-page.component').then((m) => m.AutomationsPageComponent),
-        ...title('Automations')
       },
       {
         path: 'settings',

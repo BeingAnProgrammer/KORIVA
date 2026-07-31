@@ -5,9 +5,10 @@ import { LogoMarkComponent } from '../logo-mark/logo-mark.component';
 export type ChatBubbleVariant = 'user' | 'ai';
 
 /**
- * AI chat message bubble — reused across the landing AI showcase, the AI
- * Assistant page, and the meeting-detail AI tab. AI-variant content
- * (answer text, citation pills, mini tables) is projected via ng-content.
+ * AI chat message bubble — reused across the landing AI showcase, the
+ * Intelligence page's "Ask Koriva" view, and the meeting-detail AI tab.
+ * AI-variant content (answer text, citation pills, mini tables) is
+ * projected via ng-content.
  *
  * Note: the template uses exactly one `<ng-content>` outlet (not one per
  * variant branch) — Angular only projects into the first unselected

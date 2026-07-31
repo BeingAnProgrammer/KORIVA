@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Insight } from '../../../../data/models/insight.model';
 import { IconComponent } from '../../../../shared/ui/icon/icon.component';
 
-/** AI insights card — reused as "AI insights" (command centre) and "What to know before" (daily focus). */
+/** AI insights card, shown on the dashboard's Command Center layout. */
 @Component({
   selector: 'app-ai-insights-card',
   imports: [IconComponent],

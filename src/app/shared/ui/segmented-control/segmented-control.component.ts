@@ -6,7 +6,7 @@ import { SegmentedOption } from './segmented-option.model';
 /**
  * Pill-shaped segmented control — ported from the handoff's `seg(active)`
  * style factory. Drives the theme switcher (system/light/dark) and the
- * dashboard command-center/daily-focus toggle.
+ * Intelligence page's Browse/Ask Koriva toggle, among other uses.
  */
 @Component({
   selector: 'app-segmented-control',
