@@ -86,7 +86,11 @@
   line-height: 0.75;
   letter-spacing: -0.04em;
   white-space: nowrap;
-  @include fx.ghost-watermark($from: color-mix(in srgb, var(--accent) 20%, var(--ink) 80%));
+  // Was 80% --ink (near-white) + 20% accent — read as plain bright white
+  // text rather than a faint brand-tinted ghost. Dropping the ink entirely
+  // and fading a low-opacity accent to transparent keeps it recognizable
+  // but properly recessed into the background.
+  @include fx.ghost-watermark($from: color-mix(in srgb, var(--accent) 30%, transparent));
 
   @include m.respond-down(lg) {
     position: relative;
