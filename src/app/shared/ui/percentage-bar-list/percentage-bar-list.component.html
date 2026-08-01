@@ -3,10 +3,10 @@
     <div class="pct-bar">
       <div class="pct-bar__head">
         <span class="pct-bar__label">{{ item.label }}</span>
-        <span class="num pct-bar__value">{{ item.percentage }}</span>
+        <span class="mono pct-bar__value">{{ item.percent }}%</span>
       </div>
       <div class="pct-bar__track">
-        <div class="pct-bar__fill" [style.width]="item.percentage" [style.background]="item.color"></div>
+        <div class="pct-bar__fill" [style.width.%]="item.percent"></div>
       </div>
     </div>
   }

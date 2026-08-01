@@ -121,14 +121,6 @@ export const MEETING_TYPES: readonly MeetingType[] = [
   }
 ];
 
-/** Suggested queries for the authenticated app's Intelligence page (`/app/intelligence`, "Ask Koriva" view). */
-export const AI_QUERIES: readonly string[] = [
-  'Show me all meetings where Azure OpenAI was discussed.',
-  'Who was assigned the API integration task?',
-  'Show all pending action items from the last 30 days.',
-  'Which meetings discussed AI agents last quarter?'
-];
-
 /**
  * What the product itself guarantees on every meeting — true by design, not
  * a usage claim about customers KORIVA doesn't have yet. Colors deliberately

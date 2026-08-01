@@ -1,0 +1,56 @@
+<div class="memory-hero">
+  <div class="memory-hero__wrap">
+    <div class="eyebrow">Memory · {{ threads().length }} threads · 312 meetings indexed</div>
+    <h1 class="memory-hero__title">What Koriva knows about Acme.</h1>
+    <p class="memory-hero__lead">
+      People, companies and projects, stitched across every room they were mentioned in. Pick a thread to see the whole conversation in
+      order.
+    </p>
+  </div>
+</div>
+
+<div class="memory-body">
+  <div class="memory-body__wrap">
+    <div class="thread-list">
+      @for (t of threads(); track t.id) {
+        <button
+          type="button"
+          class="thread-list__item"
+          [class.thread-list__item--active]="t.id === selectedThread()?.id"
+          (click)="selectThread(t.id)"
+        >
+          <span class="thread-list__copy">
+            <span class="thread-list__name">{{ t.name }}</span>
+            <span class="mono thread-list__kind">{{ t.kind | uppercase }}</span>
+          </span>
+          <span class="mono thread-list__count">{{ t.count }}</span>
+        </button>
+      }
+    </div>
+
+    @if (selectedThread(); as t) {
+      <div class="thread-detail">
+        <div class="thread-detail__heading">
+          <h2 class="thread-detail__name">{{ t.name }}</h2>
+          <span class="mono thread-detail__meta">{{ t.kind }} · {{ t.count }} meetings</span>
+        </div>
+        <p class="thread-detail__note">{{ t.note }}</p>
+
+        <div class="mono thread-detail__label">What Koriva knows</div>
+        <div class="thread-detail__facts">
+          @for (f of t.facts; track f) {
+            <div class="thread-detail__fact"><span class="thread-detail__fact-dot"></span>{{ f }}</div>
+          }
+        </div>
+
+        <div class="mono thread-detail__label thread-detail__label--timeline">The thread, in order</div>
+        <app-thread-timeline [items]="t.items" />
+
+        <div class="thread-detail__actions">
+          <button type="button" appButton variant="accent-sm" (click)="askAboutThread(t.name)">Ask about {{ t.name }}</button>
+          <button type="button" appButton variant="soft-sm" (click)="seeTheMeetings()">See the meetings</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

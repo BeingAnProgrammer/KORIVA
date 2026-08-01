@@ -1,11 +1,8 @@
 <div class="app-shell">
-  <app-sidebar />
-  <main class="app-shell__main">
-    <app-top-header />
-    <div class="app-shell__scroll">
-      <div class="app-shell__content">
-        <router-outlet />
-      </div>
-    </div>
+  <app-top-nav />
+  <main class="app-shell__content">
+    <router-outlet />
   </main>
+  <app-command-palette />
+  <app-toast />
 </div>

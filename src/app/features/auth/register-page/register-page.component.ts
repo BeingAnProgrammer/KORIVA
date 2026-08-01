@@ -113,6 +113,6 @@ export class RegisterPageComponent {
   }
 
   private returnUrl(): string {
-    return this.route.snapshot.queryParamMap.get('returnUrl') || '/app/dashboard';
+    return this.route.snapshot.queryParamMap.get('returnUrl') || '/app/home';
   }
 }

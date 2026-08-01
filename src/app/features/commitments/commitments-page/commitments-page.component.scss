@@ -1,0 +1,47 @@
+@use 'mixins' as m;
+
+.commitments-hero {
+  background-image: var(--glow);
+  padding: 56px 0 30px;
+}
+
+.commitments-hero__wrap {
+  @include m.page-wrap;
+}
+
+.commitments-hero__title {
+  @include m.page-hero-title;
+  margin-top: 14px;
+}
+
+.commitments-hero__filters {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.commitments-list {
+  padding-bottom: 100px;
+}
+
+.commitments-list__wrap {
+  @include m.page-wrap;
+}
+
+.commitment-rows {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.commitments-empty {
+  text-align: center;
+  color: var(--ink-3);
+  font-size: 15px;
+  line-height: 1.6;
+  background: var(--surface-alt);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+}

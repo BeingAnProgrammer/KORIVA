@@ -1,0 +1,375 @@
+@use 'mixins' as m;
+
+.livecard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--invert);
+  color: var(--invert-ink);
+  padding: 34px 36px;
+  box-shadow: var(--shadow-xl);
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 44px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(620px 280px at 0% 0%, rgba(126, 123, 255, 0.22), transparent 70%),
+      radial-gradient(440px 240px at 100% 100%, rgba(251, 113, 133, 0.15), transparent 70%);
+  }
+
+  > * {
+    position: relative;
+  }
+
+  @include m.respond-down(lg) {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+.livecard__main {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.livecard__status-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.livecard__listening {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px 7px 11px;
+  border-radius: var(--radius-pill);
+  background: rgba(251, 113, 133, 0.16);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  color: #fb7185;
+}
+
+.livecard__dot {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  display: inline-flex;
+  flex: none;
+
+  i,
+  em {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-pill);
+    background: #fb7185;
+  }
+
+  i {
+    animation: livecard-pulse 1.8s ease-out infinite;
+  }
+}
+
+@keyframes livecard-pulse {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}
+
+.livecard__meta {
+  font-size: 12px;
+  color: var(--invert-ink-3);
+}
+
+.livecard__clock {
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-left: auto;
+}
+
+.livecard__title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.032em;
+}
+
+.livecard__section-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--invert-ink-3);
+  margin-bottom: 12px;
+}
+
+.livecard__speaker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.livecard__speaker {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.livecard__speaker-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.livecard__speaker-name {
+  font: 450 13px/1 var(--font-sans);
+
+  &--muted {
+    color: var(--invert-ink-2);
+  }
+}
+
+.livecard__speak-bar {
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--invert-soft);
+  overflow: hidden;
+
+  i {
+    display: block;
+    height: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--invert-ink-3);
+
+    &.livecard__speak-bar-fill--active {
+      background: var(--accent-2);
+    }
+  }
+}
+
+.livecard__speaker-elapsed {
+  font-size: 11px;
+  color: var(--invert-ink-3);
+}
+
+.livecard__transcript {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.livecard__transcript-line {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  gap: 16px;
+}
+
+.livecard__transcript-meta {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--invert-ink-3);
+
+  &--final {
+    font-weight: 500;
+    color: #fb7185;
+  }
+}
+
+.livecard__transcript-text {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--invert-ink-2);
+
+  &--final {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--invert-ink);
+    text-wrap: pretty;
+  }
+}
+
+.livecard__caret {
+  color: var(--accent-on-invert);
+  animation: livecard-caret 1.1s step-end infinite;
+}
+
+@keyframes livecard-caret {
+  0%,
+  48% {
+    opacity: 1;
+  }
+  49%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.livecard__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.livecard__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: none;
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 13px 19px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  transition: filter var(--dur-fast);
+
+  &:hover {
+    filter: brightness(1.08);
+  }
+
+  &--solid {
+    background: var(--invert-ink);
+    color: var(--invert);
+  }
+
+  &--soft {
+    background: var(--invert-soft);
+    color: var(--invert-ink);
+  }
+}
+
+.livecard__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-left: 44px;
+  border-left: 1px solid var(--invert-soft);
+
+  @include m.respond-down(lg) {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--invert-soft);
+    padding-top: 24px;
+  }
+}
+
+.livecard__aside-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.livecard__aside-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-on-invert);
+}
+
+.livecard__noticings {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.livecard__noticing {
+  display: flex;
+  gap: 13px;
+}
+
+.livecard__noticing-icon {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+
+  &--green {
+    background: rgba(52, 211, 153, 0.16);
+    color: #34d399;
+  }
+
+  &--orange {
+    background: rgba(251, 146, 60, 0.16);
+    color: #fb923c;
+  }
+
+  &--amber {
+    background: rgba(251, 191, 36, 0.16);
+    color: #fbbf24;
+  }
+
+  &--rose {
+    background: rgba(251, 113, 133, 0.16);
+    color: #fb7185;
+  }
+
+  &--blue {
+    background: rgba(90, 156, 255, 0.16);
+    color: #5a9cff;
+  }
+
+  &--accent {
+    background: rgba(126, 123, 255, 0.16);
+    color: var(--accent-on-invert);
+  }
+}
+
+.livecard__noticing-text {
+  font: 450 15px/1.45 var(--font-sans);
+}
+
+.livecard__noticing-meta {
+  font-size: 11px;
+  color: var(--invert-ink-3);
+  margin-top: 6px;
+}
+
+.livecard__insight {
+  margin-top: auto;
+  border-radius: 16px;
+  background: var(--invert-soft);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.livecard__insight-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-on-invert);
+}
+
+.livecard__insight-text {
+  font: 400 15px/1.55 var(--font-sans);
+  text-wrap: pretty;
+}
+
+.livecard__insight-link {
+  font: 500 13px/1 var(--font-sans);
+  color: var(--accent-on-invert);
+
+  &:hover {
+    color: var(--accent-on-invert);
+    opacity: 0.85;
+  }
+}

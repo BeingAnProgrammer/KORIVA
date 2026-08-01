@@ -90,3 +90,49 @@ $breakpoints: (
     box-shadow: var(--shadow-md);
   }
 }
+
+// Page-level hero title — shared by every reference page except Home (which
+// uses the larger `.big` variant for its "Ask anything…" headline).
+@mixin page-hero-title {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(32px, 4.4vw, 52px);
+  line-height: 1.06;
+  letter-spacing: -0.042em;
+  margin: 0;
+}
+
+// Section heading ("h2.sec" in the reference) — card/list-group titles.
+@mixin section-heading {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: -0.026em;
+  margin: 0;
+}
+
+// Content container (".wrap" in the reference) — every page's max-width,
+// horizontal-padding container.
+@mixin page-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+
+  @include respond-down(md) {
+    padding: 0 20px;
+  }
+}
+
+// Page-hero lead paragraph (".lead" in the reference) — Meetings, Memory,
+// Commitments and Patterns all follow their h1 with one of these.
+@mixin page-lead {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 660px;
+  margin: 0;
+  text-wrap: pretty;
+}

@@ -1,18 +1,18 @@
 .pct-bar-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 18px;
 }
 
 .pct-bar__head {
   display: flex;
   justify-content: space-between;
-  font-size: var(--text-sm);
-  margin-bottom: 6px;
+  font: 450 14px/1 var(--font-sans);
+  margin-bottom: 9px;
 }
 
 .pct-bar__label {
-  color: var(--ink-2);
+  color: var(--ink);
 }
 
 .pct-bar__value {
@@ -21,11 +21,14 @@
 
 .pct-bar__track {
   height: 8px;
-  border-radius: 99px;
-  background: var(--canvas-sub);
+  border-radius: var(--radius-pill);
+  background: var(--surface-alt);
+  overflow: hidden;
 }
 
 .pct-bar__fill {
   height: 100%;
-  border-radius: 99px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  transition: width 0.5s ease;
 }

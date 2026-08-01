@@ -1,0 +1,32 @@
+<div class="pattern-card">
+  <button type="button" class="pattern-card__header" (click)="toggled.emit()">
+    <span class="pattern-card__icon" [style.background]="'var(--' + pattern().color + '-soft)'" [style.color]="'var(--' + pattern().color + '-ink)'">
+      <app-icon [name]="dirIcon()" size="16" />
+    </span>
+    <span class="pattern-card__copy">
+      <span class="pattern-card__title">{{ pattern().title }}</span>
+      <span class="mono pattern-card__trend" [style.color]="'var(--' + pattern().color + '-ink)'">{{ pattern().trend | uppercase }}</span>
+    </span>
+    <span class="mono pattern-card__toggle">{{ expanded() ? 'HIDE' : 'EVIDENCE' }}</span>
+  </button>
+
+  @if (expanded()) {
+    <div class="pattern-card__body">
+      <p class="pattern-card__detail">{{ pattern().detail }}</p>
+
+      <div class="pattern-card__evidence">
+        <div class="mono pattern-card__evidence-label">Where Koriva heard it</div>
+        @for (e of pattern().evidence; track e) {
+          <div class="pattern-card__evidence-item">
+            <span class="pattern-card__evidence-dot" [style.background]="'var(--' + pattern().color + ')'"></span>{{ e }}
+          </div>
+        }
+      </div>
+
+      <div class="pattern-card__actions">
+        <button type="button" appButton variant="accent-sm" (click)="askClicked.emit()">Ask Koriva about this</button>
+        <a routerLink="/app/meetings" appButton variant="soft-sm">See the meetings</a>
+      </div>
+    </div>
+  }
+</div>

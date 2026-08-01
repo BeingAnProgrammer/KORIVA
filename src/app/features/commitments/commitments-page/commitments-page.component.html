@@ -1,0 +1,32 @@
+<div class="commitments-hero">
+  <div class="commitments-hero__wrap">
+    <div class="eyebrow">Commitments · {{ openCount() }} open · {{ lateCount() }} late</div>
+    <h1 class="commitments-hero__title">Every promise, with the sentence it came from.</h1>
+
+    <div class="commitments-hero__filters">
+      <app-segmented-control [options]="filterOptions()" [value]="filter()" (valueChange)="filter.set($event)" />
+      <button type="button" appButton variant="ref-ghost-sm" (click)="nudgeEveryoneLate()">Nudge everyone late</button>
+    </div>
+  </div>
+</div>
+
+<div class="commitments-list">
+  <div class="commitments-list__wrap">
+    @if (filteredCommitments().length) {
+      <div class="commitment-rows">
+        @for (item of filteredCommitments(); track item.id) {
+          <app-commitment-card
+            [commitment]="item"
+            (toggled)="toggleDone(item)"
+            (meetingClicked)="openMeetingFor(item)"
+            (nudged)="nudge(item)"
+          />
+        }
+      </div>
+    } @else {
+      <div class="commitments-empty">Nothing here — that is a good sign.</div>
+    }
+  </div>
+</div>
+
+<app-meeting-drawer [meeting]="selectedMeeting()" (closed)="closeDrawer()" />

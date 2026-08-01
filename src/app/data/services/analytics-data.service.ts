@@ -1,24 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { CategoryStat } from '../models/category-stat.model';
-import { Kpi } from '../models/kpi.model';
-import { Team } from '../models/team.model';
-import { CATEGORY_STATS } from '../mock/analytics.mock-data';
-import { KPIS } from '../mock/dashboard.mock-data';
-import { TEAMS_LIST } from '../mock/teams.mock-data';
+import { AnalyticsTabData } from '../models/analytics-tab.model';
+import { ANALYTICS_MONTHS, ANALYTICS_TABS } from '../mock/analytics-tabs.mock-data';
 
 @Injectable({ providedIn: 'root' })
 export class AnalyticsDataService {
-  getKpis(): Observable<readonly Kpi[]> {
-    return of(KPIS);
-  }
+  readonly months = ANALYTICS_MONTHS;
 
-  getCategoryStats(): Observable<readonly CategoryStat[]> {
-    return of(CATEGORY_STATS);
-  }
-
-  getTeamContributions(): Observable<readonly Team[]> {
-    return of(TEAMS_LIST);
+  getAnalyticsTabs(): Observable<readonly AnalyticsTabData[]> {
+    return of(ANALYTICS_TABS);
   }
 }

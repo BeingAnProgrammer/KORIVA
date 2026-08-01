@@ -100,3 +100,74 @@
     color: var(--ink);
   }
 }
+
+// ---------------------------------------------------------------------
+// Reference design's button system — ported from its `.btn`/`.btn-primary`/
+// `.btn-sm`/`.btn-ghost` classes. Radius/weight/height are reset per-variant
+// since they differ from the legacy pill-shaped language above.
+.btn--accent,
+.btn--accent-sm,
+.btn--soft,
+.btn--soft-sm,
+.btn--ref-ghost,
+.btn--ref-ghost-sm {
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  letter-spacing: normal;
+  transition: background var(--dur-fast), color var(--dur-fast);
+
+  &:not(:disabled):hover {
+    transform: none;
+  }
+}
+
+.btn--accent,
+.btn--soft,
+.btn--ref-ghost {
+  height: auto;
+  padding: 13px 19px;
+  font-size: 14px;
+}
+
+.btn--accent-sm,
+.btn--soft-sm,
+.btn--ref-ghost-sm {
+  height: auto;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
+.btn--accent,
+.btn--accent-sm {
+  background: var(--accent);
+  color: var(--accent-fg);
+  box-shadow: none;
+
+  &:not(:disabled):hover {
+    background: var(--accent-hover);
+  }
+}
+
+.btn--soft,
+.btn--soft-sm {
+  background: var(--surface-alt);
+  color: var(--ink);
+  border: none;
+
+  &:not(:disabled):hover {
+    background: var(--hairline-2);
+  }
+}
+
+.btn--ref-ghost,
+.btn--ref-ghost-sm {
+  background: transparent;
+  color: var(--ink-2);
+  border: none;
+
+  &:not(:disabled):hover {
+    background: var(--surface-alt);
+    color: var(--ink);
+  }
+}

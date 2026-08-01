@@ -1,0 +1,7 @@
+@for (item of items(); track item.date + item.title) {
+  <div class="thread-timeline-row">
+    <span class="thread-timeline-row__dot" [style.background]="'var(--' + item.color + ')'" [style.box-shadow]="'0 0 0 4px var(--' + item.color + '-soft)'"></span>
+    <span class="mono thread-timeline-row__date">{{ item.date }}</span>
+    <span class="thread-timeline-row__title">{{ item.title }} <span class="thread-timeline-row__team">· {{ item.team }}</span></span>
+  </div>
+}

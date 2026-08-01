@@ -1,0 +1,24 @@
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 34px;
+  z-index: 100;
+  transform: translate(-50%, 20px);
+  background: var(--invert);
+  color: var(--invert-ink);
+  border-radius: 14px;
+  padding: 14px 20px;
+  font: 450 14px/1 var(--font-sans);
+  box-shadow: var(--shadow-xl);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &--show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

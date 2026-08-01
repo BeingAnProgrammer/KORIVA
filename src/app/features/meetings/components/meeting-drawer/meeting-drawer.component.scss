@@ -1,0 +1,149 @@
+@use 'mixins' as m;
+
+.drawer-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(10, 10, 16, 0.5);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base);
+
+  &--open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.meeting-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(620px, 96vw);
+  background: var(--canvas);
+  z-index: 95;
+  box-shadow: var(--shadow-xl);
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: auto;
+
+  &--open {
+    transform: none;
+  }
+}
+
+.meeting-drawer__header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--canvas);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 26px 34px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.meeting-drawer__meta {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.meeting-drawer__close {
+  margin-left: auto;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  background: var(--surface-alt);
+  color: var(--ink-2);
+  display: grid;
+  place-items: center;
+  transition: color var(--dur-fast);
+  @include m.focus-ring;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.meeting-drawer__body {
+  padding: 32px 34px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.meeting-drawer__title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.meeting-drawer__stats {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.meeting-drawer__avatars {
+  display: flex;
+  align-items: center;
+}
+
+.meeting-drawer__avatar + .meeting-drawer__avatar {
+  margin-left: -7px;
+}
+
+.meeting-drawer__summary {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.meeting-drawer__soft {
+  border-radius: var(--radius-xl);
+  background: var(--surface-alt);
+  padding: var(--space-6);
+}
+
+.meeting-drawer__section-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+}
+
+.meeting-drawer__minutes-list {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.meeting-drawer__related {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.meeting-drawer__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

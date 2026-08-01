@@ -22,7 +22,7 @@ export class MarketingHeaderComponent {
   protected readonly activeNav = signal('Features');
   protected readonly mobileOpen = signal(false);
 
-  protected readonly accountLink = computed(() => (this.auth.isAuthenticated() ? '/app/dashboard' : '/login'));
+  protected readonly accountLink = computed(() => (this.auth.isAuthenticated() ? '/app/home' : '/login'));
   protected readonly accountLabel = computed(() => (this.auth.isAuthenticated() ? 'Dashboard' : 'Sign in'));
 
   protected setActive(name: string): void {

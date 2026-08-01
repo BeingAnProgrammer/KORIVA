@@ -1,0 +1,22 @@
+<div class="patterns-hero">
+  <div class="patterns-hero__wrap">
+    <div class="eyebrow">Patterns · discovered without being asked</div>
+    <h1 class="patterns-hero__title">What keeps coming back.</h1>
+    <p class="patterns-hero__lead">
+      Topics that repeat, questions nobody answers, and decisions that get revisited. Click one to read the evidence.
+    </p>
+  </div>
+</div>
+
+<div class="patterns-list">
+  <div class="patterns-list__wrap">
+    @for (p of patterns(); track p.id) {
+      <app-pattern-card
+        [pattern]="p"
+        [expanded]="expandedId() === p.id"
+        (toggled)="toggle(p.id)"
+        (askClicked)="askAbout(p.title)"
+      />
+    }
+  </div>
+</div>

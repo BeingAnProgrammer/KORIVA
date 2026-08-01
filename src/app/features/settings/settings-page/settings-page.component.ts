@@ -1,31 +1,26 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 
-import { ThemeMode } from '../../../core/models/theme.model';
+import { ACCENT_OPTIONS, ThemeMode } from '../../../core/models/theme.model';
 import { SeoService } from '../../../core/services/seo.service';
 import { ThemeService } from '../../../core/services/theme.service';
-import { AutomationsDataService } from '../../../data/services/automations-data.service';
+import { ToastService } from '../../../core/services/toast.service';
+import { ConnectionItem } from '../../../data/models/connection-item.model';
+import { ToggleItem } from '../../../data/models/toggle-item.model';
 import { SettingsDataService } from '../../../data/services/settings-data.service';
-import { TeamsDataService } from '../../../data/services/teams-data.service';
-import { TemplatesDataService } from '../../../data/services/templates-data.service';
-import { AvatarComponent } from '../../../shared/ui/avatar/avatar.component';
-import { IconComponent } from '../../../shared/ui/icon/icon.component';
 import { SegmentedControlComponent } from '../../../shared/ui/segmented-control/segmented-control.component';
 import { SegmentedOption } from '../../../shared/ui/segmented-control/segmented-option.model';
-import { StatusPillComponent } from '../../../shared/ui/status-pill/status-pill.component';
-import { AutomationCardComponent } from '../components/automation-card/automation-card.component';
-import { TeamCardComponent } from '../components/team-card/team-card.component';
-import { TemplateCardComponent } from '../components/template-card/template-card.component';
+import { ToggleSwitchComponent } from '../../../shared/ui/toggle-switch/toggle-switch.component';
 
 const THEME_OPTIONS: readonly SegmentedOption<ThemeMode>[] = [
-  { value: 'system', label: 'System', icon: 'monitor' },
-  { value: 'light', label: 'Light', icon: 'sun' },
-  { value: 'dark', label: 'Dark', icon: 'moon' }
+  { value: 'system', label: 'System' },
+  { value: 'light', label: 'Light' },
+  { value: 'dark', label: 'Dark' }
 ];
 
 @Component({
   selector: 'app-settings-page',
-  imports: [IconComponent, AvatarComponent, SegmentedControlComponent, StatusPillComponent, TeamCardComponent, AutomationCardComponent, TemplateCardComponent],
+  imports: [SegmentedControlComponent, ToggleSwitchComponent],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -33,24 +28,45 @@ const THEME_OPTIONS: readonly SegmentedOption<ThemeMode>[] = [
 export class SettingsPageComponent {
   private readonly seo = inject(SeoService);
   private readonly data = inject(SettingsDataService);
-  private readonly teamsData = inject(TeamsDataService);
-  private readonly automationsData = inject(AutomationsDataService);
-  private readonly templatesData = inject(TemplatesDataService);
+  private readonly toast = inject(ToastService);
   protected readonly themeService = inject(ThemeService);
 
-  protected readonly navItems = toSignal(this.data.getNavItems(), { initialValue: [] });
   protected readonly themeOptions = THEME_OPTIONS;
-  protected readonly activeSection = signal('profile');
+  protected readonly accentOptions = ACCENT_OPTIONS;
 
-  protected readonly teams = toSignal(this.teamsData.getTeams(), { initialValue: [] });
-  protected readonly automations = toSignal(this.automationsData.getAutomations(), { initialValue: [] });
-  protected readonly templates = toSignal(this.templatesData.getTemplates(), { initialValue: [] });
+  protected readonly toggles = signal<readonly ToggleItem[]>([]);
+  protected readonly connections = toSignal(this.data.getConnections(), { initialValue: [] });
 
   constructor() {
     this.seo.setPage({
       title: 'Settings',
-      description: 'Profile, workspace, teams, automations, and integrations.',
+      description: 'Theme, accent colour, meeting automations, and connected apps.',
       path: '/app/settings'
     });
+
+    this.data
+      .getToggles()
+      .pipe(takeUntilDestroyed())
+      .subscribe((items) => this.toggles.set(items));
+  }
+
+  flipToggle(id: string): void {
+    let toggled: ToggleItem | undefined;
+    this.toggles.update((items) =>
+      items.map((item) => {
+        if (item.id !== id) {
+          return item;
+        }
+        toggled = { ...item, on: !item.on };
+        return toggled;
+      })
+    );
+    if (toggled) {
+      this.toast.show(`${toggled.label} — ${toggled.on ? 'on' : 'off'}`);
+    }
+  }
+
+  connectionAction(connection: ConnectionItem): void {
+    this.toast.show(connection.connected ? `Manage ${connection.name}` : `Connecting ${connection.name}…`);
   }
 }

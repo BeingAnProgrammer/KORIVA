@@ -1,0 +1,89 @@
+<div class="livecard">
+  <div class="livecard__main">
+    <div class="livecard__status-row">
+      <span class="livecard__listening"><span class="livecard__dot"><i></i><em></em></span><span>LISTENING</span></span>
+      <span class="mono livecard__meta">{{ meeting().platform }} · since {{ meeting().since }}</span>
+      <span class="mono livecard__clock">{{ clock() }}</span>
+    </div>
+
+    <h2 class="livecard__title">{{ meeting().title }}</h2>
+
+    <div>
+      <div class="mono livecard__section-label">Who is talking</div>
+      <div class="livecard__speaker-grid">
+        @for (speaker of meeting().speakers; track speaker.initials) {
+          <div class="livecard__speaker">
+            <div class="livecard__speaker-row">
+              <app-avatar [initials]="speaker.initials" [size]="26" variant="neutral" />
+              <span class="livecard__speaker-name" [class.livecard__speaker-name--muted]="!speaker.speaking">{{ speaker.name }}</span>
+              @if (speaker.speaking) {
+                <span class="eq" style="height: 10px">
+                  <span style="background: #fb7185"></span><span style="background: #fb7185"></span><span style="background: #fb7185"></span>
+                </span>
+              }
+            </div>
+            <div class="livecard__speak-bar">
+              <i [style.width.%]="speaker.levelPercent" [class.livecard__speak-bar-fill--active]="speaker.speaking"></i>
+            </div>
+            <span class="mono livecard__speaker-elapsed">{{ speaker.elapsed }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div>
+      <div class="mono livecard__section-label">Transcribing</div>
+      <div class="livecard__transcript">
+        @for (line of meeting().transcript; track line.time + line.speaker) {
+          <div class="livecard__transcript-line" [style.opacity]="line.final ? 1 : line.opacity">
+            <span class="mono livecard__transcript-meta" [class.livecard__transcript-meta--final]="line.final">{{ line.time }} {{ line.speaker }}</span>
+            <span class="livecard__transcript-text" [class.livecard__transcript-text--final]="line.final">
+              {{ line.text }}
+              @if (line.final) {
+                <span class="livecard__caret">▍</span>
+              }
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="livecard__actions">
+      <button type="button" class="livecard__btn livecard__btn--solid" (click)="joinMeeting()">
+        <app-icon name="video" size="15" />
+        Join meeting
+      </button>
+      <button type="button" class="livecard__btn livecard__btn--soft" (click)="askAboutCall()">Ask about this call</button>
+      <a routerLink="/app/meetings" class="livecard__btn livecard__btn--soft">Live notes</a>
+    </div>
+  </div>
+
+  <aside class="livecard__aside">
+    <div class="livecard__aside-heading">
+      <span class="eq" style="height: 10px">
+        <span style="background: var(--accent-2)"></span><span style="background: var(--accent-2)"></span><span style="background: var(--accent-2)"></span>
+      </span>
+      <span class="mono livecard__aside-label">Koriva is noticing</span>
+    </div>
+
+    <div class="livecard__noticings">
+      @for (n of meeting().noticings; track n.text) {
+        <div class="livecard__noticing">
+          <span class="livecard__noticing-icon" [class]="'livecard__noticing-icon--' + n.tone">
+            <app-icon [name]="n.icon" size="13" />
+          </span>
+          <div>
+            <div class="livecard__noticing-text">{{ n.text }}</div>
+            <div class="mono livecard__noticing-meta">{{ n.meta }}</div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="livecard__insight">
+      <div class="mono livecard__insight-label">Live insight</div>
+      <div class="livecard__insight-text">{{ meeting().liveInsightText }}</div>
+      <a routerLink="/app/patterns" class="livecard__insight-link">{{ meeting().liveInsightLinkLabel }}</a>
+    </div>
+  </aside>
+</div>

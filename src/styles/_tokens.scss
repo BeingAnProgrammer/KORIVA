@@ -3,32 +3,80 @@
 // be altered; this is the single source of truth for the light theme.
 
 :root {
-  // Surfaces
-  --canvas: #F7F4EE;
-  --canvas-sub: #F1ECE2;
+  // Surfaces — canvas/surface/surface-alt match the reference's
+  // canvas/surface/surface-2 exactly; canvas-sub has no reference equivalent
+  // (it only backs app-shell chrome — sidebar, top-header — which isn't part
+  // of the reference at all) so it's extrapolated to fit the same cool
+  // neutral family instead of copied.
+  --canvas: #FAFAFC;
+  --canvas-sub: #EEEEF3;
   --surface: #FFFFFF;
-  --surface-alt: #FBF8F2;
+  --surface-alt: #F3F3F7;
 
-  // Ink (text) scale
-  --ink: #15120D;
-  --ink-2: #3A362E;
-  --ink-3: #6B665C;
-  --ink-4: #9A9488;
-  --ink-5: #C6C0B3;
+  // Ink (text) scale — ink/ink-2/ink-3 match the reference's text/text-2/
+  // text-3 exactly; ink-4/ink-5 are extrapolated (no reference equivalent).
+  --ink: #131318;
+  --ink-2: #4B4C58;
+  --ink-3: #83849A;
+  --ink-4: #A8A9B8;
+  --ink-5: #D3D4DE;
 
-  // Hairlines
-  --hairline: #E6E0D1;
-  --hairline-2: #EFE9DB;
+  // Hairlines — matches the reference's border/border-2 (its near-identical
+  // third tone, "hair", is folded into --hairline since the two are barely
+  // distinguishable).
+  --hairline: #E6E6EE;
+  --hairline-2: #D6D6E1;
 
-  // Accent
-  --accent: #0C8B94;
-  --accent-hover: #0A757D;
-  --accent-press: #085F66;
-  --accent-soft: #D6F1F2;
-  --accent-ink: #0A474C;
+  // Accent — indigo (KORIVA's brand accent as of the Home/Meetings/Memory/
+  // Commitments/Patterns/Analytics/Settings redesign). --accent-hover/-press
+  // aren't specified by the reference (which only ever swaps to --accent-ink
+  // on hover); -hover mirrors -ink and -press is one step darker so existing
+  // button states still have three distinct stops.
+  --accent: #5B54F0;
+  --accent-hover: #3F38D6;
+  --accent-press: #332DB0;
+  --accent-soft: #EEEDFE;
+  --accent-ink: #3F38D6;
   --accent-fg: #FFFFFF;
 
-  // Brand secondary hues
+  // Secondary accent (violet) — gradients, speaker/eq graphics, and the
+  // Settings accent-picker's "Violet" swatch.
+  --accent-2: #8B5CF6;
+
+  // Reference hue system — tag pills, chips, trend cards, category dots.
+  --blue: #2E7DF7;
+  --blue-soft: #E8F1FE;
+  --blue-ink: #1858C4;
+  --green: #0FA96B;
+  --green-soft: #E3F8EE;
+  --green-ink: #07754A;
+  --orange: #F0700F;
+  --orange-soft: #FDEEE2;
+  --orange-ink: #B0490A;
+  --rose: #E8415F;
+  --rose-soft: #FDEAEE;
+  --rose-ink: #BF1739;
+  --amber: #CE9312;
+  --amber-soft: #FBF2DC;
+  --amber-ink: #8A6206;
+
+  // "Invert" surface — the dark hero/live-meeting card that appears even in
+  // light theme. Only --invert itself is redefined per-theme; the rest are
+  // theme-invariant (this matches the reference, which never overrides them).
+  --invert: #131318;
+  --invert-soft: rgba(255, 255, 255, 0.10);
+  --invert-ink: #FFFFFF;
+  --invert-ink-2: rgba(255, 255, 255, 0.66);
+  --invert-ink-3: rgba(255, 255, 255, 0.48);
+  --accent-on-invert: #BDB4FF;
+
+  // Decorative hero background wash (Home/Meetings/Memory/Commitments/
+  // Patterns/Analytics/Settings page headers).
+  --glow: radial-gradient(1000px 440px at 50% -10%, rgba(91, 84, 240, 0.11), transparent 68%),
+    radial-gradient(620px 300px at 88% 4%, rgba(46, 125, 247, 0.07), transparent 70%);
+
+  // Brand secondary hues (legacy — still used by marketing pages and by
+  // features not yet through the redesign; not part of the new accent system)
   --ochre: #B8894A;
   --ochre-soft: #F2E6D1;
   --rust: #9C4A2E;
@@ -46,10 +94,11 @@
   --info: #2E4A6B;
   --info-soft: #D9E1EC;
 
-  // Typography
-  --font-display: 'Space Grotesk', 'Inter Tight', system-ui, sans-serif;
-  --font-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  // Typography — Geist/Geist Mono (KORIVA's brand typeface as of the
+  // redesign, replacing Space Grotesk/Inter Tight/JetBrains Mono everywhere).
+  --font-display: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   --text-xs: 11px;
   --text-sm: 13px;
@@ -96,13 +145,13 @@
   --radius-2xl: 28px;
   --radius-pill: 999px;
 
-  // Shadows
-  --shadow-xs: 0 1px 1px rgba(30, 24, 12, 0.04);
-  --shadow-sm: 0 1px 2px rgba(30, 24, 12, 0.05), 0 1px 1px rgba(30, 24, 12, 0.03);
-  --shadow-md: 0 4px 12px -2px rgba(30, 24, 12, 0.08), 0 2px 4px -1px rgba(30, 24, 12, 0.04);
-  --shadow-lg: 0 12px 32px -8px rgba(30, 24, 12, 0.12), 0 4px 8px -2px rgba(30, 24, 12, 0.05);
-  --shadow-xl: 0 24px 64px -12px rgba(30, 24, 12, 0.18), 0 8px 16px -4px rgba(30, 24, 12, 0.06);
-  --shadow-inset: inset 0 1px 2px rgba(30, 24, 12, 0.06);
+  // Shadows — cool blue-purple tint matches the reference's rgba(19,19,40,…)
+  --shadow-xs: 0 1px 1px rgba(19, 19, 40, 0.04);
+  --shadow-sm: 0 1px 2px rgba(19, 19, 40, 0.05), 0 1px 1px rgba(19, 19, 40, 0.03);
+  --shadow-md: 0 4px 12px -2px rgba(19, 19, 40, 0.08), 0 2px 4px -1px rgba(19, 19, 40, 0.04);
+  --shadow-lg: 0 12px 32px -8px rgba(19, 19, 40, 0.12), 0 4px 8px -2px rgba(19, 19, 40, 0.05);
+  --shadow-xl: 0 24px 64px -12px rgba(19, 19, 40, 0.18), 0 8px 16px -4px rgba(19, 19, 40, 0.06);
+  --shadow-inset: inset 0 1px 2px rgba(19, 19, 40, 0.06);
   --glow-accent: 0 0 0 6px rgba(12, 139, 148, 0.12), 0 0 24px rgba(12, 139, 148, 0.2);
 
   // Motion
@@ -113,10 +162,6 @@
   --dur-base: 200ms;
   --dur-slow: 320ms;
   --dur-slower: 520ms;
-
-  // Layout
-  --sidebar-w: 264px;
-  --sidebar-w-collapsed: 76px;
 
   // Z-index scale
   --z-base: 0;

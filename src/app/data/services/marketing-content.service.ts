@@ -8,7 +8,7 @@ import { NavPill } from '../models/nav-pill.model';
 import { PipelineStep } from '../models/pipeline-step.model';
 import { Stat } from '../models/stat.model';
 import { CHAT_EXCHANGES } from '../mock/chat-demo.mock-data';
-import { AI_QUERIES, MEETING_TYPES, PIPELINE_STEPS, SHOWCASE_FEATURES, STATS } from '../mock/marketing.mock-data';
+import { MEETING_TYPES, PIPELINE_STEPS, SHOWCASE_FEATURES, STATS } from '../mock/marketing.mock-data';
 import { NAV_PILLS } from '../mock/navigation.mock-data';
 
 /**
@@ -32,10 +32,6 @@ export class MarketingContentService {
 
   getMeetingTypes(): Observable<readonly MeetingType[]> {
     return of(MEETING_TYPES);
-  }
-
-  getAiQueries(): Observable<readonly string[]> {
-    return of(AI_QUERIES);
   }
 
   getChatExchanges(): Observable<readonly ChatExchange[]> {

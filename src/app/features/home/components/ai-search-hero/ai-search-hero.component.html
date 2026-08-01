@@ -1,0 +1,35 @@
+<div class="ask-hero">
+  <div class="ask-hero__eyebrow-row">
+    <span class="eq"><span></span><span></span><span></span></span>
+    <span class="eyebrow">{{ eyebrow }}</span>
+  </div>
+
+  <h1 class="ask-hero__title">Ask anything<br /><span class="ask-hero__title-muted">that was ever said in a meeting.</span></h1>
+
+  <form class="ask-hero__box" (submit)="$event.preventDefault(); ask()">
+    <div class="ask-hero__row">
+      <app-icon class="ask-hero__row-icon" name="sparkles" size="26" />
+      <input
+        class="ask-hero__input"
+        type="text"
+        [value]="query()"
+        (input)="query.set($any($event.target).value)"
+        placeholder="What did customers say about pricing this month?"
+        aria-label="Ask Koriva"
+      />
+      <button type="submit" class="ask-hero__submit">
+        Ask Koriva
+        <app-icon name="arrow-right" size="16" />
+      </button>
+    </div>
+
+    <div class="ask-hero__chips">
+      <span class="eyebrow ask-hero__try">Try</span>
+      @for (suggestion of suggestions(); track suggestion.label) {
+        <button type="button" class="ask-hero__chip" [class]="'ask-hero__chip--' + suggestion.tone" (click)="ask(suggestion.label)">
+          <i></i>{{ suggestion.label }}
+        </button>
+      }
+    </div>
+  </form>
+</div>

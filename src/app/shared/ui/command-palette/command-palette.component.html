@@ -1,0 +1,42 @@
+<div class="palette-scrim" [class.palette-scrim--open]="palette.isOpen()" (click)="palette.close()">
+  <div class="palette" role="dialog" aria-label="Search Koriva" (click)="$event.stopPropagation()">
+    <div class="palette__top">
+      <app-icon name="sparkles" size="19" class="palette__top-icon" />
+      <input
+        #paletteInput
+        class="palette__input"
+        placeholder="Search meetings, promises, people — or ask a question"
+        [value]="palette.query()"
+        (input)="onQueryInput($any($event.target).value)"
+        (keydown)="onKeydown($event)"
+      />
+      <span class="mono palette__kbd">ESC</span>
+    </div>
+
+    <div class="palette__list">
+      @for (group of groups(); track group.name) {
+        <div class="mono palette__group">{{ group.name }}</div>
+        @for (item of group.items; track item.label) {
+          <button
+            type="button"
+            class="palette__item"
+            [class.palette__item--selected]="indexOf(group, item) === selectedIndex()"
+            (click)="item.action()"
+          >
+            <span class="palette__item-icon"><app-icon [name]="item.icon" size="14" /></span>
+            <span class="palette__item-label">{{ item.label }}</span>
+            <span class="mono palette__item-meta">{{ item.meta }}</span>
+          </button>
+        }
+      } @empty {
+        <div class="mono palette__group">No results</div>
+      }
+    </div>
+
+    <div class="palette__footer">
+      <span><span class="mono">↑↓</span> navigate</span>
+      <span><span class="mono">↵</span> open</span>
+      <span><span class="mono">esc</span> close</span>
+    </div>
+  </div>
+</div>

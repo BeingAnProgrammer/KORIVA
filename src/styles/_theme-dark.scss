@@ -17,12 +17,35 @@
   --hairline: #1F242C;
   --hairline-2: #171B21;
 
-  --accent: #34E0E8;
-  --accent-hover: #5AE9EF;
-  --accent-press: #82EFF3;
-  --accent-soft: #0C2A2E;
-  --accent-ink: #8CEEF3;
-  --accent-fg: #05191B;
+  --accent: #7E7BFF;
+  --accent-hover: #A5A2FF;
+  --accent-press: #9E9CFF;
+  --accent-soft: #1A1930;
+  --accent-ink: #A5A2FF;
+  --accent-fg: #FFFFFF;
+
+  --accent-2: #A78BFA;
+
+  --blue: #5A9CFF;
+  --blue-soft: #111F38;
+  --blue-ink: #5A9CFF;
+  --green: #34D399;
+  --green-soft: #0C2A20;
+  --green-ink: #34D399;
+  --orange: #FB923C;
+  --orange-soft: #2C1A0D;
+  --orange-ink: #FB923C;
+  --rose: #FB7185;
+  --rose-soft: #2B1218;
+  --rose-ink: #FB7185;
+  --amber: #FBBF24;
+  --amber-soft: #2A2010;
+  --amber-ink: #FBBF24;
+
+  --invert: #191926;
+
+  --glow: radial-gradient(1000px 440px at 50% -10%, rgba(126, 123, 255, 0.20), transparent 68%),
+    radial-gradient(620px 300px at 88% 4%, rgba(90, 156, 255, 0.10), transparent 70%);
 
   --ochre: #E0B15E;
   --ochre-soft: #2A2213;

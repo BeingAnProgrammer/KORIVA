@@ -18,5 +18,5 @@ export const guestGuard: CanActivateFn = async () => {
   const router = inject(Router);
 
   const authenticated = await auth.whenReady();
-  return authenticated ? router.createUrlTree(['/app/dashboard']) : true;
+  return authenticated ? router.createUrlTree(['/app/home']) : true;
 };

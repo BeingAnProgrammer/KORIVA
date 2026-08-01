@@ -1,0 +1,114 @@
+<app-ai-search-hero />
+
+<div class="home-wrap">
+  <app-live-meeting-panel [meeting]="liveMeeting()" />
+</div>
+
+<div class="home-wrap briefing">
+  <div class="briefing__eyebrow-row">
+    <span class="eyebrow briefing__eyebrow-accent">Your morning briefing</span>
+    <span class="briefing__dot"></span>
+    <span class="mono briefing__written">{{ briefing().writtenAgo }}</span>
+  </div>
+
+  <h2 class="briefing__headline">{{ briefing().headline }}</h2>
+
+  <div class="briefing__paragraphs">
+    @for (p of briefing().paragraphs; track p.term) {
+      <p>{{ p.before }}<b class="briefing__highlight" [style.box-shadow]="'inset 0 -9px 0 var(--' + p.tone + '-soft)'">{{ p.term }}</b>{{ p.after }}</p>
+    }
+  </div>
+
+  <div class="briefing__decision">
+    <span class="briefing__decision-icon"><app-icon name="check" size="17" /></span>
+    <div class="briefing__decision-body">
+      <div class="mono briefing__decision-label">The decision that mattered</div>
+      <div class="briefing__decision-quote">&ldquo;{{ briefing().decision.quote }}&rdquo;</div>
+      <div class="briefing__decision-meta">
+        {{ briefing().decision.meetingLabel }} · {{ briefing().decision.agreedLabel }} ·
+        <a routerLink="/app/meetings" class="briefing__decision-link">read the minutes</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="briefing__footer">{{ briefing().footerNote }}</div>
+</div>
+
+<div class="home-wrap today-grid">
+  <div>
+    <div class="today-grid__heading">
+      <h2 class="today-grid__title">Three things need you today</h2>
+      <a routerLink="/app/commitments" class="today-grid__link">All commitments</a>
+    </div>
+    <div class="focus-rows">
+      @for (item of todayFocusItems(); track item.title) {
+        <div class="focus-row">
+          <span class="focus-row__icon" [class]="'focus-row__icon--' + item.tone">
+            <app-icon name="clock" size="13" />
+          </span>
+          <span class="focus-row__copy">
+            <span class="focus-row__title">{{ item.title }}</span>
+            <span class="focus-row__desc">{{ item.description }}</span>
+          </span>
+          <button type="button" class="focus-row__cta" (click)="onFocusCta(item.ctaLabel)">{{ item.ctaLabel }}</button>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="today-grid__col">
+    <div class="today-grid__heading">
+      <h2 class="today-grid__title">Rest of today</h2>
+      <a routerLink="/app/meetings" class="today-grid__link">Meetings</a>
+    </div>
+
+    <div class="rest-rows">
+      @if (liveMeetingRow(); as m) {
+        <a routerLink="/app/meetings" class="rest-row">
+          <span class="mono rest-row__time rest-row__time--live">{{ m.day.split('·')[0].trim() }}</span>
+          <span class="rest-row__copy">
+            <span class="rest-row__title">{{ m.title }}</span>
+            <span class="rest-row__subtitle rest-row__subtitle--live">Koriva is listening now</span>
+          </span>
+          <span class="rest-row__tag rest-row__tag--rose">LIVE</span>
+        </a>
+      }
+      @if (nextUpcomingMeeting(); as m) {
+        <a routerLink="/app/meetings" class="rest-row">
+          <span class="mono rest-row__time">{{ m.day.split('·')[0].trim() }}</span>
+          <span class="rest-row__copy">
+            <span class="rest-row__title">{{ m.title }}</span>
+            <span class="rest-row__subtitle">{{ m.people.length }} people · interview template ready</span>
+          </span>
+          <span class="rest-row__tag rest-row__tag--accent">BRIEF</span>
+        </a>
+      }
+      <a routerLink="/app/meetings" class="rest-row">
+        <span class="mono rest-row__time rest-row__time--muted">Earlier</span>
+        <span class="rest-row__copy">
+          <span class="rest-row__title rest-row__title--muted">{{ restOfTodayFiledNote }}</span>
+          <span class="rest-row__subtitle">{{ restOfTodayFiledTitles }}</span>
+        </span>
+        <span class="rest-row__tag rest-row__tag--green">DONE</span>
+      </a>
+    </div>
+
+    <div class="patterns-preview">
+      <div class="patterns-preview__heading">
+        <span class="eq" style="height: 10px"><span></span><span></span><span></span></span>
+        <span class="mono patterns-preview__label">Koriva is watching</span>
+      </div>
+      <div class="patterns-preview__list">
+        @for (pattern of patternsPreview(); track pattern.id) {
+          <a routerLink="/app/patterns" class="patterns-preview__item">
+            <span class="patterns-preview__dot" [style.background]="'var(--' + pattern.color + ')'"></span>
+            <span
+              >{{ pattern.title }} — <b class="patterns-preview__trend" [style.color]="'var(--' + pattern.color + '-ink)'">{{ pattern.trend }}</b></span
+            >
+          </a>
+        }
+      </div>
+      <a routerLink="/app/patterns" class="patterns-preview__all">All patterns →</a>
+    </div>
+  </div>
+</div>

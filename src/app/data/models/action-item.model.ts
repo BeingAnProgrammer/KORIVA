@@ -1,12 +1,15 @@
 import { PillVariant } from './pill-variant.model';
 
-/** A tracked action item / commitment row. */
+/** A commitment row — the sentence someone said, who owes it, and its staleness. */
 export interface ActionItem {
+  id?: number;
   task: string;
   owner: string;
-  ownerInitials: string;
   due: string;
   meeting: string;
-  status: string;
+  meetingId?: string;
   statusVariant: PillVariant;
+  quote?: string;
+  late?: boolean;
+  done?: boolean;
 }

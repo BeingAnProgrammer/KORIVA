@@ -1,5 +1,8 @@
+import { Tone } from './tone.model';
+
 /**
- * The 4 status-pill colour treatments used across meeting/action-item
- * status badges (ported from the design's `pill(fg,bg)` style factory).
+ * Status-pill colour treatments. `Tone` (accent/green/amber/orange/rose/blue)
+ * is the reference design's reused hue system; rust/ochre/neutral are legacy
+ * variants still used by pages not yet through the redesign.
  */
-export type PillVariant = 'accent' | 'rust' | 'ochre' | 'neutral';
+export type PillVariant = Tone | 'rust' | 'ochre' | 'neutral';

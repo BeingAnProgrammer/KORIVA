@@ -1,28 +1,17 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-import { SeoService } from '../../../core/services/seo.service';
+import { AnalyticsTabKey } from '../../../data/models/analytics-tab.model';
 import { AnalyticsDataService } from '../../../data/services/analytics-data.service';
+import { SeoService } from '../../../core/services/seo.service';
 import { BarChartComponent } from '../../../shared/ui/bar-chart/bar-chart.component';
-import { BarChartItem } from '../../../shared/ui/bar-chart/bar-chart.model';
-import { IconComponent } from '../../../shared/ui/icon/icon.component';
-import { KpiCardComponent } from '../../../shared/ui/kpi-card/kpi-card.component';
 import { PercentageBarListComponent } from '../../../shared/ui/percentage-bar-list/percentage-bar-list.component';
-
-const MEETING_PRODUCTIVITY: readonly BarChartItem[] = [
-  { value: 40 },
-  { value: 55 },
-  { value: 48 },
-  { value: 70 },
-  { value: 62, emphasis: true },
-  { value: 85, emphasis: true },
-  { value: 74, emphasis: true },
-  { value: 92, emphasis: true }
-];
+import { SegmentedControlComponent } from '../../../shared/ui/segmented-control/segmented-control.component';
+import { SegmentedOption } from '../../../shared/ui/segmented-control/segmented-option.model';
 
 @Component({
   selector: 'app-analytics-page',
-  imports: [IconComponent, KpiCardComponent, BarChartComponent, PercentageBarListComponent],
+  imports: [SegmentedControlComponent, BarChartComponent, PercentageBarListComponent],
   templateUrl: './analytics-page.component.html',
   styleUrl: './analytics-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -31,18 +20,25 @@ export class AnalyticsPageComponent {
   private readonly seo = inject(SeoService);
   private readonly data = inject(AnalyticsDataService);
 
-  protected readonly kpis = toSignal(this.data.getKpis(), { initialValue: [] });
-  private readonly categoryStats = toSignal(this.data.getCategoryStats(), { initialValue: [] });
-  protected readonly categoryBars = computed(() =>
-    this.categoryStats().map((stat) => ({ label: stat.name, percentage: stat.percentage, color: stat.color }))
+  protected readonly months = this.data.months;
+  protected readonly tabs = toSignal(this.data.getAnalyticsTabs(), { initialValue: [] });
+  protected readonly activeKey = signal<AnalyticsTabKey>('meetings');
+
+  protected readonly tabOptions = computed<readonly SegmentedOption<AnalyticsTabKey>[]>(() =>
+    this.tabs().map((t) => ({ value: t.key, label: t.label }))
   );
-  protected readonly teamContributions = toSignal(this.data.getTeamContributions(), { initialValue: [] });
-  protected readonly meetingProductivity = MEETING_PRODUCTIVITY;
+
+  protected readonly activeTab = computed(() => this.tabs().find((t) => t.key === this.activeKey()) ?? this.tabs()[0]);
+
+  protected readonly chartBars = computed(() => {
+    const tab = this.activeTab();
+    return tab ? tab.monthlyValues.map((value, i) => ({ value, label: this.months[i] })) : [];
+  });
 
   constructor() {
     this.seo.setPage({
       title: 'Analytics',
-      description: 'Hours, cadence, participation, and follow-through, measured.',
+      description: 'Show me the evidence — meetings, decisions, and promises, measured.',
       path: '/app/analytics'
     });
   }

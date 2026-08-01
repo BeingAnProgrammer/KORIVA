@@ -31,6 +31,33 @@
   background: var(--canvas-sub);
 }
 
+// Reference Tone system — meeting stat tags, commitment staleness badges,
+// pattern trend icons, category dots.
+.status-pill--green {
+  color: var(--green-ink);
+  background: var(--green-soft);
+}
+
+.status-pill--amber {
+  color: var(--amber-ink);
+  background: var(--amber-soft);
+}
+
+.status-pill--orange {
+  color: var(--orange-ink);
+  background: var(--orange-soft);
+}
+
+.status-pill--rose {
+  color: var(--rose-ink);
+  background: var(--rose-soft);
+}
+
+.status-pill--blue {
+  color: var(--blue-ink);
+  background: var(--blue-soft);
+}
+
 // Generic small chip — tags/badges (feature-card tags & badges, template
 // meta, etc.), ported from the handoff's inline mono chip styling.
 .chip {

@@ -1,9 +1,10 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Injectable, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
 
-import { ThemeMode } from '../models/theme.model';
+import { ACCENT_OPTIONS, ThemeMode } from '../models/theme.model';
 
 const STORAGE_KEY = 'koriva-theme';
+const ACCENT_STORAGE_KEY = 'koriva-accent';
 const THEME_CYCLE: readonly ThemeMode[] = ['system', 'light', 'dark'];
 
 /**
@@ -17,6 +18,7 @@ export class ThemeService {
   private readonly isBrowser = isPlatformBrowser(this.platformId);
 
   readonly theme = signal<ThemeMode>(this.readInitialTheme());
+  readonly accent = signal<string>(this.readInitialAccent());
 
   readonly themeIcon = computed(() => {
     switch (this.theme()) {
@@ -38,6 +40,19 @@ export class ThemeService {
         localStorage.setItem(STORAGE_KEY, mode);
       }
     });
+
+    // Accent overrides --accent/--accent-ink inline, independent of theme
+    // mode — matches the reference's setAccent(), which flattens both tokens
+    // to the same swatch hex rather than deriving a separate hover ink.
+    effect(() => {
+      const hex = this.accent();
+      this.document.documentElement.style.setProperty('--accent', hex);
+      this.document.documentElement.style.setProperty('--accent-ink', hex);
+
+      if (this.isBrowser) {
+        localStorage.setItem(ACCENT_STORAGE_KEY, hex);
+      }
+    });
   }
 
   setTheme(mode: ThemeMode): void {
@@ -49,6 +64,10 @@ export class ThemeService {
     this.theme.set(THEME_CYCLE[next]);
   }
 
+  setAccent(hex: string): void {
+    this.accent.set(hex);
+  }
+
   private readInitialTheme(): ThemeMode {
     if (!this.isBrowser) {
       return 'dark';
@@ -56,5 +75,13 @@ export class ThemeService {
 
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored === 'system' || stored === 'light' || stored === 'dark' ? stored : 'dark';
+  }
+
+  private readInitialAccent(): string {
+    if (!this.isBrowser) {
+      return ACCENT_OPTIONS[0].hex;
+    }
+
+    return localStorage.getItem(ACCENT_STORAGE_KEY) ?? ACCENT_OPTIONS[0].hex;
   }
 }

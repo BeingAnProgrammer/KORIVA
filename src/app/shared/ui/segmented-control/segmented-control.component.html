@@ -11,6 +11,9 @@
         <app-icon [name]="option.icon" size="15" />
       }
       {{ option.label }}
+      @if (option.count !== undefined) {
+        <span class="mono segmented__count">{{ option.count }}</span>
+      }
     </button>
   }
 </div>

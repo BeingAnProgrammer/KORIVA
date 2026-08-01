@@ -88,7 +88,7 @@ export class LoginPageComponent {
   }
 
   private returnUrl(): string {
-    return this.route.snapshot.queryParamMap.get('returnUrl') || '/app/dashboard';
+    return this.route.snapshot.queryParamMap.get('returnUrl') || '/app/home';
   }
 
   /** Supabase appends `error_description` to the redirect URL when an email/OAuth link fails. */

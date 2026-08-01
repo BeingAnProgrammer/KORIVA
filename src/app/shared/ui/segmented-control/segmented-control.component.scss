@@ -1,34 +1,50 @@
 @use 'mixins' as m;
 
+// Matches the reference's `.segs`/`.segs button` exactly — a neutral pill
+// container with the active option "popping" to --surface, not an
+// accent-filled active state.
 .segmented {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   padding: 4px;
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-pill);
+  background: var(--surface-alt);
+  border-radius: 11px;
+  flex-wrap: wrap;
 }
 
 .segmented__option {
   display: flex;
   align-items: center;
   gap: 7px;
-  padding: 7px 14px;
-  border-radius: var(--radius-pill);
+  padding: 9px 15px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   font-family: var(--font-sans);
   font-size: var(--text-sm);
-  font-weight: 450;
+  font-weight: 500;
   background: transparent;
   color: var(--ink-3);
   transition: all var(--dur-fast) var(--ease-standard);
   @include m.focus-ring;
 
-  &--active {
-    font-weight: 600;
-    background: var(--accent);
-    color: var(--accent-fg);
+  &:hover {
+    color: var(--ink);
   }
+
+  &--active {
+    background: var(--surface);
+    color: var(--ink);
+    box-shadow: var(--shadow-xs);
+
+    &:hover {
+      color: var(--ink);
+    }
+  }
+}
+
+.segmented__count {
+  font-size: 11px;
+  color: var(--ink-3);
 }

@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { SettingsNavItem } from '../models/settings-nav-item.model';
-import { SETTINGS_NAV_ITEMS } from '../mock/settings.mock-data';
+import { ConnectionItem } from '../models/connection-item.model';
+import { ToggleItem } from '../models/toggle-item.model';
+import { CONNECTIONS, TOGGLE_ITEMS } from '../mock/settings.mock-data';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsDataService {
-  getNavItems(): Observable<readonly SettingsNavItem[]> {
-    return of(SETTINGS_NAV_ITEMS);
+  getToggles(): Observable<readonly ToggleItem[]> {
+    return of(TOGGLE_ITEMS);
+  }
+
+  getConnections(): Observable<readonly ConnectionItem[]> {
+    return of(CONNECTIONS);
   }
 }

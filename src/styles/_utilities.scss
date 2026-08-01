@@ -29,6 +29,43 @@
   animation: fadeUp var(--dur-slow) var(--ease-spring) both;
 }
 
+// Breathing equalizer bars — Home's ask hero eyebrow, live-meeting panel
+// aside heading, and the patterns preview heading all reuse this exact
+// element (matching the reference, which defines it once globally too).
+// Color/height are overridden per-usage via inline style, same as the source.
+.eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 11px;
+}
+
+.eq span {
+  width: 2px;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+  animation: eq-breathe 1.4s ease-in-out infinite;
+}
+
+.eq span:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.eq span:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes eq-breathe {
+  0%,
+  100% {
+    transform: scaleY(0.45);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
 .reveal > * {
   animation: fadeUp var(--dur-slow) var(--ease-spring) both;
 }
