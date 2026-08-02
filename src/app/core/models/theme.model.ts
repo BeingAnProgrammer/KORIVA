@@ -7,7 +7,6 @@ export interface AccentOption {
 }
 
 /**
- * The first four match the reference design's `ACCENTS` list exactly
  * (Indigo is the default); the rest reuse the same hue tokens the rest of
  * the app already draws tag pills and chips from (see `_tokens.scss`).
  * Teal reuses the landing page's `--accent-2` brand hue; Pink fills the gap
