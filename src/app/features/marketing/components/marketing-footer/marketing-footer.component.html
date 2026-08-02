@@ -89,15 +89,6 @@
         <a routerLink="/login" class="site-footer__link">Sign in</a>
       </div>
     </div>
-
-    <div class="site-footer__col">
-      <div class="eyebrow site-footer__heading">Appearance</div>
-      <app-segmented-control
-        [options]="themeOptions"
-        [value]="themeService.theme()"
-        (valueChange)="themeService.setTheme($event)"
-      />
-    </div>
   </div>
 
   <div class="site-footer__bottom">

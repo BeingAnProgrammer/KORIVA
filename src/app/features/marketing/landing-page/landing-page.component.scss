@@ -15,8 +15,15 @@
 // Scoped to the landing page only; the authenticated app shell keeps the
 // cyan/multi-hue dark theme in _theme-dark.scss untouched.
 :host {
-  display: block;
+  // flow-root (not block) contains child margins — otherwise the sticky
+  // nav's margin-top collapses through this host straight up to <body>,
+  // pushing the whole page down and exposing body's background (which still
+  // tracks the app-wide light/dark/system theme) in the gap above it.
+  display: flow-root;
   position: relative;
+  // Pins the page's own background instead of inheriting body's, for the
+  // same reason — this page must always render dark regardless of theme.
+  background: var(--canvas);
 
   --canvas: #09090b;
   --canvas-sub: #121216;
