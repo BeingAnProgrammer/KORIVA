@@ -5,7 +5,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { CommandPaletteService } from '../../../../core/services/command-palette.service';
 import { ThemeService } from '../../../../core/services/theme.service';
-import { ToastService } from '../../../../core/services/toast.service';
 import { MeetingsDataService } from '../../../../data/services/meetings-data.service';
 import { APP_NAV_ITEMS } from '../../../../data/mock/navigation.mock-data';
 import { AvatarComponent } from '../../../../shared/ui/avatar/avatar.component';
@@ -15,9 +14,8 @@ import { LogoMarkComponent } from '../../../../shared/ui/logo-mark/logo-mark.com
 
 /**
  * App-wide top-nav bar — replaces the old left sidebar entirely, matching
- * the reference's single horizontal header: logo + workspace switcher,
- * inline page links, and a right-hand cluster (live-meeting status, theme,
- * search, user).
+ * the reference's single horizontal header: logo, inline page links, and a
+ * right-hand cluster (live-meeting status, theme, search, user).
  */
 @Component({
   selector: 'app-top-nav',
@@ -30,7 +28,6 @@ export class TopNavComponent {
   protected readonly auth = inject(AuthService);
   protected readonly theme = inject(ThemeService);
   protected readonly palette = inject(CommandPaletteService);
-  private readonly toast = inject(ToastService);
   private readonly meetingsData = inject(MeetingsDataService);
 
   protected readonly navItems = APP_NAV_ITEMS;
@@ -66,11 +63,6 @@ export class TopNavComponent {
 
   protected closeUserMenu(): void {
     this.userMenuOpen.set(false);
-  }
-
-  /** Multi-workspace isn't in scope — matches the reference's own stub behaviour exactly. */
-  protected onWorkspaceClick(): void {
-    this.toast.show('Workspace switcher — Acme Corp is your only workspace');
   }
 
   protected signOut(): void {
