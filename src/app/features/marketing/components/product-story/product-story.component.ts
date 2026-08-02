@@ -81,7 +81,6 @@ const TRANSCRIPT_SNIPPETS: readonly string[] = [
 export class ProductStoryComponent implements OnDestroy {
   private readonly content = inject(MarketingContentService);
 
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly transformPinRef = viewChild<ElementRef<HTMLElement>>('transformPin');
   private readonly recallChapterRef = viewChild.required('recallChapter', { read: ElementRef });
   private readonly queryBubbleRef = viewChild.required('queryBubble', { read: ElementRef });
@@ -98,7 +97,6 @@ export class ProductStoryComponent implements OnDestroy {
 
   private timeline?: gsap.core.Timeline;
   private scrollTrigger?: ScrollTrigger;
-  private waveformTrigger?: ScrollTrigger;
   private transformTrigger?: ScrollTrigger;
   private userInteracted = false;
 
@@ -109,7 +107,6 @@ export class ProductStoryComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.timeline?.kill();
     this.scrollTrigger?.kill();
-    this.waveformTrigger?.kill();
     this.transformTrigger?.kill();
   }
 
@@ -124,7 +121,6 @@ export class ProductStoryComponent implements OnDestroy {
     }
 
     registerScrollTrigger();
-    this.bindCaptureWaveform();
     this.bindStructureTransform();
 
     // Pinned sections are sensitive to layout height at the moment
@@ -145,35 +141,6 @@ export class ProductStoryComponent implements OnDestroy {
         if (!this.userInteracted) {
           this.play(0);
         }
-      }
-    });
-  }
-
-  /**
-   * Ties the capture card's waveform to scroll position instead of a
-   * looping CSS animation — the bars visibly react as you scroll past the
-   * chapter, reading as "listening in real time" rather than a static decal.
-   * Deterministic per-bar sine offsets (not random) so it's the same on
-   * every load and never needs a running rAF loop when the page is idle.
-   */
-  private bindCaptureWaveform(): void {
-    const chapter = this.elementRef.nativeElement.querySelector('.product-story__chapter--capture');
-    const bars = Array.from(this.elementRef.nativeElement.querySelectorAll('.product-story__waveform span')) as HTMLElement[];
-
-    if (!chapter || !bars.length) {
-      return;
-    }
-
-    this.waveformTrigger = ScrollTrigger.create({
-      trigger: chapter,
-      start: 'top 90%',
-      end: 'bottom 10%',
-      scrub: 0.5,
-      onUpdate: (self) => {
-        bars.forEach((bar, i) => {
-          const scale = 0.35 + 0.65 * Math.abs(Math.sin(self.progress * Math.PI * 4 + i * 1.1));
-          gsap.set(bar, { scaleY: scale });
-        });
       }
     });
   }
