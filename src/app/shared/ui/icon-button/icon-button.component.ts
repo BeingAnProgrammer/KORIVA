@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 
 import { IconComponent } from '../icon/icon.component';
 
-/** Square 38px icon-only button — sidebar reopen, theme toggle, notifications. */
+/** Square 38px icon-only button — used for the top-nav theme toggle. */
 @Component({
   selector: 'app-icon-button',
   imports: [IconComponent],

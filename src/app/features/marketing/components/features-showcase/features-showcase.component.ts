@@ -30,7 +30,7 @@ const ICON_IMAGE_MAP: Readonly<Record<string, string>> = {
   sparkles: 'ai-knowledge-search.png',
   'calendar-days': 'meeting-scheduling.png',
   'bar-chart-3': 'meeting-analytics.png',
-  'square-check-big': 'action-item-tracking.png',
+  'square-check-big': 'commitment-tracking.png',
   bot: 'ai-agents.png',
   download: 'export-pdf-docx.png',
   library: 'organizational-knowledge-base.png'

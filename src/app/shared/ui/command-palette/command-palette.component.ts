@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { CommandPaletteService } from '../../../core/services/command-palette.service';
 import { ToastService } from '../../../core/services/toast.service';
-import { ActionItemsDataService } from '../../../data/services/action-items-data.service';
+import { CommitmentsDataService } from '../../../data/services/commitments-data.service';
 import { MeetingsDataService } from '../../../data/services/meetings-data.service';
 import { MemoryDataService } from '../../../data/services/memory-data.service';
 import { IconComponent } from '../icon/icon.component';
@@ -47,7 +47,7 @@ export class CommandPaletteComponent {
   private readonly toast = inject(ToastService);
   private readonly router = inject(Router);
   private readonly meetingsData = inject(MeetingsDataService);
-  private readonly commitmentsData = inject(ActionItemsDataService);
+  private readonly commitmentsData = inject(CommitmentsDataService);
   private readonly memoryData = inject(MemoryDataService);
 
   private readonly inputRef = viewChild<ElementRef<HTMLInputElement>>('paletteInput');
@@ -184,7 +184,7 @@ export class CommandPaletteComponent {
     }
   }
 
-  protected indexOf(group: PaletteGroup, item: PaletteItem): number {
+  protected indexOf(item: PaletteItem): number {
     return this.flatItems().indexOf(item);
   }
 }

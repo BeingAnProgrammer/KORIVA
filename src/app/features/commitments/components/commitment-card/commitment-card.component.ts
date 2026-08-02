@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
-import { ActionItem } from '../../../../data/models/action-item.model';
+import { Commitment } from '../../../../data/models/commitment.model';
 import { ButtonDirective } from '../../../../shared/directives/button.directive';
 import { IconComponent } from '../../../../shared/ui/icon/icon.component';
 import { StatusPillComponent } from '../../../../shared/ui/status-pill/status-pill.component';
@@ -18,7 +18,7 @@ import { StatusPillComponent } from '../../../../shared/ui/status-pill/status-pi
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommitmentCardComponent {
-  readonly commitment = input.required<ActionItem>();
+  readonly commitment = input.required<Commitment>();
   readonly toggled = output<void>();
   readonly nudged = output<void>();
   readonly meetingClicked = output<void>();

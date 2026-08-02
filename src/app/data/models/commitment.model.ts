@@ -1,7 +1,7 @@
 import { PillVariant } from './pill-variant.model';
 
 /** A commitment row — the sentence someone said, who owes it, and its staleness. */
-export interface ActionItem {
+export interface Commitment {
   id?: number;
   task: string;
   owner: string;

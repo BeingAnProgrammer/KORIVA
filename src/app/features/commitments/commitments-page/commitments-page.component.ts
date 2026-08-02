@@ -3,9 +3,9 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 
 import { SeoService } from '../../../core/services/seo.service';
 import { ToastService } from '../../../core/services/toast.service';
-import { ActionItem } from '../../../data/models/action-item.model';
+import { Commitment } from '../../../data/models/commitment.model';
 import { Meeting } from '../../../data/models/meeting.model';
-import { ActionItemsDataService } from '../../../data/services/action-items-data.service';
+import { CommitmentsDataService } from '../../../data/services/commitments-data.service';
 import { MeetingsDataService } from '../../../data/services/meetings-data.service';
 import { ButtonDirective } from '../../../shared/directives/button.directive';
 import { SegmentedControlComponent } from '../../../shared/ui/segmented-control/segmented-control.component';
@@ -25,10 +25,10 @@ type CommitmentFilter = 'open' | 'late' | 'mine' | 'done' | 'all';
 export class CommitmentsPageComponent {
   private readonly seo = inject(SeoService);
   private readonly toast = inject(ToastService);
-  private readonly data = inject(ActionItemsDataService);
+  private readonly data = inject(CommitmentsDataService);
   private readonly meetingsData = inject(MeetingsDataService);
 
-  protected readonly commitments = signal<ActionItem[]>([]);
+  protected readonly commitments = signal<Commitment[]>([]);
   protected readonly meetings = toSignal(this.meetingsData.getMeetings(), { initialValue: [] });
   protected readonly filter = signal<CommitmentFilter>('open');
   protected readonly selectedMeeting = signal<Meeting | null>(null);
@@ -76,7 +76,7 @@ export class CommitmentsPageComponent {
       .subscribe((items) => this.commitments.set([...items]));
   }
 
-  protected toggleDone(item: ActionItem): void {
+  protected toggleDone(item: Commitment): void {
     this.commitments.update((items) =>
       items.map((c) => {
         if (c.id !== item.id) {
@@ -88,7 +88,7 @@ export class CommitmentsPageComponent {
     );
   }
 
-  protected openMeetingFor(item: ActionItem): void {
+  protected openMeetingFor(item: Commitment): void {
     const meeting = this.meetings().find((m) => m.id === item.meetingId);
     if (meeting) {
       this.selectedMeeting.set(meeting);
@@ -103,7 +103,7 @@ export class CommitmentsPageComponent {
     this.toast.show(`Nudges sent for ${this.lateCount()} late promises`);
   }
 
-  protected nudge(item: ActionItem): void {
+  protected nudge(item: Commitment): void {
     this.toast.show(`Nudge sent to ${item.owner}`);
   }
 }

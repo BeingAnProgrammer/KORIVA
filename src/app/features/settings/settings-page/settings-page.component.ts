@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, PLATFORM_ID, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 
 import { ACCENT_OPTIONS, ThemeMode } from '../../../core/models/theme.model';
@@ -18,6 +19,8 @@ const THEME_OPTIONS: readonly SegmentedOption<ThemeMode>[] = [
   { value: 'dark', label: 'Dark' }
 ];
 
+const TOGGLES_STORAGE_KEY = 'koriva-toggles';
+
 @Component({
   selector: 'app-settings-page',
   imports: [SegmentedControlComponent, ToggleSwitchComponent],
@@ -29,6 +32,7 @@ export class SettingsPageComponent {
   private readonly seo = inject(SeoService);
   private readonly data = inject(SettingsDataService);
   private readonly toast = inject(ToastService);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   protected readonly themeService = inject(ThemeService);
 
   protected readonly themeOptions = THEME_OPTIONS;
@@ -47,7 +51,7 @@ export class SettingsPageComponent {
     this.data
       .getToggles()
       .pipe(takeUntilDestroyed())
-      .subscribe((items) => this.toggles.set(items));
+      .subscribe((items) => this.toggles.set(this.applyStoredToggles(items)));
   }
 
   flipToggle(id: string): void {
@@ -63,7 +67,34 @@ export class SettingsPageComponent {
     );
     if (toggled) {
       this.toast.show(`${toggled.label} — ${toggled.on ? 'on' : 'off'}`);
+      this.persistToggles();
     }
+  }
+
+  private applyStoredToggles(items: readonly ToggleItem[]): readonly ToggleItem[] {
+    if (!this.isBrowser) {
+      return items;
+    }
+
+    const stored = localStorage.getItem(TOGGLES_STORAGE_KEY);
+    if (!stored) {
+      return items;
+    }
+
+    const overrides: Record<string, boolean> = JSON.parse(stored);
+    return items.map((item) => (item.id in overrides ? { ...item, on: overrides[item.id] } : item));
+  }
+
+  private persistToggles(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    const overrides: Record<string, boolean> = {};
+    for (const item of this.toggles()) {
+      overrides[item.id] = item.on;
+    }
+    localStorage.setItem(TOGGLES_STORAGE_KEY, JSON.stringify(overrides));
   }
 
   connectionAction(connection: ConnectionItem): void {

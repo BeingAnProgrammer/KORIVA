@@ -77,10 +77,6 @@
   }
 }
 
-.visually-hidden {
-  @include m.visually-hidden;
-}
-
 // Single-accent text highlight — the one place color is used inline with
 // body copy, reserved for the word that matters most in a given headline.
 .text-accent {

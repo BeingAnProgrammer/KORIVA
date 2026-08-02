@@ -1,5 +1,5 @@
-// Shared SCSS mixins — responsive breakpoints, focus rings, truncation,
-// and small layout helpers used across the shared UI kit and feature pages.
+// Shared SCSS mixins — responsive breakpoints, focus rings, and small
+// layout helpers used across the shared UI kit and feature pages.
 
 @use 'sass:map';
 
@@ -52,24 +52,6 @@ $breakpoints: (
   }
 }
 
-@mixin truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-@mixin visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 @mixin reduced-motion {
   @media (prefers-reduced-motion: reduce) {
     @content;
@@ -80,15 +62,6 @@ $breakpoints: (
   background: $bg;
   border: 1px solid var(--hairline);
   border-radius: $radius;
-}
-
-@mixin hover-lift {
-  transition: transform var(--dur-base) var(--ease-spring), box-shadow var(--dur-base);
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
 }
 
 // Page-level hero title — shared by every reference page except Home (which

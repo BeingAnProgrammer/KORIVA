@@ -1,7 +1,7 @@
-import { ActionItem } from '../models/action-item.model';
+import { Commitment } from '../models/commitment.model';
 
 /** Ported verbatim from the reference design's `COMMITMENTS` array. */
-export const COMMITMENTS: readonly ActionItem[] = [
+export const COMMITMENTS: readonly Commitment[] = [
   {
     id: 1,
     task: 'Send Northwind the SSO + audit-log scope',

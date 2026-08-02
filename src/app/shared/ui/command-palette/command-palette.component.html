@@ -20,7 +20,7 @@
           <button
             type="button"
             class="palette__item"
-            [class.palette__item--selected]="indexOf(group, item) === selectedIndex()"
+            [class.palette__item--selected]="indexOf(item) === selectedIndex()"
             (click)="item.action()"
           >
             <span class="palette__item-icon"><app-icon [name]="item.icon" size="14" /></span>

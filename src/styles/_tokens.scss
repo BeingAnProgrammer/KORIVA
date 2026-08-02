@@ -5,9 +5,9 @@
 :root {
   // Surfaces — canvas/surface/surface-alt match the reference's
   // canvas/surface/surface-2 exactly; canvas-sub has no reference equivalent
-  // (it only backs app-shell chrome — sidebar, top-header — which isn't part
-  // of the reference at all) so it's extrapolated to fit the same cool
-  // neutral family instead of copied.
+  // (it only backs app-shell chrome — the top-nav — which isn't part of the
+  // reference at all) so it's extrapolated to fit the same cool neutral
+  // family instead of copied.
   --canvas: #FAFAFC;
   --canvas-sub: #EEEEF3;
   --surface: #FFFFFF;
