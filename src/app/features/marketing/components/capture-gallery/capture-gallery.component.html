@@ -1,0 +1,22 @@
+<div class="capture-gallery">
+  <div class="capture-gallery__intro">
+    <span class="mono capture-gallery__eyebrow"><span class="capture-gallery__dot"></span>Inside the call</span>
+  </div>
+
+  <div class="capture-gallery__viewport" #gallerySection>
+    <div class="capture-gallery__track" #galleryTrack>
+      @for (frame of frames; track frame.title) {
+        <figure class="capture-gallery__frame">
+          <div class="capture-gallery__image-wrap">
+            <img [src]="frame.src" [alt]="frame.alt" loading="lazy" />
+          </div>
+          <figcaption class="capture-gallery__caption">
+            <span class="mono capture-gallery__time">{{ frame.time }}</span>
+            <h4 class="capture-gallery__frame-title">{{ frame.title }}</h4>
+            <p class="capture-gallery__frame-desc">{{ frame.desc }}</p>
+          </figcaption>
+        </figure>
+      }
+    </div>
+  </div>
+</div>

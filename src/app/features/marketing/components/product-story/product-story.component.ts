@@ -25,6 +25,7 @@ import { IconComponent } from '../../../../shared/ui/icon/icon.component';
 import { LogoMarkComponent } from '../../../../shared/ui/logo-mark/logo-mark.component';
 import { SectionEyebrowComponent } from '../../../../shared/ui/section-eyebrow/section-eyebrow.component';
 import { StatusPillComponent } from '../../../../shared/ui/status-pill/status-pill.component';
+import { CaptureGalleryComponent } from '../capture-gallery/capture-gallery.component';
 
 interface CapabilityRow {
   icon: string;
@@ -70,7 +71,8 @@ const TRANSCRIPT_SNIPPETS: readonly string[] = [
     IconComponent,
     LogoMarkComponent,
     SectionEyebrowComponent,
-    StatusPillComponent
+    StatusPillComponent,
+    CaptureGalleryComponent
   ],
   templateUrl: './product-story.component.html',
   styleUrl: './product-story.component.scss',

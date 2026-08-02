@@ -1,0 +1,125 @@
+@use 'mixins' as m;
+
+.capture-gallery {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 var(--space-16);
+}
+
+.capture-gallery__intro {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6) var(--space-8);
+}
+
+.capture-gallery__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--story-capture);
+}
+
+.capture-gallery__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--story-capture);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--story-capture) 60%, transparent);
+}
+
+.capture-gallery__viewport {
+  position: relative;
+  overflow: hidden;
+  height: 74vh;
+  min-height: 540px;
+  max-height: 760px;
+
+  @include m.respond-down(lg) {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.capture-gallery__track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-10);
+  width: max-content;
+  height: 100%;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+  padding-right: var(--space-6);
+  // Left edge lines up with every other section's centered 1200px column
+  // (not just a flat gutter) — this section is full-bleed on the right for
+  // the horizontal scroll, but the journey-rail lives in that same left
+  // margin on wide viewports, so a flat `var(--space-6)` here would run
+  // straight through it.
+  padding-left: max(var(--space-6), calc((100vw - 1200px) / 2 + var(--space-6)));
+
+  @include m.respond-down(lg) {
+    height: auto;
+    padding-bottom: var(--space-4);
+    padding-left: var(--space-6);
+  }
+}
+
+.capture-gallery__frame {
+  flex: none;
+  width: min(84vw, 640px);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+
+  @include m.respond-down(lg) {
+    scroll-snap-align: start;
+  }
+}
+
+.capture-gallery__image-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 280px;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.capture-gallery__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.capture-gallery__time {
+  font-size: var(--text-xs);
+  color: var(--story-capture);
+}
+
+.capture-gallery__frame-title {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.capture-gallery__frame-desc {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--ink-3);
+}
