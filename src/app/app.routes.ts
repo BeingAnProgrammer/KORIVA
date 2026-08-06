@@ -34,11 +34,6 @@ export const routes: Routes = [
         loadComponent: () => import('./features/home/home-page/home-page.component').then((m) => m.HomePageComponent)
       },
       {
-        path: 'meetings',
-        loadComponent: () =>
-          import('./features/meetings/meetings-list-page/meetings-list-page.component').then((m) => m.MeetingsListPageComponent)
-      },
-      {
         path: 'memory',
         loadComponent: () => import('./features/memory/memory-page/memory-page.component').then((m) => m.MemoryPageComponent)
       },

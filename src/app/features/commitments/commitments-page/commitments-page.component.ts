@@ -1,23 +1,23 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { SeoService } from '../../../core/services/seo.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { Commitment } from '../../../data/models/commitment.model';
-import { Meeting } from '../../../data/models/meeting.model';
 import { CommitmentsDataService } from '../../../data/services/commitments-data.service';
-import { MeetingsDataService } from '../../../data/services/meetings-data.service';
 import { ButtonDirective } from '../../../shared/directives/button.directive';
+import { AvatarComponent } from '../../../shared/ui/avatar/avatar.component';
+import { IconComponent } from '../../../shared/ui/icon/icon.component';
 import { SegmentedControlComponent } from '../../../shared/ui/segmented-control/segmented-control.component';
 import { SegmentedOption } from '../../../shared/ui/segmented-control/segmented-option.model';
-import { MeetingDrawerComponent } from '../../meetings/components/meeting-drawer/meeting-drawer.component';
-import { CommitmentCardComponent } from '../components/commitment-card/commitment-card.component';
+import { StatusPillComponent } from '../../../shared/ui/status-pill/status-pill.component';
+import { CommitmentDrawerComponent } from '../components/commitment-drawer/commitment-drawer.component';
 
-type CommitmentFilter = 'open' | 'late' | 'mine' | 'done' | 'all';
+type CommitmentFilter = 'all' | 'live' | 'upcoming' | 'done';
 
 @Component({
   selector: 'app-commitments-page',
-  imports: [SegmentedControlComponent, ButtonDirective, CommitmentCardComponent, MeetingDrawerComponent],
+  imports: [IconComponent, ButtonDirective, SegmentedControlComponent, StatusPillComponent, AvatarComponent, CommitmentDrawerComponent],
   templateUrl: './commitments-page.component.html',
   styleUrl: './commitments-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,84 +26,53 @@ export class CommitmentsPageComponent {
   private readonly seo = inject(SeoService);
   private readonly toast = inject(ToastService);
   private readonly data = inject(CommitmentsDataService);
-  private readonly meetingsData = inject(MeetingsDataService);
 
-  protected readonly commitments = signal<Commitment[]>([]);
-  protected readonly meetings = toSignal(this.meetingsData.getMeetings(), { initialValue: [] });
-  protected readonly filter = signal<CommitmentFilter>('open');
-  protected readonly selectedMeeting = signal<Meeting | null>(null);
-
-  protected readonly openCount = computed(() => this.commitments().filter((c) => !c.done).length);
-  protected readonly lateCount = computed(() => this.commitments().filter((c) => !c.done && c.late).length);
+  protected readonly commitments = toSignal(this.data.getCommitments(), { initialValue: [] });
+  protected readonly filter = signal<CommitmentFilter>('all');
+  protected readonly query = signal('');
+  protected readonly selectedCommitment = signal<Commitment | null>(null);
 
   protected readonly filterOptions = computed<readonly SegmentedOption<CommitmentFilter>[]>(() => {
     const all = this.commitments();
     return [
-      { value: 'open', label: 'Open', count: all.filter((c) => !c.done).length },
-      { value: 'late', label: 'Late', count: all.filter((c) => !c.done && c.late).length },
-      { value: 'mine', label: 'Mine', count: all.filter((c) => c.owner === 'You').length },
-      { value: 'done', label: 'Done', count: all.filter((c) => c.done).length },
-      { value: 'all', label: 'All', count: all.length }
+      { value: 'all', label: 'All', count: all.length },
+      { value: 'live', label: 'Live', count: all.filter((c) => c.status === 'live').length },
+      { value: 'upcoming', label: 'Upcoming', count: all.filter((c) => c.status === 'upcoming').length },
+      { value: 'done', label: 'Completed', count: all.filter((c) => c.status === 'done').length }
     ];
   });
 
   protected readonly filteredCommitments = computed(() => {
-    const all = this.commitments();
-    switch (this.filter()) {
-      case 'open':
-        return all.filter((c) => !c.done);
-      case 'late':
-        return all.filter((c) => !c.done && c.late);
-      case 'mine':
-        return all.filter((c) => c.owner === 'You');
-      case 'done':
-        return all.filter((c) => c.done);
-      default:
-        return all;
-    }
+    const q = this.query().trim().toLowerCase();
+    const f = this.filter();
+    return this.commitments().filter((c) => {
+      const matchesFilter = f === 'all' || c.status === f;
+      const matchesQuery = !q || `${c.title} ${c.summary} ${c.cat}`.toLowerCase().includes(q);
+      return matchesFilter && matchesQuery;
+    });
   });
 
   constructor() {
     this.seo.setPage({
       title: 'Commitments',
-      description: 'Every promise, with the sentence it came from.',
+      description: 'Every commitment, already understood — filter, search, and open the minutes.',
       path: '/app/commitments'
     });
-
-    this.data
-      .getCommitments()
-      .pipe(takeUntilDestroyed())
-      .subscribe((items) => this.commitments.set([...items]));
   }
 
-  protected toggleDone(item: Commitment): void {
-    this.commitments.update((items) =>
-      items.map((c) => {
-        if (c.id !== item.id) {
-          return c;
-        }
-        const done = !c.done;
-        return { ...c, done, late: done ? false : c.late };
-      })
-    );
-  }
-
-  protected openMeetingFor(item: Commitment): void {
-    const meeting = this.meetings().find((m) => m.id === item.meetingId);
-    if (meeting) {
-      this.selectedMeeting.set(meeting);
-    }
+  protected openCommitment(commitment: Commitment): void {
+    this.selectedCommitment.set(commitment);
   }
 
   protected closeDrawer(): void {
-    this.selectedMeeting.set(null);
+    this.selectedCommitment.set(null);
   }
 
-  protected nudgeEveryoneLate(): void {
-    this.toast.show(`Nudges sent for ${this.lateCount()} late promises`);
+  protected inviteKoriva(): void {
+    this.toast.show('Koriva will join your next scheduled meeting');
   }
 
-  protected nudge(item: Commitment): void {
-    this.toast.show(`Nudge sent to ${item.owner}`);
+  protected loadOlder(): void {
+    this.toast.show('Loaded 20 older commitments');
   }
 }

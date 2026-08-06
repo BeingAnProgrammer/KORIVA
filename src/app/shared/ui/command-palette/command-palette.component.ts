@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { CommandPaletteService } from '../../../core/services/command-palette.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { CommitmentsDataService } from '../../../data/services/commitments-data.service';
-import { MeetingsDataService } from '../../../data/services/meetings-data.service';
 import { MemoryDataService } from '../../../data/services/memory-data.service';
 import { IconComponent } from '../icon/icon.component';
 
@@ -23,7 +22,6 @@ interface PaletteGroup {
 
 const GO_TO_PAGES: readonly { label: string; route: string }[] = [
   { label: 'Home', route: '/app/home' },
-  { label: 'Meetings', route: '/app/meetings' },
   { label: 'Memory', route: '/app/memory' },
   { label: 'Commitments', route: '/app/commitments' },
   { label: 'Patterns', route: '/app/patterns' },
@@ -32,7 +30,7 @@ const GO_TO_PAGES: readonly { label: string; route: string }[] = [
 ];
 
 /**
- * ⌘K command palette — search meetings, promises, people, or ask a question.
+ * ⌘K command palette — search commitments, people, or ask a question.
  * New component; nothing like it existed before this pass.
  */
 @Component({
@@ -46,13 +44,11 @@ export class CommandPaletteComponent {
   protected readonly palette = inject(CommandPaletteService);
   private readonly toast = inject(ToastService);
   private readonly router = inject(Router);
-  private readonly meetingsData = inject(MeetingsDataService);
   private readonly commitmentsData = inject(CommitmentsDataService);
   private readonly memoryData = inject(MemoryDataService);
 
   private readonly inputRef = viewChild<ElementRef<HTMLInputElement>>('paletteInput');
 
-  private readonly meetings = toSignal(this.meetingsData.getMeetings(), { initialValue: [] });
   private readonly commitments = toSignal(this.commitmentsData.getCommitments(), { initialValue: [] });
   private readonly threads = toSignal(this.memoryData.getThreads(), { initialValue: [] });
 
@@ -73,41 +69,23 @@ export class CommandPaletteComponent {
             meta: '↵',
             action: () => {
               this.palette.close();
-              this.toast.show('Koriva is reading 312 meetings to answer that…');
+              this.toast.show('Koriva is reading 312 commitments to answer that…');
             }
           }
         ]
       });
     }
 
-    const meetings = this.meetings()
-      .filter((m) => !q || `${m.title} ${m.summary} ${m.cat}`.toLowerCase().includes(q))
-      .slice(0, 4);
-    if (meetings.length) {
-      groups.push({
-        name: 'Meetings',
-        items: meetings.map((m) => ({
-          icon: 'calendar-days',
-          label: m.title,
-          meta: m.date,
-          action: () => {
-            this.palette.close();
-            void this.router.navigate(['/app/meetings']);
-          }
-        }))
-      });
-    }
-
     const commitments = this.commitments()
-      .filter((c) => !q || `${c.task} ${c.owner}`.toLowerCase().includes(q))
-      .slice(0, 3);
+      .filter((c) => !q || `${c.title} ${c.summary} ${c.cat}`.toLowerCase().includes(q))
+      .slice(0, 4);
     if (commitments.length) {
       groups.push({
         name: 'Commitments',
         items: commitments.map((c) => ({
-          icon: 'square-check-big',
-          label: c.task,
-          meta: c.due,
+          icon: 'calendar-days',
+          label: c.title,
+          meta: c.date,
           action: () => {
             this.palette.close();
             void this.router.navigate(['/app/commitments']);

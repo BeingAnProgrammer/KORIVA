@@ -97,8 +97,8 @@ $breakpoints: (
   }
 }
 
-// Page-hero lead paragraph (".lead" in the reference) — Meetings, Memory,
-// Commitments and Patterns all follow their h1 with one of these.
+// Page-hero lead paragraph (".lead" in the reference) — Commitments, Memory,
+// and Patterns all follow their h1 with one of these.
 @mixin page-lead {
   font-family: var(--font-sans);
   font-weight: 400;

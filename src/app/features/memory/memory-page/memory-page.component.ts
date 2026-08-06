@@ -46,7 +46,7 @@ export class MemoryPageComponent {
     this.palette.open(`Everything about ${name}`);
   }
 
-  protected seeTheMeetings(): void {
-    void this.router.navigate(['/app/meetings']);
+  protected seeTheCommitments(): void {
+    void this.router.navigate(['/app/commitments']);
   }
 }

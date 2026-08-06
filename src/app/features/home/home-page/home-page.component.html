@@ -26,7 +26,7 @@
       <div class="briefing__decision-quote">&ldquo;{{ briefing().decision.quote }}&rdquo;</div>
       <div class="briefing__decision-meta">
         {{ briefing().decision.meetingLabel }} · {{ briefing().decision.agreedLabel }} ·
-        <a routerLink="/app/meetings" class="briefing__decision-link">read the minutes</a>
+        <a routerLink="/app/commitments" class="briefing__decision-link">read the minutes</a>
       </div>
     </div>
   </div>
@@ -59,12 +59,12 @@
   <div class="today-grid__col">
     <div class="today-grid__heading">
       <h2 class="today-grid__title">Rest of today</h2>
-      <a routerLink="/app/meetings" class="today-grid__link">Meetings</a>
+      <a routerLink="/app/commitments" class="today-grid__link">Commitments</a>
     </div>
 
     <div class="rest-rows">
       @if (liveMeetingRow(); as m) {
-        <a routerLink="/app/meetings" class="rest-row">
+        <a routerLink="/app/commitments" class="rest-row">
           <span class="mono rest-row__time rest-row__time--live">{{ m.day.split('·')[0].trim() }}</span>
           <span class="rest-row__copy">
             <span class="rest-row__title">{{ m.title }}</span>
@@ -74,7 +74,7 @@
         </a>
       }
       @if (nextUpcomingMeeting(); as m) {
-        <a routerLink="/app/meetings" class="rest-row">
+        <a routerLink="/app/commitments" class="rest-row">
           <span class="mono rest-row__time">{{ m.day.split('·')[0].trim() }}</span>
           <span class="rest-row__copy">
             <span class="rest-row__title">{{ m.title }}</span>
@@ -83,7 +83,7 @@
           <span class="rest-row__tag rest-row__tag--accent">BRIEF</span>
         </a>
       }
-      <a routerLink="/app/meetings" class="rest-row">
+      <a routerLink="/app/commitments" class="rest-row">
         <span class="mono rest-row__time rest-row__time--muted">Earlier</span>
         <span class="rest-row__copy">
           <span class="rest-row__title rest-row__title--muted">{{ restOfTodayFiledNote }}</span>

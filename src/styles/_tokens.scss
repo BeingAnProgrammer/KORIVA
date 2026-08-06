@@ -27,7 +27,7 @@
   --hairline: #E6E6EE;
   --hairline-2: #D6D6E1;
 
-  // Accent — indigo (KORIVA's brand accent as of the Home/Meetings/Memory/
+  // Accent — indigo (KORIVA's brand accent as of the Home/Memory/
   // Commitments/Patterns/Analytics/Settings redesign). --accent-hover/-press
   // aren't specified by the reference (which only ever swaps to --accent-ink
   // on hover); -hover mirrors -ink and -press is one step darker so existing
@@ -70,7 +70,7 @@
   --invert-ink-3: rgba(255, 255, 255, 0.48);
   --accent-on-invert: #BDB4FF;
 
-  // Decorative hero background wash (Home/Meetings/Memory/Commitments/
+  // Decorative hero background wash (Home/Memory/Commitments/
   // Patterns/Analytics/Settings page headers).
   --glow: radial-gradient(1000px 440px at 50% -10%, rgba(91, 84, 240, 0.11), transparent 68%),
     radial-gradient(620px 300px at 88% 4%, rgba(46, 125, 247, 0.07), transparent 70%);

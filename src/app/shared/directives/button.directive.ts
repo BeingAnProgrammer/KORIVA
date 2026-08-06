@@ -6,7 +6,7 @@ export type ButtonVariant =
   | 'secondary'
   | 'secondary-lg'
   | 'ghost'
-  // Reference design's button system (Home/Meetings/Commitments/Patterns/…) —
+  // Reference design's button system (Home/Commitments/Patterns/…) —
   // distinct from the legacy pill-shaped marketing variants above.
   | 'accent'
   | 'accent-sm'

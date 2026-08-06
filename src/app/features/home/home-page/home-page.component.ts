@@ -4,8 +4,8 @@ import { RouterLink } from '@angular/router';
 
 import { SeoService } from '../../../core/services/seo.service';
 import { ToastService } from '../../../core/services/toast.service';
+import { CommitmentsDataService } from '../../../data/services/commitments-data.service';
 import { HomeDataService } from '../../../data/services/home-data.service';
-import { MeetingsDataService } from '../../../data/services/meetings-data.service';
 import { PatternsDataService } from '../../../data/services/patterns-data.service';
 import { IconComponent } from '../../../shared/ui/icon/icon.component';
 import { AiSearchHeroComponent } from '../components/ai-search-hero/ai-search-hero.component';
@@ -22,13 +22,13 @@ export class HomePageComponent {
   private readonly seo = inject(SeoService);
   private readonly toast = inject(ToastService);
   private readonly homeData = inject(HomeDataService);
-  private readonly meetingsData = inject(MeetingsDataService);
+  private readonly commitmentsData = inject(CommitmentsDataService);
   private readonly patternsData = inject(PatternsDataService);
 
   protected readonly liveMeeting = toSignal(this.homeData.getLiveMeeting(), { requireSync: true });
   protected readonly briefing = toSignal(this.homeData.getMorningBriefing(), { requireSync: true });
   protected readonly todayFocusItems = toSignal(this.homeData.getTodayFocusItems(), { initialValue: [] });
-  protected readonly meetings = toSignal(this.meetingsData.getMeetings(), { initialValue: [] });
+  protected readonly meetings = toSignal(this.commitmentsData.getCommitments(), { initialValue: [] });
   protected readonly patterns = toSignal(this.patternsData.getPatterns(), { initialValue: [] });
 
   protected readonly liveMeetingRow = computed(() => this.meetings().find((m) => m.status === 'live'));

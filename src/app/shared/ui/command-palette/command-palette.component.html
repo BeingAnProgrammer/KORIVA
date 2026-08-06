@@ -5,7 +5,7 @@
       <input
         #paletteInput
         class="palette__input"
-        placeholder="Search meetings, promises, people — or ask a question"
+        placeholder="Search commitments, people — or ask a question"
         [value]="palette.query()"
         (input)="onQueryInput($any($event.target).value)"
         (keydown)="onKeydown($event)"

@@ -1,11 +1,33 @@
 <div class="commitments-hero">
   <div class="commitments-hero__wrap">
-    <div class="eyebrow">Commitments · {{ openCount() }} open · {{ lateCount() }} late</div>
-    <h1 class="commitments-hero__title">Every promise, with the sentence it came from.</h1>
+    <div class="commitments-hero__top">
+      <div class="commitments-hero__copy">
+        <div class="eyebrow">312 commitments in memory</div>
+        <h1 class="commitments-hero__title">Every commitment, already understood.</h1>
+        <p class="commitments-hero__lead">
+          You were in 42 commitments this month. Koriva wrote minutes for 41 of them, extracted 96 decisions and is still holding 17
+          promises open.
+        </p>
+      </div>
+      <button type="button" appButton variant="accent" (click)="inviteKoriva()">
+        <app-icon name="plus" size="15" />
+        Invite Koriva to a meeting
+      </button>
+    </div>
 
     <div class="commitments-hero__filters">
       <app-segmented-control [options]="filterOptions()" [value]="filter()" (valueChange)="filter.set($event)" />
-      <button type="button" appButton variant="ref-ghost-sm" (click)="nudgeEveryoneLate()">Nudge everyone late</button>
+      <div class="commitments-hero__field">
+        <app-icon name="search" size="15" />
+        <input
+          type="text"
+          placeholder="Filter commitments…"
+          [value]="query()"
+          (input)="query.set($any($event.target).value)"
+          aria-label="Filter commitments"
+        />
+      </div>
+      <span class="mono commitments-hero__count">{{ filteredCommitments().length }} shown</span>
     </div>
   </div>
 </div>
@@ -14,19 +36,60 @@
   <div class="commitments-list__wrap">
     @if (filteredCommitments().length) {
       <div class="commitment-rows">
-        @for (item of filteredCommitments(); track item.id) {
-          <app-commitment-card
-            [commitment]="item"
-            (toggled)="toggleDone(item)"
-            (meetingClicked)="openMeetingFor(item)"
-            (nudged)="nudge(item)"
-          />
+        @for (c of filteredCommitments(); track c.id) {
+          <button type="button" class="commitment-row" (click)="openCommitment(c)">
+            <span class="commitment-row__date-col">
+              <span class="commitment-row__date">{{ c.date }}</span>
+              <span class="mono commitment-row__day">{{ c.day }}</span>
+              <span class="commitment-row__cat">
+                <span class="commitment-row__cat-dot" [style.background]="'var(--' + c.color + ')'"></span>
+                {{ c.cat }}
+              </span>
+            </span>
+
+            <span class="commitment-row__main">
+              <span class="commitment-row__title-row">
+                <span class="commitment-row__title">{{ c.title }}</span>
+                @if (c.status === 'live') {
+                  <app-status-pill variant="rose">LIVE NOW</app-status-pill>
+                }
+              </span>
+              <span class="commitment-row__summary">{{ c.summary }}</span>
+              <span class="commitment-row__stats">
+                @for (stat of c.stats; track stat.label) {
+                  <app-status-pill [variant]="stat.tone">{{ stat.label }}</app-status-pill>
+                }
+                <span class="commitment-row__divider"></span>
+                <span class="commitment-row__avatars">
+                  @for (person of c.people; track $index) {
+                    <app-avatar class="commitment-row__avatar" [initials]="person" [size]="24" variant="neutral" />
+                  }
+                </span>
+              </span>
+            </span>
+
+            <span class="commitment-row__related-col">
+              <span class="mono commitment-row__related-label">Related</span>
+              @for (r of c.related; track r) {
+                <span class="commitment-row__related-item"><span class="commitment-row__related-dot"></span>{{ r }}</span>
+              }
+              <span class="commitment-row__open">Open minutes →</span>
+            </span>
+          </button>
         }
       </div>
     } @else {
-      <div class="commitments-empty">Nothing here — that is a good sign.</div>
+      <div class="commitments-empty">No commitments match that filter.</div>
     }
+
+    <div class="commitments-footer">
+      <span class="commitments-footer__note">303 more commitments in memory, back to March 2024.</span>
+      <button type="button" appButton variant="soft" (click)="loadOlder()">
+        Load older
+        <app-icon name="arrow-down" size="14" />
+      </button>
+    </div>
   </div>
 </div>
 
-<app-meeting-drawer [meeting]="selectedMeeting()" (closed)="closeDrawer()" />
+<app-commitment-drawer [commitment]="selectedCommitment()" (closed)="closeDrawer()" />

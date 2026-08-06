@@ -16,7 +16,7 @@
   }
 }
 
-.meeting-drawer {
+.commitment-drawer {
   position: fixed;
   top: 0;
   right: 0;
@@ -34,7 +34,7 @@
   }
 }
 
-.meeting-drawer__header {
+.commitment-drawer__header {
   position: sticky;
   top: 0;
   z-index: 2;
@@ -46,12 +46,12 @@
   border-bottom: 1px solid var(--hairline);
 }
 
-.meeting-drawer__meta {
+.commitment-drawer__meta {
   font-size: 12px;
   color: var(--ink-3);
 }
 
-.meeting-drawer__close {
+.commitment-drawer__close {
   margin-left: auto;
   width: 36px;
   height: 36px;
@@ -71,14 +71,14 @@
   }
 }
 
-.meeting-drawer__body {
+.commitment-drawer__body {
   padding: 32px 34px 60px;
   display: flex;
   flex-direction: column;
   gap: 26px;
 }
 
-.meeting-drawer__title {
+.commitment-drawer__title {
   margin: 0;
   font-family: var(--font-sans);
   font-weight: 400;
@@ -87,23 +87,23 @@
   letter-spacing: -0.03em;
 }
 
-.meeting-drawer__stats {
+.commitment-drawer__stats {
   display: flex;
   align-items: center;
   gap: 9px;
   flex-wrap: wrap;
 }
 
-.meeting-drawer__avatars {
+.commitment-drawer__avatars {
   display: flex;
   align-items: center;
 }
 
-.meeting-drawer__avatar + .meeting-drawer__avatar {
+.commitment-drawer__avatar + .commitment-drawer__avatar {
   margin-left: -7px;
 }
 
-.meeting-drawer__summary {
+.commitment-drawer__summary {
   margin: 0;
   font-size: 17px;
   line-height: 1.7;
@@ -111,13 +111,13 @@
   text-wrap: pretty;
 }
 
-.meeting-drawer__soft {
+.commitment-drawer__soft {
   border-radius: var(--radius-xl);
   background: var(--surface-alt);
   padding: var(--space-6);
 }
 
-.meeting-drawer__section-label {
+.commitment-drawer__section-label {
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -125,7 +125,7 @@
   margin-bottom: 14px;
 }
 
-.meeting-drawer__minutes-list {
+.commitment-drawer__minutes-list {
   margin: 0;
   padding-left: 20px;
   display: flex;
@@ -136,13 +136,13 @@
   color: var(--ink);
 }
 
-.meeting-drawer__related {
+.commitment-drawer__related {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-.meeting-drawer__actions {
+.commitment-drawer__actions {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;

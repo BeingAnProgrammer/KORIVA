@@ -1,0 +1,53 @@
+<div class="drawer-scrim" [class.drawer-scrim--open]="commitment()" (click)="close()"></div>
+
+<aside class="commitment-drawer" [class.commitment-drawer--open]="commitment()" role="dialog" aria-label="Commitment detail">
+  @if (commitment(); as c) {
+    <div class="commitment-drawer__header">
+      <app-status-pill [variant]="statusTone()">{{ statusLabel() }}</app-status-pill>
+      <span class="mono commitment-drawer__meta">{{ c.date }} · {{ c.dur }} · {{ c.cat }}</span>
+      <button type="button" class="commitment-drawer__close" (click)="close()" aria-label="Close">
+        <app-icon name="x" size="16" />
+      </button>
+    </div>
+
+    <div class="commitment-drawer__body">
+      <h2 class="commitment-drawer__title">{{ c.title }}</h2>
+
+      <div class="commitment-drawer__stats">
+        @for (stat of c.stats; track stat.label) {
+          <app-status-pill [variant]="stat.tone">{{ stat.label }}</app-status-pill>
+        }
+        <span class="commitment-drawer__avatars">
+          @for (person of c.people; track $index) {
+            <app-avatar class="commitment-drawer__avatar" [initials]="person" [size]="24" variant="neutral" />
+          }
+        </span>
+      </div>
+
+      <p class="commitment-drawer__summary">{{ c.summary }}</p>
+
+      <div class="commitment-drawer__soft">
+        <div class="mono commitment-drawer__section-label">{{ minutesHeading() }}</div>
+        <ol class="commitment-drawer__minutes-list">
+          @for (line of c.minutes; track line) {
+            <li>{{ line }}</li>
+          }
+        </ol>
+      </div>
+
+      <div>
+        <div class="mono commitment-drawer__section-label">Related</div>
+        <div class="commitment-drawer__related">
+          @for (r of c.related; track r) {
+            <span class="chip">{{ r }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="commitment-drawer__actions">
+        <button type="button" appButton variant="accent" (click)="copyMinutes()">Copy minutes</button>
+        <button type="button" appButton variant="soft" (click)="askAboutThis()">Ask about this</button>
+      </div>
+    </div>
+  }
+</aside>

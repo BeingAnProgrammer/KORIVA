@@ -11,7 +11,6 @@ export const NAV_PILLS: readonly NavPill[] = [
 /** App top-nav links, in display order (matches the reference's nav bar exactly). */
 export const APP_NAV_ITEMS: readonly NavItem[] = [
   { key: 'home', label: 'Home', route: '/app/home' },
-  { key: 'meetings', label: 'Meetings', route: '/app/meetings' },
   { key: 'memory', label: 'Memory', route: '/app/memory' },
   { key: 'commitments', label: 'Commitments', route: '/app/commitments' },
   { key: 'patterns', label: 'Patterns', route: '/app/patterns' },
