@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
 import { SeoService } from '../../../core/services/seo.service';
 import { ToastService } from '../../../core/services/toast.service';
@@ -17,7 +18,7 @@ type CommitmentFilter = 'all' | 'live' | 'upcoming' | 'done';
 
 @Component({
   selector: 'app-commitments-page',
-  imports: [IconComponent, ButtonDirective, SegmentedControlComponent, StatusPillComponent, AvatarComponent, CommitmentDrawerComponent],
+  imports: [RouterLink, IconComponent, ButtonDirective, SegmentedControlComponent, StatusPillComponent, AvatarComponent, CommitmentDrawerComponent],
   templateUrl: './commitments-page.component.html',
   styleUrl: './commitments-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -66,10 +67,6 @@ export class CommitmentsPageComponent {
 
   protected closeDrawer(): void {
     this.selectedCommitment.set(null);
-  }
-
-  protected inviteKoriva(): void {
-    this.toast.show('Koriva will join your next scheduled meeting');
   }
 
   protected loadOlder(): void {

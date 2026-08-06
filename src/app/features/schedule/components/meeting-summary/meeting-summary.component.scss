@@ -1,0 +1,52 @@
+@use 'mixins' as m;
+
+:host {
+  display: block;
+  @include m.card-surface($bg: var(--surface-alt), $radius: var(--radius-xl));
+  border: none;
+  padding: var(--space-6);
+}
+
+.meeting-summary__eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: var(--space-4);
+}
+
+.meeting-summary__grid {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.meeting-summary__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+
+  dt {
+    flex: none;
+    font-size: var(--text-xs);
+    color: var(--ink-3);
+  }
+
+  dd {
+    margin: 0;
+    min-width: 0;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--ink);
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+}
+
+.meeting-summary__platform {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}

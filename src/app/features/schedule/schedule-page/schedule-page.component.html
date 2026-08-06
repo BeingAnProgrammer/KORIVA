@@ -1,0 +1,134 @@
+<div class="schedule-hero">
+  <div class="schedule-hero__wrap">
+    <div class="eyebrow">Invite Koriva</div>
+    <h1 class="schedule-hero__title">Prepare Koriva before it joins.</h1>
+    <p class="schedule-hero__lead">
+      Choose how Koriva shows up, what it says the moment it joins, and when — Koriva takes it from there.
+    </p>
+  </div>
+</div>
+
+<div class="schedule-wrap">
+  <div class="schedule-grid">
+    <section class="schedule-form" aria-label="Meeting configuration">
+      <div class="field">
+        <label class="field__label" for="meeting-title">Meeting name</label>
+        <input
+          id="meeting-title"
+          type="text"
+          class="field__input"
+          placeholder="Weekly Engineering Standup"
+          [value]="title()"
+          (input)="title.set($any($event.target).value)"
+        />
+      </div>
+
+      <div class="field">
+        <span class="field__label">Meeting platform</span>
+        <app-segmented-control [options]="platformOptions" [value]="platform()" (valueChange)="platform.set($event)" />
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="meeting-url">Meeting URL</label>
+        <input
+          id="meeting-url"
+          type="url"
+          class="field__input"
+          [class.field__input--error]="urlTouched() && urlError()"
+          [placeholder]="urlPlaceholder()"
+          [value]="url()"
+          (input)="url.set($any($event.target).value)"
+          (blur)="urlTouched.set(true)"
+        />
+        @if (urlTouched() && urlError()) {
+          <span class="field__hint field__hint--error">{{ urlError() }}</span>
+        }
+      </div>
+
+      <div class="field">
+        <span class="field__label">Meeting type</span>
+        <app-segmented-control [options]="meetingTypeOptions" [value]="meetingType()" (valueChange)="meetingType.set($event)" />
+      </div>
+
+      @if (meetingType() === 'scheduled') {
+        <div class="field">
+          <div class="schedule-datetime">
+            <div class="field">
+              <label class="field__label" for="meeting-date">Date</label>
+              <input
+                id="meeting-date"
+                type="date"
+                class="field__input"
+                [attr.min]="today"
+                [value]="scheduledDate()"
+                (input)="scheduledDate.set($any($event.target).value)"
+              />
+            </div>
+            <div class="field">
+              <label class="field__label" for="meeting-start">Start time</label>
+              <input
+                id="meeting-start"
+                type="time"
+                class="field__input"
+                [value]="startTime()"
+                (input)="startTime.set($any($event.target).value)"
+              />
+            </div>
+            <div class="field">
+              <label class="field__label" for="meeting-end">End time</label>
+              <input
+                id="meeting-end"
+                type="time"
+                class="field__input"
+                [value]="endTime()"
+                (input)="endTime.set($any($event.target).value)"
+              />
+            </div>
+          </div>
+          @if (timeRangeError()) {
+            <span class="field__hint field__hint--error">{{ timeRangeError() }}</span>
+          }
+        </div>
+      }
+
+      <div class="field">
+        <label class="field__label" for="entry-message">Entry message</label>
+        <textarea
+          id="entry-message"
+          class="field__textarea"
+          rows="5"
+          [value]="entryMessage()"
+          (input)="entryMessage.set($any($event.target).value)"
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <span class="field__label">Koriva identity</span>
+        <div class="schedule-identity">
+          <input
+            type="text"
+            class="field__input schedule-identity__name"
+            placeholder="Koriva AI"
+            aria-label="Koriva display name"
+            [value]="displayName()"
+            (input)="displayName.set($any($event.target).value)"
+          />
+          <app-avatar-picker [value]="avatar()" (valueChange)="avatar.set($event)" />
+        </div>
+      </div>
+
+      <app-meeting-summary [summary]="summary()" />
+
+      <div class="schedule-actions">
+        <button type="button" appButton variant="ghost" (click)="cancel()">Cancel</button>
+        <button type="button" appButton variant="primary" [disabled]="submitting() || !canSubmit()" (click)="submit()">
+          {{ submitLabel() }}
+        </button>
+      </div>
+    </section>
+
+    <aside class="schedule-calendar-col" aria-label="Scheduled meetings">
+      <app-meeting-calendar [meetings]="meetings()" [selectedDate]="scheduledDate()" (dateSelected)="onDateSelected($event)" />
+    </aside>
+  </div>
+</div>

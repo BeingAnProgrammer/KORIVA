@@ -14,10 +14,10 @@
     </nav>
 
     <div class="top-nav__right">
-      <button type="button" appButton variant="accent-sm" class="top-nav__invite" (click)="inviteKoriva()">
+      <a routerLink="/app/schedule" appButton variant="accent-sm" class="top-nav__invite">
         <app-icon name="calendar-plus" size="15" />
         <span class="top-nav__invite-label">Invite Koriva to a meeting</span>
-      </button>
+      </a>
 
       <app-icon-button [icon]="theme.themeIcon()" ariaLabel="Toggle theme" (pressed)="theme.cycleTheme()" />
 

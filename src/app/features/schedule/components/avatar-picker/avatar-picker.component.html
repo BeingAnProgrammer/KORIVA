@@ -1,0 +1,22 @@
+<div class="avatar-picker">
+  <span class="avatar-picker__preview">
+    @if (value(); as src) {
+      <img [src]="src" alt="Koriva avatar preview" class="avatar-picker__image" />
+    } @else {
+      <app-logo-mark [size]="22" />
+    }
+  </span>
+
+  <div class="avatar-picker__actions">
+    <button type="button" appButton variant="soft-sm" (click)="fileInput.click()">
+      <app-icon name="upload" size="14" />
+      {{ value() ? 'Replace image' : 'Upload image' }}
+    </button>
+
+    @if (value()) {
+      <app-icon-button icon="x" ariaLabel="Remove avatar" (pressed)="remove()" />
+    }
+  </div>
+
+  <input #fileInput type="file" accept="image/*" class="avatar-picker__input" tabindex="-1" (change)="onFileSelected($event)" />
+</div>

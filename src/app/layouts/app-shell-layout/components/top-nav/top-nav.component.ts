@@ -4,7 +4,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { CommandPaletteService } from '../../../../core/services/command-palette.service';
 import { ThemeService } from '../../../../core/services/theme.service';
-import { ToastService } from '../../../../core/services/toast.service';
 import { APP_NAV_ITEMS } from '../../../../data/mock/navigation.mock-data';
 import { ButtonDirective } from '../../../../shared/directives/button.directive';
 import { AvatarComponent } from '../../../../shared/ui/avatar/avatar.component';
@@ -28,7 +27,6 @@ export class TopNavComponent {
   protected readonly auth = inject(AuthService);
   protected readonly theme = inject(ThemeService);
   protected readonly palette = inject(CommandPaletteService);
-  private readonly toast = inject(ToastService);
 
   protected readonly navItems = APP_NAV_ITEMS;
 
@@ -65,9 +63,5 @@ export class TopNavComponent {
   protected signOut(): void {
     this.closeUserMenu();
     void this.auth.signOut();
-  }
-
-  protected inviteKoriva(): void {
-    this.toast.show('Koriva will join your next scheduled meeting');
   }
 }

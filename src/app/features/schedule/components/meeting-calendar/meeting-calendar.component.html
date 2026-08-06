@@ -1,0 +1,76 @@
+<div class="meeting-calendar">
+  <div class="meeting-calendar__header">
+    <div class="meeting-calendar__month">
+      <app-icon-button icon="chevron-left" ariaLabel="Previous month" (pressed)="prevMonth()" />
+      <h2 class="meeting-calendar__title">{{ monthLabel() }}</h2>
+      <app-icon-button icon="chevron-right" ariaLabel="Next month" (pressed)="nextMonth()" />
+    </div>
+
+    <app-segmented-control [options]="viewOptions" [value]="view()" (valueChange)="view.set($event)" />
+  </div>
+
+  @if (view() === 'month') {
+    <div class="meeting-calendar__panel">
+      <div class="meeting-calendar__weekdays">
+        @for (label of weekdayLabels; track label) {
+          <span>{{ label }}</span>
+        }
+      </div>
+
+      <div class="meeting-calendar__grid" (keydown)="onGridKeydown($event)">
+        @for (day of days(); track day.iso; let i = $index) {
+          <button
+            type="button"
+            class="meeting-calendar__day"
+            [style.--stagger]="i * 6 + 'ms'"
+            [class.meeting-calendar__day--outside]="!day.inCurrentMonth"
+            [class.meeting-calendar__day--today]="day.isToday"
+            [class.meeting-calendar__day--selected]="day.isSelected"
+            [class.meeting-calendar__day--busy]="day.meetings.length > 0"
+            [class.meeting-calendar__day--past]="day.isPast"
+            [disabled]="!day.inCurrentMonth || day.isPast"
+            [attr.aria-pressed]="day.isSelected"
+            [attr.aria-label]="dayAriaLabel(day)"
+            [attr.aria-describedby]="day.meetings.length ? 'meeting-calendar-tip-' + day.iso : null"
+            (click)="selectDay(day)"
+          >
+            <span class="meeting-calendar__day-number">{{ day.dayNumber }}</span>
+
+            @if (day.meetings.length) {
+              <span class="meeting-calendar__badge">{{ day.meetings.length }}</span>
+
+              <div class="meeting-calendar__tooltip" [id]="'meeting-calendar-tip-' + day.iso" role="tooltip">
+                @for (meeting of day.meetings; track meeting.id) {
+                  <div class="meeting-calendar__tooltip-row">
+                    <span class="mono meeting-calendar__tooltip-time">{{ meeting.startTime }}</span>
+                    <span class="meeting-calendar__tooltip-title">{{ meeting.title }}</span>
+                  </div>
+                }
+              </div>
+            }
+          </button>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="meeting-calendar__panel meeting-calendar__agenda">
+      @if (agendaGroups().length) {
+        @for (group of agendaGroups(); track group.iso) {
+          <div class="meeting-calendar__agenda-group">
+            <div class="mono meeting-calendar__agenda-date">{{ group.label }}</div>
+
+            @for (meeting of group.meetings; track meeting.id) {
+              <div class="meeting-calendar__agenda-item">
+                <span class="mono meeting-calendar__agenda-time">{{ meeting.startTime }}–{{ meeting.endTime }}</span>
+                <span class="meeting-calendar__agenda-title">{{ meeting.title }}</span>
+                <span class="meeting-calendar__agenda-platform">{{ platformLabel(meeting.platform) }}</span>
+              </div>
+            }
+          </div>
+        }
+      } @else {
+        <div class="meeting-calendar__agenda-empty">No meetings this month.</div>
+      }
+    </div>
+  }
+</div>

@@ -54,6 +54,10 @@ export const routes: Routes = [
       {
         path: 'settings',
         loadComponent: () => import('./features/settings/settings-page/settings-page.component').then((m) => m.SettingsPageComponent)
+      },
+      {
+        path: 'schedule',
+        loadComponent: () => import('./features/schedule/schedule-page/schedule-page.component').then((m) => m.SchedulePageComponent)
       }
     ]
   },

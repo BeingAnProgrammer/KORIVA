@@ -18,7 +18,10 @@ body {
   transition: background var(--dur-slow) var(--ease-standard), color var(--dur-slow) var(--ease-standard);
 }
 
-a {
+// :not(.btn) so a plain link's hover state (a pseudo-class, which counts
+// toward specificity like a class) never outranks a single .btn--* variant
+// class and overrides its color — e.g. <a appButton variant="accent">.
+a:not(.btn) {
   color: var(--accent);
   text-decoration: none;
 

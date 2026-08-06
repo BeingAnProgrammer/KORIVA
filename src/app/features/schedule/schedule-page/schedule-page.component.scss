@@ -1,0 +1,140 @@
+@use 'mixins' as m;
+
+.schedule-hero {
+  padding: 56px 0 30px;
+  background-image: var(--glow);
+}
+
+.schedule-hero__wrap {
+  @include m.page-wrap;
+}
+
+.schedule-hero__title {
+  @include m.page-hero-title;
+  margin-top: 14px;
+}
+
+.schedule-hero__lead {
+  @include m.page-lead;
+  margin-top: 14px;
+}
+
+.schedule-wrap {
+  padding-bottom: 120px;
+  @include m.page-wrap;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: var(--space-10);
+  align-items: start;
+
+  @include m.respond-down(lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.schedule-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.schedule-calendar-col {
+  position: sticky;
+  top: 96px;
+  background: var(--canvas-sub);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+
+  @include m.respond-down(lg) {
+    position: static;
+  }
+}
+
+// ---------------------------------------------------------------------
+// Fields
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field__label {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.field__input,
+.field__textarea {
+  width: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  padding: 12px 14px;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+
+  &::placeholder {
+    color: var(--ink-4);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+
+  &--error {
+    border-color: var(--danger);
+  }
+}
+
+.field__textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: var(--leading-loose);
+}
+
+.field__hint {
+  font-size: 12px;
+  color: var(--ink-3);
+
+  &--error {
+    color: var(--danger);
+  }
+}
+
+.schedule-datetime {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+
+  @include m.respond-down(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.schedule-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.schedule-identity__name {
+  flex: 1;
+  min-width: 200px;
+}
+
+.schedule-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+}

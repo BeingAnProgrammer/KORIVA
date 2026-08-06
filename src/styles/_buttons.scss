@@ -13,6 +13,7 @@
   font-family: var(--font-sans);
   font-weight: 600;
   letter-spacing: -0.01em;
+  text-decoration: none;
   border: none;
   white-space: nowrap;
   @include m.focus-ring;

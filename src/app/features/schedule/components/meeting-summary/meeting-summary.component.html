@@ -1,0 +1,33 @@
+<div class="meeting-summary">
+  <div class="mono meeting-summary__eyebrow">Summary</div>
+
+  <dl class="meeting-summary__grid">
+    <div class="meeting-summary__row">
+      <dt>Meeting</dt>
+      <dd>{{ summary().title || 'Untitled meeting' }}</dd>
+    </div>
+
+    <div class="meeting-summary__row">
+      <dt>Platform</dt>
+      <dd class="meeting-summary__platform">
+        <app-icon [name]="summary().platformIcon" size="14" />
+        {{ summary().platformLabel }}
+      </dd>
+    </div>
+
+    <div class="meeting-summary__row">
+      <dt>Time</dt>
+      <dd>{{ summary().timeLabel }}</dd>
+    </div>
+
+    <div class="meeting-summary__row">
+      <dt>Koriva</dt>
+      <dd>Will join as {{ summary().displayName }}</dd>
+    </div>
+
+    <div class="meeting-summary__row">
+      <dt>Entry message</dt>
+      <dd>{{ summary().entryMessageConfigured ? 'Configured' : 'Default' }}</dd>
+    </div>
+  </dl>
+</div>

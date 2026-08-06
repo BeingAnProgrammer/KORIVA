@@ -16,6 +16,7 @@ import {
   LucideCaptions,
   LucideCheck,
   LucideChevronDown,
+  LucideChevronLeft,
   LucideChevronRight,
   LucideChevronUp,
   LucideCircleCheck,
@@ -76,10 +77,12 @@ import {
   LucideTarget,
   LucideTrendingUp,
   LucideTriangleAlert,
+  LucideUpload,
   LucideUser,
   LucideUserRound,
   LucideUsers,
   LucideVideo,
+  LucideWebcam,
   LucideWorkflow,
   LucideX
 } from '@lucide/angular';
@@ -112,6 +115,7 @@ export const APP_ICONS = [
   LucideCaptions,
   LucideCheck,
   LucideChevronDown,
+  LucideChevronLeft,
   LucideChevronRight,
   LucideChevronUp,
   LucideCircleCheck,
@@ -172,10 +176,12 @@ export const APP_ICONS = [
   LucideTarget,
   LucideTrendingUp,
   LucideTriangleAlert,
+  LucideUpload,
   LucideUser,
   LucideUserRound,
   LucideUsers,
   LucideVideo,
+  LucideWebcam,
   LucideWorkflow,
   LucideX
 ] as const;
