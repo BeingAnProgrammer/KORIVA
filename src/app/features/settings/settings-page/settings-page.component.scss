@@ -5,6 +5,17 @@
   background-image: var(--glow);
 }
 
+.settings-hero__wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-10);
+
+  @include m.respond-down(md) {
+    padding-left: var(--space-5);
+    padding-right: var(--space-5);
+  }
+}
+
 .settings-hero__title {
   @include m.page-hero-title;
   margin-top: 14px;
