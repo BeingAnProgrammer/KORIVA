@@ -1,0 +1,82 @@
+@use 'mixins' as m;
+
+.color-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 220px;
+}
+
+.color-picker__area {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  border-radius: var(--radius-md);
+  cursor: crosshair;
+  touch-action: none;
+  @include m.focus-ring;
+}
+
+.color-picker__area-thumb {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-pill);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), var(--shadow-md);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.color-picker__hue {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+  cursor: pointer;
+  touch-action: none;
+  @include m.focus-ring;
+}
+
+.color-picker__hue-thumb {
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-pill);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), var(--shadow-md);
+  transform: translate(-50%, -50%);
+  background: var(--surface);
+  pointer-events: none;
+}
+
+.color-picker__hex-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+}
+
+.color-picker__preview {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.color-picker__hex-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--ink);
+}

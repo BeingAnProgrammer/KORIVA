@@ -93,6 +93,39 @@
   }
 }
 
+.settings-swatch--custom {
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: conic-gradient(from 180deg, #ef4444, #eab308, #22c55e, #06b6d4, #3b82f6, #8b5cf6, #ec4899, #ef4444);
+}
+
+.settings-custom-swatch {
+  position: relative;
+}
+
+.settings-custom-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-popover);
+  background: none;
+  border: none;
+  cursor: default;
+}
+
+.settings-custom-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: calc(var(--z-popover) + 1);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 12px;
+  animation: popIn var(--dur-fast) var(--ease-spring);
+}
+
 .settings-connect-btn {
   height: 34px;
   padding: 0 14px;

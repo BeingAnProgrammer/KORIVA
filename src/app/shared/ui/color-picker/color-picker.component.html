@@ -1,0 +1,52 @@
+<div class="color-picker">
+  <div
+    class="color-picker__area"
+    [style.background]="areaBackground()"
+    role="slider"
+    tabindex="0"
+    aria-label="Saturation and brightness"
+    [attr.aria-valuetext]="'Saturation ' + hsb().s + '%, Brightness ' + hsb().b + '%'"
+    (pointerdown)="onAreaPointerDown($event)"
+    (pointermove)="onAreaPointerMove($event)"
+    (pointerup)="onAreaPointerUp($event)"
+    (keydown)="onAreaKeydown($event)"
+  >
+    <span
+      class="color-picker__area-thumb"
+      [style.left.%]="hsb().s"
+      [style.top.%]="100 - hsb().b"
+      [style.background]="hexValue()"
+    ></span>
+  </div>
+
+  <div
+    class="color-picker__hue"
+    role="slider"
+    tabindex="0"
+    aria-label="Hue"
+    aria-valuemin="0"
+    aria-valuemax="360"
+    [attr.aria-valuenow]="hsb().h"
+    (pointerdown)="onHuePointerDown($event)"
+    (pointermove)="onHuePointerMove($event)"
+    (pointerup)="onHuePointerUp($event)"
+    (keydown)="onHueKeydown($event)"
+  >
+    <span class="color-picker__hue-thumb" [style.left.%]="(hsb().h / 360) * 100"></span>
+  </div>
+
+  <div class="color-picker__hex-row">
+    <span class="color-picker__preview" [style.background]="hexValue()"></span>
+    <input
+      class="color-picker__hex-input"
+      type="text"
+      [value]="hexInputValue()"
+      (input)="onHexInput($event)"
+      (blur)="onHexBlur()"
+      aria-label="Hex colour"
+      spellcheck="false"
+      autocomplete="off"
+      maxlength="7"
+    />
+  </div>
+</div>

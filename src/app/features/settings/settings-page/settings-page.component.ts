@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectionStrategy, Component, PLATFORM_ID, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 
 import { ACCENT_OPTIONS, ThemeMode } from '../../../core/models/theme.model';
@@ -9,6 +9,8 @@ import { ToastService } from '../../../core/services/toast.service';
 import { ConnectionItem } from '../../../data/models/connection-item.model';
 import { ToggleItem } from '../../../data/models/toggle-item.model';
 import { SettingsDataService } from '../../../data/services/settings-data.service';
+import { ColorPickerComponent } from '../../../shared/ui/color-picker/color-picker.component';
+import { IconComponent } from '../../../shared/ui/icon/icon.component';
 import { SegmentedControlComponent } from '../../../shared/ui/segmented-control/segmented-control.component';
 import { SegmentedOption } from '../../../shared/ui/segmented-control/segmented-option.model';
 import { ToggleSwitchComponent } from '../../../shared/ui/toggle-switch/toggle-switch.component';
@@ -23,7 +25,7 @@ const TOGGLES_STORAGE_KEY = 'koriva-toggles';
 
 @Component({
   selector: 'app-settings-page',
-  imports: [SegmentedControlComponent, ToggleSwitchComponent],
+  imports: [SegmentedControlComponent, ToggleSwitchComponent, ColorPickerComponent, IconComponent],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -37,6 +39,9 @@ export class SettingsPageComponent {
 
   protected readonly themeOptions = THEME_OPTIONS;
   protected readonly accentOptions = ACCENT_OPTIONS;
+
+  protected readonly customPickerOpen = signal(false);
+  protected readonly isCustomAccent = computed(() => !this.accentOptions.some((option) => this.isActiveAccent(option.hex)));
 
   protected readonly toggles = signal<readonly ToggleItem[]>([]);
   protected readonly connections = toSignal(this.data.getConnections(), { initialValue: [] });
@@ -95,6 +100,18 @@ export class SettingsPageComponent {
       overrides[item.id] = item.on;
     }
     localStorage.setItem(TOGGLES_STORAGE_KEY, JSON.stringify(overrides));
+  }
+
+  protected isActiveAccent(hex: string): boolean {
+    return this.themeService.accent().toLowerCase() === hex.toLowerCase();
+  }
+
+  protected toggleCustomPicker(): void {
+    this.customPickerOpen.update((open) => !open);
+  }
+
+  protected closeCustomPicker(): void {
+    this.customPickerOpen.set(false);
   }
 
   connectionAction(connection: ConnectionItem): void {

@@ -21,11 +21,33 @@
             type="button"
             class="settings-swatch"
             [style.background]="option.hex"
-            [attr.aria-pressed]="themeService.accent() === option.hex"
+            [attr.aria-pressed]="isActiveAccent(option.hex)"
             [attr.aria-label]="option.name"
             (click)="themeService.setAccent(option.hex)"
           ></button>
         }
+
+        <div class="settings-custom-swatch">
+          <button
+            type="button"
+            class="settings-swatch settings-swatch--custom"
+            [style.background]="isCustomAccent() ? themeService.accent() : null"
+            [attr.aria-pressed]="isCustomAccent()"
+            aria-label="Custom colour"
+            (click)="toggleCustomPicker()"
+          >
+            @if (!isCustomAccent()) {
+              <app-icon name="palette" size="14" />
+            }
+          </button>
+
+          @if (customPickerOpen()) {
+            <button type="button" class="settings-custom-backdrop" aria-label="Close" (click)="closeCustomPicker()"></button>
+            <div class="settings-custom-popover">
+              <app-color-picker [value]="themeService.accent()" (valueChange)="themeService.setAccent($event)" />
+            </div>
+          }
+        </div>
       </div>
     </div>
   </section>
