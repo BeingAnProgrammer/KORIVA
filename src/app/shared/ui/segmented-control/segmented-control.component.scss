@@ -48,3 +48,10 @@
   font-size: 11px;
   color: var(--ink-3);
 }
+
+.segmented__icon-img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex: none;
+}

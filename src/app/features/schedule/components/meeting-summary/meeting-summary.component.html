@@ -10,7 +10,9 @@
     <div class="meeting-summary__row">
       <dt>Platform</dt>
       <dd class="meeting-summary__platform">
-        <app-icon [name]="summary().platformIcon" size="14" />
+        @if (summary().platformIconSrc) {
+          <img [src]="summary().platformIconSrc" alt="" class="meeting-summary__platform-icon" />
+        }
         {{ summary().platformLabel }}
       </dd>
     </div>

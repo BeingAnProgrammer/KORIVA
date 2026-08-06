@@ -111,7 +111,7 @@ export class SchedulePageComponent {
     return {
       title: this.title().trim(),
       platformLabel: platformOption.label,
-      platformIcon: platformOption.icon ?? 'video',
+      platformIconSrc: platformOption.iconSrc,
       timeLabel: this.timeLabel(),
       displayName: this.displayName().trim() || DEFAULT_KORIVA_DISPLAY_NAME,
       entryMessageConfigured: this.entryMessage().trim() !== DEFAULT_ENTRY_MESSAGE.trim()

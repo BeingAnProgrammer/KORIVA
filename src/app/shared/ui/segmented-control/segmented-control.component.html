@@ -7,7 +7,9 @@
       [attr.aria-pressed]="option.value === value()"
       (click)="select(option.value)"
     >
-      @if (option.icon) {
+      @if (option.iconSrc) {
+        <img [src]="option.iconSrc" alt="" class="segmented__icon-img" />
+      } @else if (option.icon) {
         <app-icon [name]="option.icon" size="15" />
       }
       {{ option.label }}

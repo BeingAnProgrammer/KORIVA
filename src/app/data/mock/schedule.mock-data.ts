@@ -9,12 +9,10 @@ I'll record this meeting, generate a transcript, identify decisions, action item
 
 export const DEFAULT_KORIVA_DISPLAY_NAME = 'Koriva AI';
 
-// Brand marks aren't in Lucide's core set (see icon-registry.ts) — these are
-// the closest distinct stand-ins, same approach as the Slack row in Settings.
 export const MEETING_PLATFORM_OPTIONS: readonly SegmentedOption<MeetingPlatform>[] = [
-  { value: 'google-meet', label: 'Google Meet', icon: 'webcam' },
-  { value: 'zoom', label: 'Zoom', icon: 'video' },
-  { value: 'teams', label: 'Microsoft Teams', icon: 'users' }
+  { value: 'google-meet', label: 'Google Meet', iconSrc: '/icons/providers/google-meet.png' },
+  { value: 'zoom', label: 'Zoom', iconSrc: '/icons/providers/zoom.png' },
+  { value: 'teams', label: 'Microsoft Teams', iconSrc: '/icons/providers/teams.png' }
 ];
 
 export const MEETING_KIND_OPTIONS: readonly SegmentedOption<MeetingKind>[] = [

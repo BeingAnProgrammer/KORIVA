@@ -50,3 +50,10 @@
   align-items: center;
   gap: 6px;
 }
+
+.meeting-summary__platform-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex: none;
+}
