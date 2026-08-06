@@ -14,12 +14,10 @@
     </nav>
 
     <div class="top-nav__right">
-      @if (hasLiveMeeting()) {
-        <a routerLink="/app/meetings" class="top-nav__live">
-          <span class="top-nav__dot"><i></i><em></em></span>
-          <span class="mono top-nav__live-label">IN A MEETING</span>
-        </a>
-      }
+      <button type="button" appButton variant="accent-sm" class="top-nav__invite" (click)="inviteKoriva()">
+        <app-icon name="calendar-plus" size="15" />
+        <span class="top-nav__invite-label">Invite Koriva to a meeting</span>
+      </button>
 
       <app-icon-button [icon]="theme.themeIcon()" ariaLabel="Toggle theme" (pressed)="theme.cycleTheme()" />
 

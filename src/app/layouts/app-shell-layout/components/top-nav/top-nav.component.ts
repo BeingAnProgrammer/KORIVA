@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { AuthService } from '../../../../core/services/auth.service';
 import { CommandPaletteService } from '../../../../core/services/command-palette.service';
 import { ThemeService } from '../../../../core/services/theme.service';
-import { MeetingsDataService } from '../../../../data/services/meetings-data.service';
+import { ToastService } from '../../../../core/services/toast.service';
 import { APP_NAV_ITEMS } from '../../../../data/mock/navigation.mock-data';
+import { ButtonDirective } from '../../../../shared/directives/button.directive';
 import { AvatarComponent } from '../../../../shared/ui/avatar/avatar.component';
 import { IconButtonComponent } from '../../../../shared/ui/icon-button/icon-button.component';
 import { IconComponent } from '../../../../shared/ui/icon/icon.component';
@@ -19,7 +19,7 @@ import { LogoMarkComponent } from '../../../../shared/ui/logo-mark/logo-mark.com
  */
 @Component({
   selector: 'app-top-nav',
-  imports: [RouterLink, RouterLinkActive, LogoMarkComponent, IconComponent, IconButtonComponent, AvatarComponent],
+  imports: [RouterLink, RouterLinkActive, LogoMarkComponent, IconComponent, IconButtonComponent, AvatarComponent, ButtonDirective],
   templateUrl: './top-nav.component.html',
   styleUrl: './top-nav.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,12 +28,9 @@ export class TopNavComponent {
   protected readonly auth = inject(AuthService);
   protected readonly theme = inject(ThemeService);
   protected readonly palette = inject(CommandPaletteService);
-  private readonly meetingsData = inject(MeetingsDataService);
+  private readonly toast = inject(ToastService);
 
   protected readonly navItems = APP_NAV_ITEMS;
-
-  private readonly meetings = toSignal(this.meetingsData.getMeetings(), { initialValue: [] });
-  protected readonly hasLiveMeeting = computed(() => this.meetings().some((m) => m.status === 'live'));
 
   protected readonly mobileNavOpen = signal(false);
   protected readonly userMenuOpen = signal(false);
@@ -68,5 +65,9 @@ export class TopNavComponent {
   protected signOut(): void {
     this.closeUserMenu();
     void this.auth.signOut();
+  }
+
+  protected inviteKoriva(): void {
+    this.toast.show('Koriva will join your next scheduled meeting');
   }
 }

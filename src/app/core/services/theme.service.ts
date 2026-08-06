@@ -5,7 +5,7 @@ import { ACCENT_OPTIONS, ThemeMode } from '../models/theme.model';
 
 const STORAGE_KEY = 'koriva-theme';
 const ACCENT_STORAGE_KEY = 'koriva-accent';
-const THEME_CYCLE: readonly ThemeMode[] = ['system', 'light', 'dark'];
+const THEME_CYCLE: readonly ThemeMode[] = ['light', 'dark'];
 
 /**
  * Owns the app-wide light/dark/system theme, mirroring the prototype's
