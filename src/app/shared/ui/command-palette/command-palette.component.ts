@@ -22,8 +22,8 @@ interface PaletteGroup {
 
 const GO_TO_PAGES: readonly { label: string; route: string }[] = [
   { label: 'Home', route: '/app/home' },
-  { label: 'Memory', route: '/app/memory' },
   { label: 'Commitments', route: '/app/commitments' },
+  { label: 'Memory', route: '/app/memory' },
   { label: 'Patterns', route: '/app/patterns' },
   { label: 'Analytics', route: '/app/analytics' },
   { label: 'Settings', route: '/app/settings' }
