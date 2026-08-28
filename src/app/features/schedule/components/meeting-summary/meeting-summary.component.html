@@ -12,6 +12,11 @@
   </div>
 
   <div class="meeting-summary__row">
+    <dt>Template</dt>
+    <dd>{{ summary().templateName }}</dd>
+  </div>
+
+  <div class="meeting-summary__row">
     <dt>Platform</dt>
     <dd class="meeting-summary__platform">
       @if (summary().platformIconSrc) {

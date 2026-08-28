@@ -12,10 +12,12 @@ import {
   MEETING_KIND_OPTIONS,
   MEETING_PLATFORM_OPTIONS
 } from '../../../data/mock/schedule.mock-data';
+import { MEETING_TYPES } from '../../../data/mock/marketing.mock-data';
 import { MeetingKind, MeetingPlatform, MeetingScheduleDraft } from '../../../data/models/meeting-schedule.model';
 import { ScheduleDataService } from '../../../data/services/schedule-data.service';
 import { ProjectsDataService } from '../../../data/services/projects-data.service';
 import { ButtonDirective } from '../../../shared/directives/button.directive';
+import { IconComponent } from '../../../shared/ui/icon/icon.component';
 import { SegmentedControlComponent } from '../../../shared/ui/segmented-control/segmented-control.component';
 import { AvatarPickerComponent } from '../components/avatar-picker/avatar-picker.component';
 import { MeetingCalendarComponent } from '../components/meeting-calendar/meeting-calendar.component';
@@ -29,7 +31,14 @@ const URL_PLACEHOLDERS: Record<MeetingPlatform, string> = {
 
 @Component({
   selector: 'app-schedule-page',
-  imports: [ButtonDirective, SegmentedControlComponent, MeetingCalendarComponent, AvatarPickerComponent, MeetingSummaryComponent],
+  imports: [
+    ButtonDirective,
+    IconComponent,
+    SegmentedControlComponent,
+    MeetingCalendarComponent,
+    AvatarPickerComponent,
+    MeetingSummaryComponent
+  ],
   templateUrl: './schedule-page.component.html',
   styleUrl: './schedule-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -49,8 +58,11 @@ export class SchedulePageComponent {
   protected readonly projects = this.projectsData.projects;
   protected readonly today = toIsoDate(new Date());
 
+  protected readonly templateOptions = MEETING_TYPES;
+
   protected readonly title = signal('');
   protected readonly projectInput = signal('');
+  protected readonly meetingTemplate = signal(MEETING_TYPES[0].name);
   protected readonly platform = signal<MeetingPlatform>('google-meet');
   protected readonly url = signal('');
   protected readonly urlTouched = signal(false);
@@ -78,6 +90,10 @@ export class SchedulePageComponent {
   });
 
   protected readonly urlPlaceholder = computed(() => URL_PLACEHOLDERS[this.platform()]);
+
+  protected readonly selectedTemplate = computed(
+    () => this.templateOptions.find((t) => t.name === this.meetingTemplate()) ?? this.templateOptions[0]
+  );
 
   protected readonly timeRangeError = computed(() => {
     if (this.meetingType() === 'instant') {
@@ -117,6 +133,7 @@ export class SchedulePageComponent {
     return {
       title: this.title().trim(),
       projectName: this.projectInput().trim() || null,
+      templateName: this.meetingTemplate(),
       platformLabel: platformOption.label,
       platformIconSrc: platformOption.iconSrc,
       timeLabel: this.timeLabel(),
@@ -157,6 +174,7 @@ export class SchedulePageComponent {
     const draft: MeetingScheduleDraft = {
       title: this.title().trim(),
       projectId: project.id,
+      meetingTemplate: this.meetingTemplate(),
       platform: this.platform(),
       url: this.url().trim(),
       meetingType: this.meetingType(),

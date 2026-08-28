@@ -94,6 +94,12 @@ export const SHOWCASE_FEATURES: readonly Feature[] = [
 const TYPE_COLOR_CYCLE = ['var(--accent)', 'var(--story-structure)', 'var(--story-capture)', 'var(--story-recall)'] as const;
 
 export const MEETING_TYPES: readonly MeetingType[] = [
+  {
+    icon: 'calendar-check',
+    name: 'General meeting',
+    fields: ['Agenda', 'Decisions', 'Action items', 'Notes'],
+    color: TYPE_COLOR_CYCLE[0]
+  },
   { icon: 'trending-up', name: 'Sales', fields: ['Opportunities', 'Budget', 'Client requirements', 'Follow-ups'], color: TYPE_COLOR_CYCLE[0] },
   { icon: 'megaphone', name: 'Marketing', fields: ['Campaigns', 'Channels', 'Metrics', 'Next steps'], color: TYPE_COLOR_CYCLE[1] },
   {
@@ -113,12 +119,7 @@ export const MEETING_TYPES: readonly MeetingType[] = [
     color: TYPE_COLOR_CYCLE[3]
   },
   { icon: 'crown', name: 'Leadership', fields: ['Priorities', 'Decisions', 'Risks', 'Accountability'], color: TYPE_COLOR_CYCLE[0] },
-  {
-    icon: 'settings-2',
-    name: 'Custom template',
-    fields: ['Your sections', 'Your prompts', 'Your format', 'Your owners'],
-    color: TYPE_COLOR_CYCLE[1]
-  }
+  { icon: 'users', name: '1:1', fields: ['Discussion topics', 'Feedback', 'Action items', 'Career notes'], color: TYPE_COLOR_CYCLE[1] }
 ];
 
 /**

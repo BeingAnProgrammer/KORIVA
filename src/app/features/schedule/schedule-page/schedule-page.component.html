@@ -44,6 +44,27 @@
       </div>
 
       <div class="field">
+        <span class="field__label">Meeting template</span>
+        <div class="template-grid" role="radiogroup" aria-label="Meeting template">
+          @for (t of templateOptions; track t.name) {
+            <button
+              type="button"
+              class="template-card"
+              role="radio"
+              [attr.aria-checked]="meetingTemplate() === t.name"
+              [class.template-card--active]="meetingTemplate() === t.name"
+              [style.--type-color]="t.color"
+              (click)="meetingTemplate.set(t.name)"
+            >
+              <span class="template-card__icon"><app-icon [name]="t.icon" size="16" /></span>
+              <span class="template-card__name">{{ t.name }}</span>
+            </button>
+          }
+        </div>
+        <span class="field__hint">Koriva structures minutes around: {{ selectedTemplate().fields.join(', ') }}</span>
+      </div>
+
+      <div class="field">
         <span class="field__label">Meeting platform</span>
         <app-segmented-control [options]="platformOptions" [value]="platform()" (valueChange)="platform.set($event)" />
       </div>

@@ -110,6 +110,63 @@
   }
 }
 
+.template-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.template-card {
+  flex: 1 1 140px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: border-color var(--dur-fast), background var(--dur-fast);
+  @include m.focus-ring;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--type-color, var(--accent)) 35%, var(--hairline));
+  }
+
+  &--active {
+    border-color: var(--type-color, var(--accent));
+    background: color-mix(in srgb, var(--type-color, var(--accent)) 8%, var(--surface));
+  }
+}
+
+.template-card__icon {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-2);
+  transition: color var(--dur-fast);
+
+  .template-card--active & {
+    color: var(--type-color, var(--accent));
+  }
+}
+
+.template-card__name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .schedule-datetime {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -20,6 +20,8 @@ export interface MeetingScheduleDraft {
   title: string;
   /** null only for legacy meetings created before projects existed — every new meeting requires one. */
   projectId: string | null;
+  /** Name of a MeetingType from marketing.mock-data.ts's MEETING_TYPES — what MOM structure Koriva uses for this meeting. */
+  meetingTemplate: string;
   platform: MeetingPlatform;
   url: string;
   meetingType: MeetingKind;
