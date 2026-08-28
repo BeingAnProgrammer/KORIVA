@@ -97,6 +97,7 @@
           id="entry-message"
           class="field__textarea"
           rows="5"
+          [placeholder]="entryMessagePlaceholder"
           [value]="entryMessage()"
           (input)="entryMessage.set($any($event.target).value)"
         ></textarea>

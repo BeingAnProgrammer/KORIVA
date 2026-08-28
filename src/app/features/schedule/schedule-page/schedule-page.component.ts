@@ -46,7 +46,7 @@ export class SchedulePageComponent {
   protected readonly meetings = this.scheduleData.meetings;
   protected readonly today = toIsoDate(new Date());
 
-  protected readonly title = signal('Weekly Engineering Standup');
+  protected readonly title = signal('');
   protected readonly platform = signal<MeetingPlatform>('google-meet');
   protected readonly url = signal('');
   protected readonly urlTouched = signal(false);
@@ -54,7 +54,8 @@ export class SchedulePageComponent {
   protected readonly scheduledDate = signal(this.today);
   protected readonly startTime = signal('10:00');
   protected readonly endTime = signal('11:00');
-  protected readonly entryMessage = signal(DEFAULT_ENTRY_MESSAGE);
+  protected readonly entryMessage = signal('');
+  protected readonly entryMessagePlaceholder = DEFAULT_ENTRY_MESSAGE;
   protected readonly displayName = signal(DEFAULT_KORIVA_DISPLAY_NAME);
   protected readonly avatar = signal<string | null>(null);
   protected readonly submitting = signal(false);
@@ -114,7 +115,7 @@ export class SchedulePageComponent {
       platformIconSrc: platformOption.iconSrc,
       timeLabel: this.timeLabel(),
       displayName: this.displayName().trim() || DEFAULT_KORIVA_DISPLAY_NAME,
-      entryMessageConfigured: this.entryMessage().trim() !== DEFAULT_ENTRY_MESSAGE.trim()
+      entryMessageConfigured: this.entryMessage().trim().length > 0
     };
   });
 
