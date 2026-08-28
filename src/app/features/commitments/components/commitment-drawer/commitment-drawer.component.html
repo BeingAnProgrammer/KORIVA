@@ -14,6 +14,9 @@
       <h2 class="commitment-drawer__title">{{ c.title }}</h2>
 
       <div class="commitment-drawer__stats">
+        @if (projectName(); as project) {
+          <app-status-pill variant="neutral">{{ project }}</app-status-pill>
+        }
         @for (stat of c.stats; track stat.label) {
           <app-status-pill [variant]="stat.tone">{{ stat.label }}</app-status-pill>
         }

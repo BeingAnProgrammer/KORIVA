@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export interface MeetingSummaryView {
   title: string;
+  projectName: string | null;
   platformLabel: string;
   platformIconSrc?: string;
   timeLabel: string;

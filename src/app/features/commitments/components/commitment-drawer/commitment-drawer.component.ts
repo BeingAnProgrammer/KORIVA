@@ -4,6 +4,7 @@ import { CommandPaletteService } from '../../../../core/services/command-palette
 import { ToastService } from '../../../../core/services/toast.service';
 import { Commitment } from '../../../../data/models/commitment.model';
 import { Tone } from '../../../../data/models/tone.model';
+import { ProjectsDataService } from '../../../../data/services/projects-data.service';
 import { ButtonDirective } from '../../../../shared/directives/button.directive';
 import { AvatarComponent } from '../../../../shared/ui/avatar/avatar.component';
 import { IconComponent } from '../../../../shared/ui/icon/icon.component';
@@ -26,6 +27,7 @@ export class CommitmentDrawerComponent {
 
   private readonly toast = inject(ToastService);
   private readonly palette = inject(CommandPaletteService);
+  private readonly projectsData = inject(ProjectsDataService);
 
   protected readonly statusLabel = computed(() => {
     switch (this.commitment()?.status) {
@@ -41,6 +43,8 @@ export class CommitmentDrawerComponent {
   protected readonly statusTone = computed<Tone>(() => (this.commitment()?.status === 'live' ? 'rose' : 'accent'));
 
   protected readonly minutesHeading = computed(() => (this.commitment()?.status === 'done' ? 'Minutes' : 'What Koriva has so far'));
+
+  protected readonly projectName = computed(() => this.projectsData.getProjectName(this.commitment()?.projectId ?? null));
 
   @HostListener('document:keydown.escape')
   protected onEscape(): void {

@@ -24,7 +24,8 @@ export const COMMITMENTS: readonly Commitment[] = [
       'Priya owns the overnight embedding spike, result by Thursday.',
       'Open risk: audit trail must stay intact through the cutover window (legal).'
     ],
-    related: ['Development standup', 'Auth migration review']
+    related: ['Development standup', 'Auth migration review'],
+    projectId: 'auth-migration'
   },
   {
     id: 'u1',
@@ -47,7 +48,8 @@ export const COMMITMENTS: readonly Commitment[] = [
       'Round 2: excellent design review, no discussion of mentoring.',
       'Unasked: on-call philosophy, failure they caused, why leaving now.'
     ],
-    related: ['Hiring loop calibration']
+    related: ['Hiring loop calibration'],
+    projectId: null
   },
   {
     id: 'u2',
@@ -68,7 +70,8 @@ export const COMMITMENTS: readonly Commitment[] = [
       'Draft agenda proposed: positioning, naming, timeline, owners.',
       'Stalled last time: who signs off on tone, and whether the logo is in scope.'
     ],
-    related: ['Q3 marketing review']
+    related: ['Q3 marketing review'],
+    projectId: null
   },
   {
     id: 'm1',
@@ -93,7 +96,8 @@ export const COMMITMENTS: readonly Commitment[] = [
       'Two deals explicitly waiting on tiering: Northwind expansion, Halcyon.',
       'Renewal outreach moves two weeks earlier from November.'
     ],
-    related: ['Q2 sales review', 'Product roadmap Q4']
+    related: ['Q2 sales review', 'Product roadmap Q4'],
+    projectId: null
   },
   {
     id: 'm2',
@@ -116,7 +120,8 @@ export const COMMITMENTS: readonly Commitment[] = [
       'API integration target holds for Friday.',
       'Staging deploy still owned by Priya, no date given.'
     ],
-    related: ['Mobile app architecture', 'Auth migration review']
+    related: ['Mobile app architecture', 'Auth migration review'],
+    projectId: 'auth-migration'
   },
   {
     id: 'm3',
@@ -139,7 +144,8 @@ export const COMMITMENTS: readonly Commitment[] = [
       'SSO + audit-log scope still not sent — 21 days late, Marcus.',
       'They will not sign the expansion before the scope arrives.'
     ],
-    related: ['Contract review · Legal', 'Kickoff · Sales']
+    related: ['Contract review · Legal', 'Kickoff · Sales'],
+    projectId: null
   },
   {
     id: 'm4',
@@ -163,7 +169,8 @@ export const COMMITMENTS: readonly Commitment[] = [
       'Offline mode deferred to Q1.',
       'Risk: search depends on the auth migration finishing first.'
     ],
-    related: ['Q3 sales review', 'Auth migration review']
+    related: ['Q3 sales review', 'Auth migration review'],
+    projectId: 'q4-planning'
   },
   {
     id: 'm5',
@@ -182,6 +189,7 @@ export const COMMITMENTS: readonly Commitment[] = [
       { tone: 'orange', label: '1 risk' }
     ],
     minutes: ['Audit trail must be continuous through migrations — non-negotiable.', 'Northwind MSA redlines returned, two clauses open.'],
-    related: ['Northwind check-in', 'Mobile app architecture']
+    related: ['Northwind check-in', 'Mobile app architecture'],
+    projectId: null
   }
 ];

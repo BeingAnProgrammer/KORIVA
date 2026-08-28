@@ -18,6 +18,8 @@ export interface KorivaIdentity {
 /** Everything the form collects, before the backend assigns an id/status. */
 export interface MeetingScheduleDraft {
   title: string;
+  /** null only for legacy meetings created before projects existed — every new meeting requires one. */
+  projectId: string | null;
   platform: MeetingPlatform;
   url: string;
   meetingType: MeetingKind;

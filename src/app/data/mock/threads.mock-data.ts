@@ -1,6 +1,13 @@
 import { Thread } from '../models/thread.model';
 
-/** Ported verbatim from the reference design's `THREADS` array. */
+/**
+ * Ported verbatim from the reference design's `THREADS` array. On the four
+ * `kind: 'Project'` entries, `count` and `items` are dead weight — the
+ * Memory page derives both live from real meetings/commitments instead (see
+ * MemoryPageComponent), so they're left at `0`/`[]` rather than a stale
+ * number that could drift from what's actually shown. `note`/`facts` still
+ * come from here — nothing derives those yet.
+ */
 export const THREADS: readonly Thread[] = [
   {
     id: 't1',
@@ -17,18 +24,40 @@ export const THREADS: readonly Thread[] = [
     facts: ['Ready to expand to 2 more teams in Q1', 'Blocked on SSO + audit-log scope (21 days late)', 'Legal needs a continuous audit trail']
   },
   {
-    id: 't2',
+    id: 'auth-migration',
     name: 'Auth migration',
     kind: 'Project',
-    count: 9,
+    count: 0,
     note: 'Eleven days without a new blocker.',
-    items: [
-      { date: '22 Sep', title: 'Design review', team: 'Engineering', color: 'accent' },
-      { date: '2 Oct', title: 'Rate limit raised', team: 'Engineering', color: 'green' },
-      { date: '14 Oct', title: 'Standup', team: 'Development', color: 'green' },
-      { date: 'Today', title: 'Architecture call', team: 'Development', color: 'rose' }
-    ],
+    items: [],
     facts: ['Read path ships before the backfill', 'Search stays warm via overnight embeddings', 'Staging deploy still undated']
+  },
+  {
+    id: 'website-redesign',
+    name: 'Website Redesign',
+    kind: 'Project',
+    count: 0,
+    note: 'Design review is in flight, with a feature demo and an iteration pass scheduled behind it.',
+    items: [],
+    facts: []
+  },
+  {
+    id: 'q4-planning',
+    name: 'Q4 Planning',
+    kind: 'Project',
+    count: 0,
+    note: 'Knowledge search leads the roadmap; offline mode slipped to Q1.',
+    items: [],
+    facts: ['Knowledge search is the Q4 headline — 6 of 7 in favour.', 'Offline mode deferred to Q1.']
+  },
+  {
+    id: 'customer-onboarding',
+    name: 'Customer Onboarding',
+    kind: 'Project',
+    count: 0,
+    note: 'No meetings logged yet — invite Koriva to get started.',
+    items: [],
+    facts: []
   },
   {
     id: 't3',

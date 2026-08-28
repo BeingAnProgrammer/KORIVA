@@ -4,4 +4,6 @@
     <span class="mono thread-timeline-row__date">{{ item.date }}</span>
     <span class="thread-timeline-row__title">{{ item.title }} <span class="thread-timeline-row__team">· {{ item.team }}</span></span>
   </div>
+} @empty {
+  <p class="thread-timeline-empty">Nothing here yet.</p>
 }

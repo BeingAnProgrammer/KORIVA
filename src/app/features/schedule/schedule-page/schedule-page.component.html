@@ -24,6 +24,26 @@
       </div>
 
       <div class="field">
+        <label class="field__label" for="meeting-project">Project</label>
+        <input
+          id="meeting-project"
+          type="text"
+          class="field__input"
+          list="meeting-project-options"
+          placeholder="Website Redesign, Q4 Planning…"
+          autocomplete="off"
+          [value]="projectInput()"
+          (input)="projectInput.set($any($event.target).value)"
+        />
+        <datalist id="meeting-project-options">
+          @for (project of projects(); track project.id) {
+            <option [value]="project.name"></option>
+          }
+        </datalist>
+        <span class="field__hint">Matches an existing project, or creates a new one.</span>
+      </div>
+
+      <div class="field">
         <span class="field__label">Meeting platform</span>
         <app-segmented-control [options]="platformOptions" [value]="platform()" (valueChange)="platform.set($event)" />
       </div>

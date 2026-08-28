@@ -14,6 +14,7 @@ import {
 } from '../../../data/mock/schedule.mock-data';
 import { MeetingKind, MeetingPlatform, MeetingScheduleDraft } from '../../../data/models/meeting-schedule.model';
 import { ScheduleDataService } from '../../../data/services/schedule-data.service';
+import { ProjectsDataService } from '../../../data/services/projects-data.service';
 import { ButtonDirective } from '../../../shared/directives/button.directive';
 import { SegmentedControlComponent } from '../../../shared/ui/segmented-control/segmented-control.component';
 import { AvatarPickerComponent } from '../components/avatar-picker/avatar-picker.component';
@@ -39,14 +40,17 @@ export class SchedulePageComponent {
   private readonly router = inject(Router);
   private readonly location = inject(Location);
   private readonly scheduleData = inject(ScheduleDataService);
+  private readonly projectsData = inject(ProjectsDataService);
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly platformOptions = MEETING_PLATFORM_OPTIONS;
   protected readonly meetingTypeOptions = MEETING_KIND_OPTIONS;
   protected readonly meetings = this.scheduleData.meetings;
+  protected readonly projects = this.projectsData.projects;
   protected readonly today = toIsoDate(new Date());
 
   protected readonly title = signal('');
+  protected readonly projectInput = signal('');
   protected readonly platform = signal<MeetingPlatform>('google-meet');
   protected readonly url = signal('');
   protected readonly urlTouched = signal(false);
@@ -90,9 +94,10 @@ export class SchedulePageComponent {
 
   protected readonly canSubmit = computed(() => {
     const hasTitle = this.title().trim().length > 0;
+    const hasProject = this.projectInput().trim().length > 0;
     const hasUrl = this.url().trim().length > 0 && !this.urlError();
     const hasSchedule = this.meetingType() === 'instant' || (!!this.scheduledDate() && !!this.startTime() && !!this.endTime());
-    return hasTitle && hasUrl && hasSchedule && !this.timeRangeError();
+    return hasTitle && hasProject && hasUrl && hasSchedule && !this.timeRangeError();
   });
 
   protected readonly submitLabel = computed(() => {
@@ -111,6 +116,7 @@ export class SchedulePageComponent {
     const platformOption = getPlatformOption(this.platform());
     return {
       title: this.title().trim(),
+      projectName: this.projectInput().trim() || null,
       platformLabel: platformOption.label,
       platformIconSrc: platformOption.iconSrc,
       timeLabel: this.timeLabel(),
@@ -147,8 +153,10 @@ export class SchedulePageComponent {
     this.submitting.set(true);
 
     const instant = this.meetingType() === 'instant';
+    const project = this.projectsData.findOrCreateByName(this.projectInput());
     const draft: MeetingScheduleDraft = {
       title: this.title().trim(),
+      projectId: project.id,
       platform: this.platform(),
       url: this.url().trim(),
       meetingType: this.meetingType(),

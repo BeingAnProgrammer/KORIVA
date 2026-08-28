@@ -56,6 +56,9 @@
               </span>
               <span class="commitment-row__summary">{{ c.summary }}</span>
               <span class="commitment-row__stats">
+                @if (projectName(c); as project) {
+                  <app-status-pill variant="neutral">{{ project }}</app-status-pill>
+                }
                 @for (stat of c.stats; track stat.label) {
                   <app-status-pill [variant]="stat.tone">{{ stat.label }}</app-status-pill>
                 }

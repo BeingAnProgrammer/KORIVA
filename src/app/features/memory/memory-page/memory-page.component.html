@@ -16,15 +16,44 @@
         <button
           type="button"
           class="thread-list__item"
-          [class.thread-list__item--active]="t.id === selectedThread()?.id"
-          (click)="selectThread(t.id)"
+          [class.thread-list__item--active]="t.id === selectedThread()?.id && !selectedMeetingRef()"
+          [attr.aria-expanded]="t.kind === 'Project' ? expandedProjectId() === t.id : null"
+          (click)="selectThread(t)"
         >
           <span class="thread-list__copy">
             <span class="thread-list__name">{{ t.name }}</span>
             <span class="mono thread-list__kind">{{ t.kind | uppercase }}</span>
           </span>
-          <span class="mono thread-list__count">{{ t.count }}</span>
+          <span class="thread-list__meta">
+            <span class="mono thread-list__count">{{ countFor(t) }}</span>
+            @if (t.kind === 'Project') {
+              <app-icon
+                name="chevron-right"
+                size="14"
+                class="thread-list__chevron"
+                [class.thread-list__chevron--open]="expandedProjectId() === t.id"
+              />
+            }
+          </span>
         </button>
+
+        @if (t.kind === 'Project' && expandedProjectId() === t.id) {
+          <div class="thread-list__meetings">
+            @for (meeting of projectMeetings(t); track meeting.source + meeting.id) {
+              <button
+                type="button"
+                class="thread-list__meeting"
+                [class.thread-list__meeting--active]="isMeetingSelected(meeting)"
+                (click)="selectMeeting(meeting)"
+              >
+                <span class="thread-list__meeting-title">{{ meeting.title }}</span>
+                <span class="mono thread-list__meeting-date">{{ meeting.dateLabel }}</span>
+              </button>
+            } @empty {
+              <p class="thread-list__meetings-empty">No meetings yet — invite Koriva to get started.</p>
+            }
+          </div>
+        }
       }
     </div>
 
@@ -32,19 +61,46 @@
       <div class="thread-detail">
         <div class="thread-detail__heading">
           <h2 class="thread-detail__name">{{ t.name }}</h2>
-          <span class="mono thread-detail__meta">{{ t.kind }} · {{ t.count }} meetings</span>
+          <span class="mono thread-detail__meta">{{ t.kind }} · {{ countFor(t) }} meetings</span>
         </div>
-        <p class="thread-detail__note">{{ t.note }}</p>
 
-        <div class="mono thread-detail__label">What Koriva knows</div>
-        <div class="thread-detail__facts">
-          @for (f of t.facts; track f) {
-            <div class="thread-detail__fact"><span class="thread-detail__fact-dot"></span>{{ f }}</div>
+        @if (selectedCommitmentDetail(); as c) {
+          <h3 class="thread-detail__meeting-title">{{ c.title }}</h3>
+          <div class="thread-detail__stats">
+            @for (stat of c.stats; track stat.label) {
+              <app-status-pill [variant]="stat.tone">{{ stat.label }}</app-status-pill>
+            }
+          </div>
+          <p class="thread-detail__note">{{ c.summary }}</p>
+          <div class="mono thread-detail__label">Minutes</div>
+          <ol class="thread-detail__minutes">
+            @for (line of c.minutes; track line) {
+              <li>{{ line }}</li>
+            }
+          </ol>
+        } @else if (selectedScheduledMeetingDetail(); as m) {
+          <h3 class="thread-detail__meeting-title">{{ m.title }}</h3>
+          <p class="thread-detail__note">{{ scheduledMeetingTimeLabel(m) }} · {{ platformLabel(m.platform) }}</p>
+          <p class="thread-detail__hint">Koriva hasn't joined this meeting yet — minutes will appear here afterwards.</p>
+        } @else {
+          @if (t.note) {
+            <p class="thread-detail__note">{{ t.note }}</p>
           }
-        </div>
 
-        <div class="mono thread-detail__label thread-detail__label--timeline">The thread, in order</div>
-        <app-thread-timeline [items]="t.items" />
+          <div class="mono thread-detail__label">What Koriva knows</div>
+          <div class="thread-detail__facts">
+            @for (f of t.facts; track f) {
+              <div class="thread-detail__fact"><span class="thread-detail__fact-dot"></span>{{ f }}</div>
+            }
+          </div>
+
+          @if (t.kind !== 'Project') {
+            <div class="mono thread-detail__label thread-detail__label--timeline">The thread, in order</div>
+            <app-thread-timeline [items]="t.items" />
+          } @else if (countFor(t) > 0) {
+            <p class="thread-detail__hint">Pick a meeting on the left to see its minutes.</p>
+          }
+        }
 
         <div class="thread-detail__actions">
           <button type="button" appButton variant="accent-sm" (click)="askAboutThread(t.name)">Ask about {{ t.name }}</button>

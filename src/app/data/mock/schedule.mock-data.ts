@@ -30,11 +30,14 @@ const at = (offsetDays: number) => toIsoDate(addDays(today(), offsetDays));
 /**
  * Seeded relative to today (not fixed calendar dates) so the demo calendar
  * always shows a populated current month, whenever it's actually opened.
+ * A few entries keep `projectId: null` on purpose, standing in for meetings
+ * created before projects existed.
  */
 export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-1',
     title: 'Design Review Meeting',
+    projectId: 'website-redesign',
     platform: 'zoom',
     url: 'https://zoom.us/j/1234567890',
     meetingType: 'scheduled',
@@ -49,6 +52,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-2',
     title: 'Sprint Planning',
+    projectId: null,
     platform: 'google-meet',
     url: 'https://meet.google.com/abc-defg-hij',
     meetingType: 'scheduled',
@@ -63,6 +67,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-3',
     title: 'Brainstorming Session',
+    projectId: 'website-redesign',
     platform: 'zoom',
     url: 'https://zoom.us/j/2345678901',
     meetingType: 'scheduled',
@@ -77,6 +82,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-4',
     title: 'Strategy Meeting',
+    projectId: 'q4-planning',
     platform: 'google-meet',
     url: 'https://meet.google.com/klm-nopq-rst',
     meetingType: 'scheduled',
@@ -91,6 +97,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-5',
     title: 'Budget Review',
+    projectId: 'q4-planning',
     platform: 'teams',
     url: 'https://teams.microsoft.com/l/meetup-join/budget-review',
     meetingType: 'scheduled',
@@ -105,6 +112,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-6',
     title: 'Client Feedback Session',
+    projectId: null,
     platform: 'zoom',
     url: 'https://zoom.us/j/3456789012',
     meetingType: 'scheduled',
@@ -119,6 +127,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-7',
     title: 'Weekly Standup',
+    projectId: 'auth-migration',
     platform: 'teams',
     url: 'https://teams.microsoft.com/l/meetup-join/weekly-standup',
     meetingType: 'scheduled',
@@ -133,6 +142,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-8',
     title: 'Feature Demo',
+    projectId: 'website-redesign',
     platform: 'zoom',
     url: 'https://zoom.us/j/4567890123',
     meetingType: 'scheduled',
@@ -147,6 +157,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-9',
     title: 'Product Launch Sync',
+    projectId: null,
     platform: 'google-meet',
     url: 'https://meet.google.com/uvw-xyza-bcd',
     meetingType: 'scheduled',
@@ -161,6 +172,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-10',
     title: 'Customer Feedback',
+    projectId: null,
     platform: 'google-meet',
     url: 'https://meet.google.com/efg-hijk-lmn',
     meetingType: 'scheduled',
@@ -175,6 +187,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-11',
     title: 'Design Iteration',
+    projectId: 'website-redesign',
     platform: 'zoom',
     url: 'https://zoom.us/j/5678901234',
     meetingType: 'scheduled',
@@ -189,6 +202,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-12',
     title: 'Team Celebration',
+    projectId: null,
     platform: 'teams',
     url: 'https://teams.microsoft.com/l/meetup-join/team-celebration',
     meetingType: 'scheduled',
@@ -203,6 +217,7 @@ export const MOCK_SCHEDULED_MEETINGS: readonly MeetingSchedule[] = [
   {
     id: 'mock-13',
     title: 'Quarterly Roadmap Review',
+    projectId: 'q4-planning',
     platform: 'google-meet',
     url: 'https://meet.google.com/opq-rstu-vwx',
     meetingType: 'scheduled',

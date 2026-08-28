@@ -6,6 +6,7 @@ import { SeoService } from '../../../core/services/seo.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { Commitment } from '../../../data/models/commitment.model';
 import { CommitmentsDataService } from '../../../data/services/commitments-data.service';
+import { ProjectsDataService } from '../../../data/services/projects-data.service';
 import { ButtonDirective } from '../../../shared/directives/button.directive';
 import { AvatarComponent } from '../../../shared/ui/avatar/avatar.component';
 import { IconComponent } from '../../../shared/ui/icon/icon.component';
@@ -27,6 +28,7 @@ export class CommitmentsPageComponent {
   private readonly seo = inject(SeoService);
   private readonly toast = inject(ToastService);
   private readonly data = inject(CommitmentsDataService);
+  private readonly projectsData = inject(ProjectsDataService);
 
   protected readonly commitments = toSignal(this.data.getCommitments(), { initialValue: [] });
   protected readonly filter = signal<CommitmentFilter>('all');
@@ -59,6 +61,10 @@ export class CommitmentsPageComponent {
       description: 'Every commitment, already understood — filter, search, and open the minutes.',
       path: '/app/commitments'
     });
+  }
+
+  protected projectName(commitment: Commitment): string | null {
+    return this.projectsData.getProjectName(commitment.projectId);
   }
 
   protected openCommitment(commitment: Commitment): void {

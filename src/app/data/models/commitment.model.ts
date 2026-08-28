@@ -27,4 +27,6 @@ export interface Commitment {
   stats: readonly CommitmentStat[];
   minutes: readonly string[];
   related: readonly string[];
+  /** null for commitments with no project (legacy data, or simply unassigned). */
+  projectId: string | null;
 }
