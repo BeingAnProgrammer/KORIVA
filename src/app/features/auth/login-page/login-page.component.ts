@@ -22,7 +22,7 @@ export class LoginPageComponent {
   protected readonly isSubmitting = signal(false);
   protected readonly isGoogleSubmitting = signal(false);
   protected readonly showPassword = signal(false);
-  protected readonly errorMessage = signal<string | null>(this.readUrlError());
+  protected readonly errorMessage = signal<string | null>(null);
 
   protected readonly form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -89,12 +89,5 @@ export class LoginPageComponent {
 
   private returnUrl(): string {
     return this.route.snapshot.queryParamMap.get('returnUrl') || '/app/home';
-  }
-
-  /** Supabase appends `error_description` to the redirect URL when an email/OAuth link fails. */
-  private readUrlError(): string | null {
-    const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
-    const hasError = hash.has('error') || this.route.snapshot.queryParamMap.has('error');
-    return hasError ? 'That link is invalid or has expired. Please try again.' : null;
   }
 }

@@ -1,6 +1,6 @@
 /**
  * Result of an AuthService operation. Components branch on `success` and
- * only ever see `message`, never a raw Supabase `AuthError`.
+ * only ever see `message`, never a raw auth-provider error.
  */
 export type AuthResult =
   | { readonly success: true; readonly requiresEmailConfirmation?: boolean }
