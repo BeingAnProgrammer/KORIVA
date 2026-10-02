@@ -21,14 +21,17 @@ function passwordsMatchValidator(control: AbstractControl): ValidationErrors | n
 })
 export class RegisterPageComponent {
   private readonly fb = inject(FormBuilder);
-  private readonly auth = inject(AuthService);
+  protected readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
 
   protected readonly isSubmitting = signal(false);
   protected readonly isGoogleSubmitting = signal(false);
   protected readonly errorMessage = signal<string | null>(null);
-  protected readonly requiresEmailConfirmation = signal(false);
+  protected readonly isCheckingVerification = signal(false);
+  protected readonly isResending = signal(false);
+  protected readonly infoMessage = signal<string | null>(null);
+  protected readonly requiresEmailConfirmation = this.auth.needsVerification;
   protected readonly showPassword = signal(false);
   protected readonly showConfirmPassword = signal(false);
 
@@ -58,15 +61,7 @@ export class RegisterPageComponent {
 
     if (!result.success) {
       this.errorMessage.set(result.message);
-      return;
     }
-
-    if (result.requiresEmailConfirmation) {
-      this.requiresEmailConfirmation.set(true);
-      return;
-    }
-
-    await this.router.navigateByUrl(this.returnUrl());
   }
 
   protected async onGoogleSignIn(): Promise<void> {
@@ -77,10 +72,55 @@ export class RegisterPageComponent {
     this.isGoogleSubmitting.set(true);
     this.errorMessage.set(null);
 
-    const result = await this.auth.signInWithGoogle(this.returnUrl());
+    const result = await this.auth.signInWithGoogle();
+
+    this.isGoogleSubmitting.set(false);
 
     if (!result.success) {
-      this.isGoogleSubmitting.set(false);
+      this.errorMessage.set(result.message || null);
+      return;
+    }
+
+    await this.router.navigateByUrl(this.returnUrl());
+  }
+
+  protected async onCheckVerification(): Promise<void> {
+    if (this.isCheckingVerification()) {
+      return;
+    }
+
+    this.isCheckingVerification.set(true);
+    this.errorMessage.set(null);
+    this.infoMessage.set(null);
+
+    const result = await this.auth.checkEmailVerified();
+
+    this.isCheckingVerification.set(false);
+
+    if (!result.success) {
+      this.errorMessage.set(result.message);
+      return;
+    }
+
+    await this.router.navigateByUrl(this.returnUrl());
+  }
+
+  protected async onResendVerification(): Promise<void> {
+    if (this.isResending()) {
+      return;
+    }
+
+    this.isResending.set(true);
+    this.errorMessage.set(null);
+    this.infoMessage.set(null);
+
+    const result = await this.auth.resendVerificationEmail();
+
+    this.isResending.set(false);
+
+    if (result.success) {
+      this.infoMessage.set('A new verification link is on its way.');
+    } else {
       this.errorMessage.set(result.message);
     }
   }

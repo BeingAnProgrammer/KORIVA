@@ -48,7 +48,7 @@ export class LoginPageComponent {
       return;
     }
 
-    await this.router.navigateByUrl(this.returnUrl());
+    await this.continue();
   }
 
   protected async onGoogleSignIn(): Promise<void> {
@@ -59,12 +59,16 @@ export class LoginPageComponent {
     this.isGoogleSubmitting.set(true);
     this.errorMessage.set(null);
 
-    const result = await this.auth.signInWithGoogle(this.returnUrl());
+    const result = await this.auth.signInWithGoogle();
+
+    this.isGoogleSubmitting.set(false);
 
     if (!result.success) {
-      this.isGoogleSubmitting.set(false);
-      this.errorMessage.set(result.message);
+      this.errorMessage.set(result.message || null);
+      return;
     }
+
+    await this.continue();
   }
 
   protected togglePasswordVisibility(): void {
@@ -85,6 +89,16 @@ export class LoginPageComponent {
     }
 
     return null;
+  }
+
+  /** Unverified accounts finish on the register page's "Check your email" step. */
+  private async continue(): Promise<void> {
+    if (this.auth.needsVerification()) {
+      await this.router.navigate(['/register'], { queryParams: { returnUrl: this.returnUrl() } });
+      return;
+    }
+
+    await this.router.navigateByUrl(this.returnUrl());
   }
 
   private returnUrl(): string {

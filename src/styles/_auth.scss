@@ -115,7 +115,8 @@
     font-size: var(--text-sm);
     color: var(--auth-footer-text);
 
-    a {
+    a,
+    button {
       color: var(--auth-heading);
       font-weight: 600;
       text-decoration: underline;
@@ -124,6 +125,14 @@
       &:hover {
         color: var(--auth-accent);
       }
+    }
+
+    button {
+      background: none;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
     }
   }
 }

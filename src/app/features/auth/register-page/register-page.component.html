@@ -8,7 +8,25 @@
     @if (requiresEmailConfirmation()) {
       <h1 class="serif auth-card__title">Check your email</h1>
       <p class="auth-card__subtitle">
-        We've sent a confirmation link to your inbox. Click it to activate your account and sign in.
+        We've sent a verification link to {{ auth.currentUser()?.email }}. Click it, then come back here to continue.
+      </p>
+
+      @if (errorMessage(); as message) {
+        <p class="auth-card__error" role="alert">{{ message }}</p>
+      }
+      @if (infoMessage(); as message) {
+        <p class="auth-card__subtitle" role="status">{{ message }}</p>
+      }
+
+      <button type="button" class="auth-submit-btn" [disabled]="isCheckingVerification()" (click)="onCheckVerification()">
+        {{ isCheckingVerification() ? 'Checking…' : "I've verified my email" }}
+      </button>
+
+      <p class="auth-card__footer">
+        Didn't get it?
+        <button type="button" [disabled]="isResending()" (click)="onResendVerification()">
+          {{ isResending() ? 'Sending…' : 'Resend email' }}
+        </button>
       </p>
     } @else {
       <h1 class="serif auth-card__title">Create your account</h1>
